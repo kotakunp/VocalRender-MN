@@ -41,20 +41,28 @@ from einops import rearrange
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
-from vocalrender.model.utils import get_in_sample_rate, get_out_sample_rate
-
+from vocalrender.model.utils import get_in_sample_rate, get_out_sample_rate  # noqa: E402
+from vocalrender.runtime_preflight import PreflightPolicy, run_preflight  # noqa: E402
+from vocalrender.training.checkpoint import resolve_latest_checkpoint  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Model loading
 # ---------------------------------------------------------------------------
+
 
 def load_svs_model(ckpt_dir: str, device: str = "cuda"):
     """Load SVS fine-tuned model from checkpoint directory."""
     from transformers import LlamaTokenizerFast
 
     ckpt_path = Path(ckpt_dir)
-    if (ckpt_path / "latest").exists():
-        ckpt_path = ckpt_path / "latest"
+    if ckpt_path.name == "latest":
+        resolved = resolve_latest_checkpoint(ckpt_path.parent)
+        if resolved is not None:
+            ckpt_path = resolved
+    elif (ckpt_path / "latest").exists():
+        resolved = resolve_latest_checkpoint(ckpt_path)
+        if resolved is not None:
+            ckpt_path = resolved
 
     print(f"[SVS Single] Loading model from: {ckpt_path}", file=sys.stderr)
 
@@ -84,6 +92,7 @@ def load_svs_model(ckpt_dir: str, device: str = "cuda"):
     pt_path = ckpt_path / "pytorch_model.bin"
     try:
         from safetensors.torch import load_file as load_safetensors
+
         HAS_SF = True
     except ImportError:
         HAS_SF = False
@@ -99,7 +108,10 @@ def load_svs_model(ckpt_dir: str, device: str = "cuda"):
 
     if architecture == "voxcpm2":
         model = ModelClass(
-            config, tokenizer, audio_vae, lora_config=None,
+            config,
+            tokenizer,
+            audio_vae,
+            lora_config=None,
         )
     else:
         model = ModelClass(config, tokenizer, audio_vae, lora_config=None)
@@ -117,6 +129,7 @@ def load_svs_model(ckpt_dir: str, device: str = "cuda"):
     model.load_state_dict(model_sd, strict=False)
 
     from vocalrender.model.utils import get_dtype
+
     model = model.to(get_dtype(config.dtype)).to(device).eval()
     model.device = device
     model.audio_vae = model.audio_vae.to(torch.float32)
@@ -129,8 +142,11 @@ def load_svs_model(ckpt_dir: str, device: str = "cuda"):
 # SVS prompt builder
 # ---------------------------------------------------------------------------
 
+
 def build_svs_prompt_from_entry(
-    entry: Dict, model, force_lyrics_only: bool = False,
+    entry: Dict,
+    model,
+    force_lyrics_only: bool = False,
 ) -> str:
     """Build SVS prompt string from a JSON label entry.
 
@@ -180,6 +196,7 @@ def _get_preprocessor(model):
 # ---------------------------------------------------------------------------
 # On-the-fly VAE encoding for prompt audio
 # ---------------------------------------------------------------------------
+
 
 def encode_prompt_audio(
     wav_path: str,
@@ -237,6 +254,7 @@ def encode_prompt_audio(
     # Crop to max_frames
     if feats.shape[0] > max_frames:
         import random
+
         start = random.Random(42).randint(0, feats.shape[0] - max_frames)
         feats = feats[start : start + max_frames]
 
@@ -247,30 +265,44 @@ def encode_prompt_audio(
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="SVS single-sample inference from JSON label file",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
-    parser.add_argument("--ckpt_dir", required=True,
-                        help="SVS model checkpoint directory")
+    parser.add_argument("--ckpt_dir", required=True, help="SVS model checkpoint directory")
     parser.add_argument("--device", default="cuda")
+    parser.add_argument(
+        "--allow-cpu",
+        action="store_true",
+        help="explicitly permit CPU inference; never used as an implicit CUDA fallback",
+    )
+    parser.add_argument(
+        "--min-free-vram-gib",
+        type=float,
+        default=None,
+        help="minimum free VRAM required before model load",
+    )
+    parser.add_argument(
+        "--min-free-storage-gib",
+        type=float,
+        default=None,
+        help="minimum free workspace storage required before model load",
+    )
 
     # Input
-    parser.add_argument("--json_file", required=True,
-                        help="JSON label file (e.g. Opencpop.json)")
-    parser.add_argument("--item_name", required=True,
-                        help="item_name of the entry to synthesize")
+    parser.add_argument("--json_file", required=True, help="JSON label file (e.g. Opencpop.json)")
+    parser.add_argument("--item_name", required=True, help="item_name of the entry to synthesize")
 
     # Prompt audio is required: released checkpoints were trained with
     # prompt_audio_prob=1.0, so prompt-free inference is out-of-distribution.
-    parser.add_argument("--prompt_audio", required=True,
-                        help="Path to a clean 2-8 second singing prompt wav")
-    parser.add_argument("--prompt_max_frames", type=int, default=50,
-                        help="Max VAE latent frames for prompt audio")
-    parser.add_argument("--lyrics_only", action="store_true",
-                        help="Force lyrics-only mode: mask all BPM/pitch/note tokens")
+    parser.add_argument("--prompt_audio", required=True, help="Path to a clean 2-8 second singing prompt wav")
+    parser.add_argument("--prompt_max_frames", type=int, default=50, help="Max VAE latent frames for prompt audio")
+    parser.add_argument(
+        "--lyrics_only", action="store_true", help="Force lyrics-only mode: mask all BPM/pitch/note tokens"
+    )
 
     # Generation
     parser.add_argument("--cfg_value", type=float, default=2.0)
@@ -287,9 +319,25 @@ def parse_args():
 def main():
     args = parse_args()
 
-    if args.device == "cuda" and not torch.cuda.is_available():
-        print("[SVS Single] Warning: CUDA not available, falling back to CPU",
-              file=sys.stderr)
+    requested_cuda = str(args.device).lower().startswith("cuda")
+    preflight = run_preflight(
+        policy=PreflightPolicy(
+            require_cuda=requested_cuda,
+            allow_cpu=bool(args.allow_cpu),
+            requested_device=args.device,
+            min_free_vram_gib=args.min_free_vram_gib,
+            min_free_storage_gib=args.min_free_storage_gib,
+        ),
+        workspace=Path(args.ckpt_dir),
+        checkpoint_dir=Path(args.ckpt_dir),
+    )
+    if not preflight.ok:
+        print("[SVS Single] Runtime preflight blocked model load:", file=sys.stderr)
+        for error in preflight.errors:
+            print(f"  - {error}", file=sys.stderr)
+        sys.exit(2)
+    if args.device == "cpu":
+        # CPU is only reachable after --allow-cpu has explicitly opted in.
         args.device = "cpu"
 
     # ---- Load JSON ----
@@ -313,8 +361,7 @@ def main():
     effective_mode = "lyrics-only" if args.lyrics_only else ("full" if has_score else "weak")
     print(f"[SVS Single] Entry: {args.item_name}", file=sys.stderr)
     print(f"  words: {''.join(entry['word'])}", file=sys.stderr)
-    print(f"  bpm: {entry.get('bpm', 120)}, label: {effective_mode}",
-          file=sys.stderr)
+    print(f"  bpm: {entry.get('bpm', 120)}, label: {effective_mode}", file=sys.stderr)
 
     wav_path = Path(args.prompt_audio)
     if not wav_path.is_file():
@@ -327,15 +374,18 @@ def main():
 
     # ---- Build SVS prompt ----
     svs_prompt = build_svs_prompt_from_entry(
-        entry, model, force_lyrics_only=args.lyrics_only,
+        entry,
+        model,
+        force_lyrics_only=args.lyrics_only,
     )
-    print(f"  prompt: {svs_prompt[:200]}{'...' if len(svs_prompt) > 200 else ''}",
-          file=sys.stderr)
+    print(f"  prompt: {svs_prompt[:200]}{'...' if len(svs_prompt) > 200 else ''}", file=sys.stderr)
 
     # ---- Required prompt audio (on-the-fly VAE encode) ----
     print(f"[SVS Single] Encoding prompt audio: {wav_path}", file=sys.stderr)
     prompt_audio_feats = encode_prompt_audio(
-        str(wav_path), model, max_frames=args.prompt_max_frames,
+        str(wav_path),
+        model,
+        max_frames=args.prompt_max_frames,
     )
     if prompt_audio_feats is None or prompt_audio_feats.numel() == 0:
         print("Error: prompt audio encoding failed", file=sys.stderr)
@@ -343,9 +393,11 @@ def main():
     print(f"  prompt latent: {prompt_audio_feats.shape}", file=sys.stderr)
 
     # ---- Generate ----
-    print(f"[SVS Single] Generating (cfg={args.cfg_value}, "
-          f"steps={args.inference_timesteps}, max_len={args.max_len})...",
-          file=sys.stderr)
+    print(
+        f"[SVS Single] Generating (cfg={args.cfg_value}, "
+        f"steps={args.inference_timesteps}, max_len={args.max_len})...",
+        file=sys.stderr,
+    )
 
     gen_kwargs = dict(
         target_texts=[svs_prompt],

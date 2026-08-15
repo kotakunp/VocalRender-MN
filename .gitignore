@@ -15,6 +15,8 @@ data/*
 !data/raw/
 data/raw/*
 !data/raw/manifest.yaml
+!data/manifests/
+!data/manifests/**
 output/
 outputs/
 log/

@@ -1,0 +1,68 @@
+{
+  "schema_version": "milestone-run/v1",
+  "run_id": "20260815T150614Z-runtime-preflight",
+  "status": "blocked",
+  "experiment": "001_upstream_smoke_test",
+  "command": "python scripts/check_runtime.py --require-cuda --task inference --json-out outputs/runtime-preflight.json",
+  "git_sha": "1bf7bb86773168f23359fdf64fdfc1545228215a",
+  "started_at": "2026-08-15T15:06:14.545Z",
+  "finished_at": "2026-08-15T15:06:16.545Z",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Windows 11 AMD64",
+    "packages": {
+      "torch": "2.13.0+cpu"
+    },
+    "cuda_available": false,
+    "cuda_build": null,
+    "visible_devices": "<default>"
+  },
+  "inputs": [
+    {
+      "id": "smoke-config",
+      "path": "experiments/001_upstream_smoke_test/config/run.yaml",
+      "sha256": "980dca08b8de28157853139ffea01e6c0e23a51c68d0f5c421d0d821ed9b8f21",
+      "bytes": 393
+    },
+    {
+      "id": "checkpoint-config",
+      "path": "pretrained_models/VocalRender-Pro/config.json",
+      "sha256": "405f0dcd92f7feba6011ed4eac5c8d4f74cba9712f07fd5cfa3063bbdd95402c",
+      "bytes": 4336
+    },
+    {
+      "id": "checkpoint-tokenizer",
+      "path": "pretrained_models/VocalRender-Pro/tokenizer.json",
+      "sha256": "d8d49570fd9105591f83281955e6b0055ac5323de1da2faba8eba6f810ccabf2",
+      "bytes": 6777048
+    },
+    {
+      "id": "checkpoint-tokenizer-config",
+      "path": "pretrained_models/VocalRender-Pro/tokenizer_config.json",
+      "sha256": "88d835b87c320d491b1ee2b367dd4f6287c0fde399ea26f81fe9478c057f1d26",
+      "bytes": 619
+    }
+  ],
+  "outputs": [],
+  "warnings": [],
+  "blocker": {
+    "code": "cuda_unavailable_cpu_only_torch",
+    "category": "blocked_environment",
+    "message": "PyTorch 2.13.0+cpu reports no CUDA runtime or visible device; the required CUDA policy blocked model load before the 9.5 GB checkpoint was touched.",
+    "remediation": "Use an approved CUDA-enabled PyTorch environment with a compatible GPU budget, rerun check_runtime.py, then append a new run record."
+  },
+  "preflight": {
+    "status": "blocked_environment",
+    "requested_dtype": "float16",
+    "workspace_free_gib": 204.476,
+    "workspace_total_gib": 450.136,
+    "model_load_started": false,
+    "generation_started": false
+  },
+  "attempt": {
+    "preflight_completed": true,
+    "model_load_started": false,
+    "generation_started": false
+  },
+  "notes": "Append-only runtime evidence. No CUDA smoke was attempted, no CPU fallback occurred, and no audio was generated. This is an infrastructure blocker, not evidence about the checkpoint or Mongolian frontend."
+}

@@ -43,6 +43,7 @@ sample_rate: 48000
 # Training Parameters
 # ================================================================
 
+seed: 42
 train_precision: "amp_bf16"
 
 zero_stage: 3
@@ -60,7 +61,7 @@ val_batch_size: 8
 
 num_workers: 4
 
-num_iters: 500000
+total_steps: 500000
 log_interval: 10
 
 valid_interval: 1000
@@ -77,7 +78,6 @@ per_rank_diagnostics: false
 learning_rate: 0.0001
 weight_decay: 0.01
 warmup_steps: 5000
-max_steps: 500000
 lr_scheduler: "inverse_sqrt"
 
 # Number of validation samples to synthesize during audio eval

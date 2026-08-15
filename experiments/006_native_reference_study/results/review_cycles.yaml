@@ -1,0 +1,22 @@
+schema_version: 1
+cycles:
+- cycle_id: 1416fca8ffe1f4bb
+  config_sha256: 0db7840087ae49341355b3706b869a2dd15856fe3e781f3528bcbc1d85dba571
+  context_annotations_sha256: e0d2a79dc34d56a9aaf2c2ee7d39765be816304806a25e8bb7683c944ce30b9a
+  alignments_sha256: e5742758c3e8232943d03e5e9e2bc2e343d3fd6913150facfb67f02c18fcaf30
+  winning_ids: []
+  deterministic_exclusions: []
+  pair_ids: []
+  diversity_vectors:
+    L: []
+    G: []
+    H: []
+    PALATALIZATION: []
+  tie_cohorts:
+    L: []
+    G: []
+    H: []
+    PALATALIZATION: []
+  items_requiring_review: []
+  alignment_statuses:
+    MNPHON_161: unreviewed

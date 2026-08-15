@@ -1,15 +1,14 @@
 from __future__ import annotations
 
 import contextlib
+import json
 import os
 import time
 from pathlib import Path
-from typing import Dict
 
 import torch
 
 from vocalrender.training import Accelerator
-from vocalrender.training.checkpoint import save_checkpoint
 from vocalrender.training.config import SVSTrainConfig, load_svs_train_config
 from vocalrender.training.dataset_ops import (
     build_song_index,
@@ -35,6 +34,7 @@ from vocalrender.training.resume import (
     restore_train_iterator,
     set_train_loader_epoch,
 )
+from vocalrender.training.provenance import ensure_run_manifest, update_run_status
 from vocalrender.training.runtime import (
     dtype_name,
     resolve_training_precision,
@@ -43,6 +43,7 @@ from vocalrender.training.runtime import (
     close_training_runtime,
     create_training_runtime,
     load_resume_context,
+    require_finite,
     save_training_checkpoint,
 )
 from vocalrender.training.svs_data import (
@@ -55,7 +56,6 @@ from vocalrender.training.svs_tokenizer import (
     extend_tokenizer_for_svs,
 )
 from vocalrender.training.validation import validate_svs
-
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 
@@ -94,6 +94,7 @@ class SVSRunner:
         self.has_logged_cuda_memory = False
         self.timing_interval = None
         self.rank_diag_interval = None
+        self.run_provenance = None
 
     @property
     def tracker(self):
@@ -120,6 +121,7 @@ class SVSRunner:
         self.precision_cfg = resolve_training_precision(self.config.dist.train_precision)
         self.accelerator = Accelerator(
             amp=self.precision_cfg["amp"],
+            seed=self.config.train.seed,
             amp_dtype=self.precision_cfg["amp_dtype"],
             zero_stage=self.config.dist.zero_stage,
             fsdp_sharding_group_size=self.config.dist.fsdp_sharding_group_size,
@@ -130,8 +132,7 @@ class SVSRunner:
         audio_eval_interval = self.config.train.audio_eval_interval
         if audio_eval_interval == 0 or audio_eval_interval < -1:
             raise ValueError(
-                "audio_eval_interval must be -1 (auto) or a positive integer, "
-                f"got {audio_eval_interval}"
+                "audio_eval_interval must be -1 (auto) or a positive integer, " f"got {audio_eval_interval}"
             )
         if audio_eval_interval < 0:
             audio_eval_interval = self.config.train.valid_interval * 4
@@ -142,6 +143,18 @@ class SVSRunner:
             save_path=self.config.runtime.save_path,
             tensorboard=self.config.runtime.tensorboard,
         )
+
+        if self.accelerator.rank == 0:
+            self.run_provenance = ensure_run_manifest(
+                self.runtime.save_dir,
+                self.config,
+                world_size=self.accelerator.world_size,
+            )
+            update_run_status(self.runtime.save_dir, status="running", step=0)
+        self.accelerator.barrier()
+        if self.run_provenance is None:
+            with (self.runtime.save_dir / "run_manifest.json").open("r", encoding="utf-8") as handle:
+                self.run_provenance = json.load(handle)
 
         if self.accelerator.rank != 0:
             return
@@ -225,8 +238,7 @@ class SVSRunner:
         base_model.audio_vae = base_model.audio_vae.to(torch.float32)
         if self.accelerator.rank == 0:
             self.tracker.print(
-                "Model storage dtype configured: "
-                f"{dtype_name(target_param_dtype)} (AudioVAE kept in float32)"
+                "Model storage dtype configured: " f"{dtype_name(target_param_dtype)} (AudioVAE kept in float32)"
             )
 
         if self.config.model.activation_checkpointing:
@@ -235,14 +247,12 @@ class SVSRunner:
             base_model.set_activation_checkpointing(True)
             if self.accelerator.rank == 0:
                 self.tracker.print(
-                    "Activation checkpointing: enabled "
-                    "(model-internal single-output closure per MiniCPM block)"
+                    "Activation checkpointing: enabled " "(model-internal single-output closure per MiniCPM block)"
                 )
 
         mask_strategy = self.config.data.svs_mask_strategy
-        masking_enabled = (
-            (isinstance(mask_strategy, list) and len(mask_strategy) > 0)
-            or (isinstance(mask_strategy, str) and mask_strategy != "none")
+        masking_enabled = (isinstance(mask_strategy, list) and len(mask_strategy) > 0) or (
+            isinstance(mask_strategy, str) and mask_strategy != "none"
         )
         self.mask_ids = {
             "pitch_token_ids": set(),
@@ -349,6 +359,7 @@ class SVSRunner:
             prompt_audio_prob=self.config.data.prompt_audio_prob,
             prompt_max_frames=self.config.data.prompt_max_frames,
             song_index=song_index,
+            prompt_audio_seed=self.config.train.seed,
             text_tokenizer=self.text_tokenizer,
         )
         val_max_batch_tokens = (
@@ -376,7 +387,7 @@ class SVSRunner:
                 prompt_audio_prob=self.config.data.prompt_audio_prob,
                 prompt_max_frames=self.config.data.prompt_max_frames,
                 song_index=self.val_song_index,
-                prompt_audio_seed=42,
+                prompt_audio_seed=self.config.train.seed,
                 text_tokenizer=self.text_tokenizer,
             )
             if val_ds is not None
@@ -413,9 +424,7 @@ class SVSRunner:
         self.load_audio_vae = eval_artifacts.load_audio_vae_fn
 
     def build_training_state(self) -> None:
-        total_training_steps = (
-            self.config.train.max_steps if self.config.train.max_steps > 0 else self.config.train.num_iters
-        )
+        total_training_steps = self.config.train.total_steps
         self.optimizer, self.scheduler, scheduler_desc = build_optimizer_and_scheduler(
             self.model,
             learning_rate=self.config.train.learning_rate,
@@ -432,6 +441,7 @@ class SVSRunner:
             self.optimizer,
             self.scheduler,
             runtime=self.runtime,
+            expected_run_id=self.run_provenance["run_id"],
         )
         self.loop_state = LoopProgressState()
         if self.resume_context.resume_runtime_state is not None:
@@ -439,9 +449,7 @@ class SVSRunner:
             self.loop_state.batches_seen_in_epoch = int(
                 self.resume_context.resume_runtime_state.get("batches_seen_in_epoch", 0)
             )
-            self.loop_state.local_samples_seen = int(
-                self.resume_context.resume_runtime_state.get("samples_seen", 0)
-            )
+            self.loop_state.local_samples_seen = int(self.resume_context.resume_runtime_state.get("samples_seen", 0))
             restore_local_runtime_state(self.resume_context.resume_runtime_state, self.accelerator)
             if self.accelerator.rank == 0:
                 self.tracker.print(
@@ -571,7 +579,7 @@ class SVSRunner:
                         processed["audio_mask"],
                         processed["loss_mask"],
                         processed["labels"],
-                        progress=step / max(1, self.config.train.num_iters),
+                        progress=step / max(1, self.config.train.total_steps),
                     )
                 if step_timing is not None:
                     sync_device_for_timing(self.accelerator.device)
@@ -592,6 +600,8 @@ class SVSRunner:
                             1,
                         )
                         loss_dict[key] = value.detach()
+
+                require_finite("loss", total_loss)
 
                 if memory_probe is not None:
                     torch.cuda.reset_peak_memory_stats(self.accelerator.device)
@@ -618,6 +628,7 @@ class SVSRunner:
             scaler.unscale_(self.optimizer)
         # Real clipping at 1.0.
         grad_norm = self.accelerator.clip_grad_norm(self.model, max_norm=1.0)
+        require_finite("gradient norm", grad_norm)
         self.accelerator.step(self.optimizer)
         self.accelerator.update()
         self.scheduler.step()
@@ -656,7 +667,7 @@ class SVSRunner:
             )
             self.has_logged_cuda_memory = True
 
-        if step % self.config.train.log_interval == 0 or step == self.config.train.num_iters - 1:
+        if step % self.config.train.log_interval == 0 or step == self.config.train.total_steps - 1:
             loss_values = {
                 key: value.item() if isinstance(value, torch.Tensor) else float(value)
                 for key, value in loss_dict.items()
@@ -677,9 +688,7 @@ class SVSRunner:
                 loss_values["time/optim_ms"] = 1000.0 * self.timing_interval["optim"] / interval_steps
                 loss_values["time/step_ms"] = 1000.0 * self.timing_interval["step"] / interval_steps
                 loss_values["throughput/tokens_per_s"] = self.timing_interval["tokens"] / interval_step_total
-                loss_values["throughput/micro_steps_per_s"] = (
-                    self.timing_interval["micro_steps"] / interval_step_total
-                )
+                loss_values["throughput/micro_steps_per_s"] = self.timing_interval["micro_steps"] / interval_step_total
             self.tracker.log_metrics(loss_values, split="train")
             if timing_active:
                 self.timing_interval = {
@@ -705,7 +714,7 @@ class SVSRunner:
     def run_validation_and_checkpoint(self, step: int) -> None:
         schedule = build_svs_eval_schedule(
             step=step,
-            total_steps=self.config.train.num_iters,
+            total_steps=self.config.train.total_steps,
             valid_interval=self.config.train.valid_interval,
             audio_eval_interval=self.audio_eval_interval,
             has_validation=self.val_loader is not None,
@@ -753,7 +762,7 @@ class SVSRunner:
         save_permanent = should_save_checkpoint(
             step=step,
             save_interval=self.config.train.save_interval,
-            total_steps=self.config.train.num_iters,
+            total_steps=self.config.train.total_steps,
             skip_step_zero=True,
         )
         save_transient = (
@@ -762,7 +771,7 @@ class SVSRunner:
             and should_save_checkpoint(
                 step=step,
                 save_interval=self.config.train.transient_save_interval,
-                total_steps=self.config.train.num_iters,
+                total_steps=self.config.train.total_steps,
                 skip_step_zero=True,
             )
         )
@@ -780,34 +789,52 @@ class SVSRunner:
                 tokenizer=self.base_tokenizer,
                 loop_state=self.loop_state,
                 is_transient=save_transient,
+                checkpoint_metadata={
+                    "run_id": self.run_provenance["run_id"] if self.run_provenance else None,
+                    "total_steps": self.config.train.total_steps,
+                },
             )
             self.accelerator.barrier()
 
     def run(self) -> None:
-        self.build_runtime()
-        self.build_model_and_tokenizer()
-        self.build_datasets_and_loaders()
-        self.build_eval_context()
-        self.build_training_state()
+        try:
+            self.build_runtime()
+            self.build_model_and_tokenizer()
+            self.build_datasets_and_loaders()
+            self.build_eval_context()
+            self.build_training_state()
 
-        if self.accelerator.rank == 0:
-            self.tracker.print(
-                f"Starting SVS training from step {self.resume_context.start_step} "
-                f"to {self.config.train.num_iters}..."
-            )
+            if self.accelerator.rank == 0:
+                self.tracker.print(
+                    f"Starting SVS training from step {self.resume_context.start_step} "
+                    f"to {self.config.train.total_steps}..."
+                )
 
-        with self.tracker.live():
-            for step in range(self.resume_context.start_step, self.config.train.num_iters):
-                self.train_one_step(step)
-                self.run_validation_and_checkpoint(step)
+            with self.tracker.live():
+                for step in range(self.resume_context.start_step, self.config.train.total_steps):
+                    self.train_one_step(step)
+                    self.run_validation_and_checkpoint(step)
 
-        # No post-loop final save: should_save_checkpoint() returns True at
-        # step=num_iters-1, so run_validation_and_checkpoint already wrote a
-        # permanent ckpt via save_training_checkpoint. A second consecutive
-        # FSDP2 full_state_dict + optimizer all-gather here hangs NCCL.
-        if self.accelerator.rank == 0:
-            self.tracker.print("SVS training completed!")
-        close_training_runtime(self.runtime)
+            if self.accelerator.rank == 0:
+                self.tracker.print("SVS training completed!")
+                update_run_status(
+                    self.runtime.save_dir,
+                    status="completed",
+                    step=self.config.train.total_steps,
+                )
+        except BaseException as exc:
+            if self.runtime is not None and self.accelerator is not None and self.accelerator.rank == 0:
+                interrupted = isinstance(exc, (KeyboardInterrupt, SystemExit))
+                update_run_status(
+                    self.runtime.save_dir,
+                    status="interrupted" if interrupted else "failed",
+                    step=(self.resume_context.signal_state.get("step") if self.resume_context else 0),
+                    detail=f"{type(exc).__name__}: {exc}",
+                )
+            raise
+        finally:
+            if self.runtime is not None:
+                close_training_runtime(self.runtime)
 
 
 def run(config: SVSTrainConfig) -> None:

@@ -1,0 +1,38 @@
+schema_version: 1
+description: Fail-closed metadata contract for score-aligned native Standard Khalkha singing.
+required_item_fields:
+  - id
+  - source_id
+  - audio_path
+  - score_path
+  - audio_sha256
+  - score_sha256
+  - duration_seconds
+  - language
+  - variety
+  - vocal_type
+  - singer_group
+  - song_group
+  - session_group
+  - consent_ref
+  - license
+  - redistribution
+  - research_evaluation_use
+  - training_use
+  - derivative_model_permission
+  - review_status
+rights_values:
+  allowed: Explicitly approved for the named use.
+  unknown: Excluded; never inferred from downloadability or file presence.
+  prohibited: Excluded.
+policy:
+  language: [mn, mongolian, khk]
+  variety: [standard_khalkha, standard-khalkha, khalkha, khk]
+  vocal_type: [singing, sung, singer, singing_voice, native_singing]
+  checksum: sha256
+  test_song_disjoint: true
+  test_singer_disjoint: true
+  test_session_disjoint: true
+  validation_song_disjoint: true
+  prompt_target_intervals_must_not_overlap: true
+  pii_or_private_urls: forbidden

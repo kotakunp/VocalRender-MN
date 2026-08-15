@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import signal
 import sys
 from dataclasses import dataclass
@@ -20,7 +19,6 @@ from .checkpoint import load_checkpoint, save_checkpoint
 from .resume import capture_local_runtime_state, gather_runtime_state
 from .tracker import TrainingTracker
 
-
 # ---------------------------------------------------------------------------
 # Precision resolution
 # ---------------------------------------------------------------------------
@@ -37,6 +35,13 @@ def dtype_name(dtype: Optional[torch.dtype]) -> str:
     if dtype == torch.bfloat16:
         return "bfloat16"
     return str(dtype)
+
+
+def require_finite(name: str, value) -> None:
+    """Fail before publishing an optimizer step containing NaN or infinity."""
+    tensor = value.detach() if isinstance(value, torch.Tensor) else torch.as_tensor(value)
+    if not bool(torch.isfinite(tensor).all().item()):
+        raise FloatingPointError(f"Non-finite {name} detected; optimizer step was not applied")
 
 
 def resolve_training_precision(train_precision: str) -> dict:
@@ -129,10 +134,7 @@ def create_lr_scheduler(
     scheduler_type = scheduler_type.lower().strip()
 
     if allowed_types is not None and scheduler_type not in allowed_types:
-        raise ValueError(
-            f"Scheduler type '{scheduler_type}' is not allowed. "
-            f"Allowed types: {list(allowed_types)}"
-        )
+        raise ValueError(f"Scheduler type '{scheduler_type}' is not allowed. " f"Allowed types: {list(allowed_types)}")
 
     if scheduler_type == "constant":
         return get_constant_schedule_with_warmup(
@@ -140,6 +142,7 @@ def create_lr_scheduler(
             num_warmup_steps=warmup_steps,
         )
     elif scheduler_type == "inverse_sqrt":
+
         def _inverse_sqrt_lr(current_step: int) -> float:
             if current_step < warmup_steps:
                 return float(current_step) / float(max(1, warmup_steps))
@@ -154,8 +157,7 @@ def create_lr_scheduler(
         )
     else:
         raise ValueError(
-            f"Unknown scheduler type '{scheduler_type}'. "
-            f"Supported: 'cosine', 'constant', 'inverse_sqrt'."
+            f"Unknown scheduler type '{scheduler_type}'. " f"Supported: 'cosine', 'constant', 'inverse_sqrt'."
         )
 
 
@@ -188,9 +190,9 @@ def install_checkpoint_signal_handler(
 ) -> None:
     """Install SIGTERM / SIGINT handlers that print resume hints and exit.
 
-    The handler does **not** save a checkpoint at signal time — it calls
-    ``os._exit(0)`` to skip atexit hooks (which can deadlock under DDP/FSDP)
-    and points the user at the latest periodic checkpoint instead.
+    The handler does **not** save a checkpoint at signal time. It exits with
+    the conventional non-zero signal status so interrupted work can never be
+    mistaken for successful completion. Multi-rank rendezvous is Plan 015B.
 
     *resume_state* is a mutable dict whose ``"step"`` key the training loop
     keeps up-to-date so the handler can report the current step.
@@ -208,7 +210,7 @@ def install_checkpoint_signal_handler(
                 f"Skipping signal-time checkpoint save; resume from the latest periodic checkpoint: {latest}",
                 file=sys.stderr,
             )
-        os._exit(0)
+        raise SystemExit(128 + int(signum))
 
     signal.signal(signal.SIGTERM, _handler)
     signal.signal(signal.SIGINT, _handler)
@@ -309,6 +311,7 @@ def load_resume_context(
     scheduler,
     *,
     runtime: TrainingRuntimeContext,
+    expected_run_id: Optional[str] = None,
 ) -> ResumeContext:
     start_step, resume_runtime_state = load_checkpoint(
         model,
@@ -317,6 +320,7 @@ def load_resume_context(
         runtime.save_dir,
         rank=runtime.accelerator.rank,
         accelerator=runtime.accelerator,
+        expected_run_id=expected_run_id,
     )
     runtime.accelerator.barrier()
     if start_step > 0 and runtime.accelerator.rank == 0:

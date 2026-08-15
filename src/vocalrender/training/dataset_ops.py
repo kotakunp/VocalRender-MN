@@ -12,10 +12,10 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 from datasets import Dataset, concatenate_datasets
 
-
 # ------------------------------------------------------------------
 # Filtering / sampling / upsampling
 # ------------------------------------------------------------------
+
 
 def filter_train_datasets(
     train_ds: Dataset,
@@ -99,6 +99,7 @@ def cap_dataset_hours(
     if target_total_hours > max_hours:
         # Shuffle with fixed seed for reproducibility, then cumsum select
         import random as rnd
+
         rng = rnd.Random(seed)
         rng.shuffle(target_indices)
 
@@ -111,8 +112,10 @@ def cap_dataset_hours(
                 break
 
         if log_fn:
-            log_fn(f"  {dataset_name} sampled: {len(selected)} samples, "
-                   f"{cumulative / 3600.0:.1f}h (target: {max_hours}h)")
+            log_fn(
+                f"  {dataset_name} sampled: {len(selected)} samples, "
+                f"{cumulative / 3600.0:.1f}h (target: {max_hours}h)"
+            )
 
         # Rebuild train_ds with selected target + all other datasets
         keep_indices = sorted(other_indices + selected)
@@ -122,8 +125,7 @@ def cap_dataset_hours(
             log_fn(f"  Final train set: {len(train_ds)} samples")
     else:
         if log_fn:
-            log_fn(f"  {dataset_name} ({target_total_hours:.1f}h) already under cap "
-                   f"({max_hours}h), keeping all")
+            log_fn(f"  {dataset_name} ({target_total_hours:.1f}h) already under cap " f"({max_hours}h), keeping all")
 
     return train_ds
 
@@ -195,6 +197,7 @@ def upsample_datasets(
 # Song index building (for prompt audio)
 # ------------------------------------------------------------------
 
+
 def build_song_index(
     ds: Dataset,
     *,
@@ -218,8 +221,10 @@ def build_song_index(
     if log_fn:
         multi_songs = {k: v for k, v in song_index.items() if len(v) >= 2}
         eligible = sum(len(v) for v in multi_songs.values())
-        log_fn(f"Prompt audio: {len(song_index)} songs, "
-               f"{len(multi_songs)} with >=2 segments ({eligible} prompt-eligible samples)")
+        log_fn(
+            f"Prompt audio: {len(song_index)} songs, "
+            f"{len(multi_songs)} with >=2 segments ({eligible} prompt-eligible samples)"
+        )
 
     return song_index
 
@@ -231,21 +236,22 @@ def build_val_prompt_pool(
     *,
     log_fn: Optional[Callable] = None,
 ) -> Tuple[Dataset, Dict[str, List[int]], Dict[str, List[int]], int]:
-    """Build a combined prompt pool (train + val) for validation prompt audio.
+    """Build a validation-only prompt pool for validation prompt audio.
 
-    Validation samples can pick prompt audio from ANY same-song segment
-    across the full dataset (train + val).
+    Validation prompts must come from the frozen validation split.  Reusing
+    training audio here leaks train material into validation generations and
+    makes resumed or compared runs scientifically ambiguous.
 
     Args:
-        train_ds: Training dataset.
+        train_ds: Retained for call-site compatibility; never used as a prompt pool.
         val_ds: Validation dataset.
-        train_song_index: Song index built from training data.
+        train_song_index: Retained for call-site compatibility; never used.
         log_fn: Optional callable for logging.
 
     Returns:
         Tuple of ``(prompt_pool_ds, prompt_pool_song_index, val_song_index,
-        val_offset)`` where *val_offset* is ``len(train_ds)`` (the index
-        offset for val samples in the combined pool).
+        val_offset)``.  ``val_offset`` is always zero because the prompt pool
+        and evaluation dataset are the same frozen validation split.
     """
     val_song_names = val_ds["song_name"]
     val_song_index: Dict[str, List[int]] = {}
@@ -253,20 +259,20 @@ def build_val_prompt_pool(
         if sn:
             val_song_index.setdefault(sn, []).append(idx)
 
-    # Build combined prompt pool
-    prompt_pool_ds = concatenate_datasets([train_ds, val_ds])
-    prompt_pool_song_index = {sn: list(indices) for sn, indices in train_song_index.items()}
-    val_offset = len(train_ds)
-    for idx, sn in enumerate(val_song_names):
-        if sn:
-            prompt_pool_song_index.setdefault(sn, []).append(val_offset + idx)
+    prompt_pool_ds = val_ds
+    prompt_pool_song_index = {sn: list(indices) for sn, indices in val_song_index.items()}
+    val_offset = 0
 
     if log_fn:
         val_multi = {k: v for k, v in val_song_index.items() if len(v) >= 2}
         pool_multi = {k: v for k, v in prompt_pool_song_index.items() if len(v) >= 2}
-        log_fn(f"Val prompt audio: {len(val_song_index)} songs, "
-               f"{len(val_multi)} with >=2 segments (seed=42 for reproducibility)")
-        log_fn(f"  Combined pool: {len(prompt_pool_song_index)} songs, "
-               f"{len(pool_multi)} with >=2 segments ({sum(len(v) for v in pool_multi.values())} eligible)")
+        log_fn(
+            f"Val prompt audio: {len(val_song_index)} songs, "
+            f"{len(val_multi)} with >=2 segments (seed=42 for reproducibility)"
+        )
+        log_fn(
+            f"  Validation-only pool: {len(prompt_pool_song_index)} songs, "
+            f"{len(pool_multi)} with >=2 segments ({sum(len(v) for v in pool_multi.values())} eligible)"
+        )
 
     return prompt_pool_ds, prompt_pool_song_index, val_song_index, val_offset

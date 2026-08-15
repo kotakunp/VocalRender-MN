@@ -1,0 +1,40 @@
+schema_version: 1
+study_id: native-reference-v1
+status: review_queue
+source_manifest_sha256: c741bbc0b605b054c64c6621817fac726a0e47d34d94bab8198038af1d7f0abe
+context_annotations_sha256: e0d2a79dc34d56a9aaf2c2ee7d39765be816304806a25e8bb7683c944ce30b9a
+alignments_sha256: e5742758c3e8232943d03e5e9e2bc2e343d3fd6913150facfb67f02c18fcaf30
+groups:
+  L:
+    group: L
+    selected_ids: []
+    feasible_sets: 0
+    diversity_vector: []
+    tie_cohort: []
+    blocker: no approved context annotations
+  G:
+    group: G
+    selected_ids: []
+    feasible_sets: 0
+    diversity_vector: []
+    tie_cohort: []
+    blocker: no approved context annotations
+  H:
+    group: H
+    selected_ids: []
+    feasible_sets: 0
+    diversity_vector: []
+    tie_cohort: []
+    blocker: no approved context annotations
+  PALATALIZATION:
+    group: PALATALIZATION
+    selected_ids: []
+    feasible_sets: 0
+    diversity_vector: []
+    tie_cohort: []
+    blocker: no approved context annotations
+selected_items: []
+items_requiring_review: []
+selector_version: native-study-selector-v1
+seed_namespace: mnphon-native-v1
+deterministic_exclusions: []

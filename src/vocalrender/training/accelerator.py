@@ -50,7 +50,12 @@ class Accelerator:
         amp_dtype: torch.dtype | None = None,
         zero_stage: int = 0,
         fsdp_sharding_group_size: int = 1,
+        require_cuda: bool = True,
     ):
+        if require_cuda and not torch.cuda.is_available():
+            raise RuntimeError(
+                "CUDA training was requested but torch.cuda.is_available() is false; " "refusing a silent CPU fallback."
+            )
         self.local_rank = int(os.environ.get("LOCAL_RANK", "0"))
         if torch.cuda.is_available():
             torch.cuda.set_device(self.local_rank)
@@ -58,17 +63,12 @@ class Accelerator:
         self.world_size = int(os.getenv("WORLD_SIZE", "1"))
         if zero_stage not in (0, 3):
             raise ValueError(
-                f"Unsupported zero_stage={zero_stage}. Expected 0 or 3 "
-                "(FSDP2 only supports FULL_SHARD)."
+                f"Unsupported zero_stage={zero_stage}. Expected 0 or 3 " "(FSDP2 only supports FULL_SHARD)."
             )
         if fsdp_sharding_group_size < 1:
-            raise ValueError(
-                f"fsdp_sharding_group_size must be >= 1, got {fsdp_sharding_group_size}"
-            )
+            raise ValueError(f"fsdp_sharding_group_size must be >= 1, got {fsdp_sharding_group_size}")
         if fsdp_sharding_group_size > 1 and zero_stage < 2:
-            raise ValueError(
-                "fsdp_sharding_group_size > 1 requires zero_stage >= 2"
-            )
+            raise ValueError("fsdp_sharding_group_size > 1 requires zero_stage >= 2")
         if fsdp_sharding_group_size > 1 and self.world_size % fsdp_sharding_group_size != 0:
             raise ValueError(
                 f"world_size ({self.world_size}) must be divisible by "
@@ -78,13 +78,15 @@ class Accelerator:
 
         if self.world_size > 1 and not dist.is_initialized():
             import datetime
+
             # Bind the PG explicitly to this rank's GPU. Without device_id NCCL
             # "guesses device based on global rank" (PG-default-device warning)
             # and can deadlock during bring-up — observed as a 2-GPU hang where
             # ranks spun at 100% util / pre-model VRAM. Passing device_id makes
             # init eager + device-correct.
             init_kwargs = dict(
-                backend="nccl", init_method="env://",
+                backend="nccl",
+                init_method="env://",
                 timeout=datetime.timedelta(hours=1),
             )
             if torch.cuda.is_available():
@@ -112,15 +114,9 @@ class Accelerator:
             def update(self):
                 pass
 
-        use_grad_scaler = (
-            amp
-            and torch.cuda.is_available()
-            and self.amp_dtype == torch.float16
-        )
+        use_grad_scaler = amp and torch.cuda.is_available() and self.amp_dtype == torch.float16
         self.scaler = torch.amp.GradScaler("cuda") if use_grad_scaler else DummyScaler()
-        self.device_ctx = (
-            torch.cuda.device(self.local_rank) if torch.cuda.is_available() else None
-        )
+        self.device_ctx = torch.cuda.device(self.local_rank) if torch.cuda.is_available() else None
         self._ddp_model = None  # For no_sync support
         self._fsdp_model = None  # FSDP2 root module
         self._device_mesh = None  # For HYBRID_SHARD device mesh
@@ -190,7 +186,7 @@ class Accelerator:
     # Model helpers
     # ------------------------------------------------------------------ #
     def prepare_model(self, model: torch.nn.Module, **kwargs):
-        if hasattr(model, 'device'):  # make sure the matrix will be moved to the correct device
+        if hasattr(model, "device"):  # make sure the matrix will be moved to the correct device
             model.device = self.device
         model = model.to(self.device)
         if self.world_size > 1:
@@ -301,8 +297,7 @@ class Accelerator:
             state = m._get_fsdp_state()
             pg = state._fsdp_param_group
             saved_post_forward_info.append(
-                (m, state._auto_reshard_after_forward,
-                 pg.post_forward_mesh_info if pg is not None else None)
+                (m, state._auto_reshard_after_forward, pg.post_forward_mesh_info if pg is not None else None)
             )
             m.set_reshard_after_forward(False, recurse=False)
 
@@ -372,15 +367,14 @@ class Accelerator:
                 get_model_state_dict,
                 StateDictOptions,
             )
+
             opts = StateDictOptions(full_state_dict=True, cpu_offload=True)
             return get_model_state_dict(model, options=opts)
         if self.rank != 0:
             return None
         return self.unwrap(model).state_dict()
 
-    def load_model_state_dict(
-        self, model: torch.nn.Module, state_dict: dict, **kwargs
-    ):
+    def load_model_state_dict(self, model: torch.nn.Module, state_dict: dict, **kwargs):
         """
         Load state dict into model. Handles FSDP transparently.
 
@@ -392,6 +386,7 @@ class Accelerator:
                 set_model_state_dict,
                 StateDictOptions,
             )
+
             # broadcast_from_rank0 lets us pass a full state_dict on rank 0
             # only (others can pass {}); strict=False mirrors prior behavior.
             opts = StateDictOptions(
@@ -403,9 +398,7 @@ class Accelerator:
             return
         self.unwrap(model).load_state_dict(state_dict, **kwargs)
 
-    def optimizer_state_dict(
-        self, model: torch.nn.Module, optimizer: torch.optim.Optimizer
-    ) -> dict | None:
+    def optimizer_state_dict(self, model: torch.nn.Module, optimizer: torch.optim.Optimizer) -> dict | None:
         """
         Get full optimizer state dict.
 
@@ -418,6 +411,7 @@ class Accelerator:
                 get_optimizer_state_dict,
                 StateDictOptions,
             )
+
             opts = StateDictOptions(full_state_dict=True, cpu_offload=True)
             return get_optimizer_state_dict(model, optimizer, options=opts)
         if self.rank != 0:
@@ -441,13 +435,12 @@ class Accelerator:
                 set_optimizer_state_dict,
                 StateDictOptions,
             )
+
             opts = StateDictOptions(
                 full_state_dict=True,
                 broadcast_from_rank0=True,
             )
-            set_optimizer_state_dict(
-                model, optimizer, state_dict, options=opts
-            )
+            set_optimizer_state_dict(model, optimizer, state_dict, options=opts)
             return
         optimizer.load_state_dict(state_dict)
 

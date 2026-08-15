@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reason": "No qualified reviewer-approved context annotations are present. Legacy benchmark labels are not eligible.",
+  "groups": [],
+  "additional_approvals_needed": ["qualified Standard Khalkha context review", "manual lyric-to-note alignment review", "approved consented native singer reference recordings"]
+}

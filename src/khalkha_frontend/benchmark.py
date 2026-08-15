@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Mapping
+import re
 
 import yaml
 
@@ -174,6 +175,19 @@ class AudioTake:
     speaker_pseudonym: str | None = None
     prompt_provenance: str | None = None
     checksum: str | None = None
+    system_id: str | None = None
+    model_id: str | None = None
+    score_checksum: str | None = None
+    config_checksum: str | None = None
+    alignment_checksum: str | None = None
+    prompt_pseudonym: str | None = None
+    generation_seed: int | None = None
+    inference_run_id: str | None = None
+    sample_rate: int | None = None
+    channels: int | None = None
+    duration_seconds: float | None = None
+    consent_reference: str | None = None
+    blind_label: str | None = None
     notes: str = ""
 
     def __post_init__(self) -> None:
@@ -212,6 +226,19 @@ class AudioTake:
                 speaker_pseudonym=_optional_str(item.get("speaker_pseudonym")),
                 prompt_provenance=_optional_str(item.get("prompt_provenance")),
                 checksum=_optional_str(item.get("checksum")),
+                system_id=_optional_str(item.get("system_id")),
+                model_id=_optional_str(item.get("model_id", item.get("base_checkpoint_id"))),
+                score_checksum=_optional_str(item.get("score_checksum")),
+                config_checksum=_optional_str(item.get("config_checksum")),
+                alignment_checksum=_optional_str(item.get("alignment_checksum")),
+                prompt_pseudonym=_optional_str(item.get("prompt_pseudonym")),
+                generation_seed=item.get("generation_seed"),
+                inference_run_id=_optional_str(item.get("inference_run_id")),
+                sample_rate=item.get("sample_rate"),
+                channels=item.get("channels"),
+                duration_seconds=item.get("duration_seconds", item.get("duration")),
+                consent_reference=_optional_str(item.get("consent_reference")),
+                blind_label=_optional_str(item.get("blind_label")),
                 notes=str(item.get("notes", "")),
             )
         except KeyError as exc:
@@ -237,6 +264,48 @@ class AudioTake:
         if not self.id.strip() or not self.item_id.strip() or not self.run_id.strip() or not self.path.strip():
             raise ValidationError(f"{label}: required fields must be non-empty")
         self.validate_path(label)
+        for field_name in ("checksum", "score_checksum", "config_checksum", "alignment_checksum"):
+            value = getattr(self, field_name)
+            if value is not None and not re.fullmatch(r"[0-9a-f]{64}", value):
+                raise ValidationError(f"{label}.{field_name}: must be lowercase SHA-256")
+        if self.generation_seed is not None and (
+            isinstance(self.generation_seed, bool) or not isinstance(self.generation_seed, int)
+        ):
+            raise ValidationError(f"{label}.generation_seed: must be an integer")
+        if self.sample_rate is not None and (
+            isinstance(self.sample_rate, bool) or not isinstance(self.sample_rate, int) or self.sample_rate <= 0
+        ):
+            raise ValidationError(f"{label}.sample_rate: must be positive")
+        if self.channels is not None and self.channels not in (1, 2):
+            raise ValidationError(f"{label}.channels: must be 1 or 2")
+        if self.duration_seconds is not None and (
+            isinstance(self.duration_seconds, bool)
+            or not isinstance(self.duration_seconds, (int, float))
+            or self.duration_seconds <= 0
+        ):
+            raise ValidationError(f"{label}.duration_seconds: must be positive")
+        if self.source is AudioSource.NATIVE_SINGING:
+            required = {
+                "score_checksum": self.score_checksum,
+                "alignment_checksum": self.alignment_checksum,
+                "consent_reference": self.consent_reference,
+            }
+            missing = [name for name, value in required.items() if not value]
+            if missing:
+                raise ValidationError(f"{label}: native singing requires {', '.join(missing)}")
+        if self.source is AudioSource.BENCHMARK_TTS:
+            required = {
+                "system_id": self.system_id,
+                "model_id": self.model_id,
+                "score_checksum": self.score_checksum,
+                "config_checksum": self.config_checksum,
+                "prompt_pseudonym": self.prompt_pseudonym,
+                "generation_seed": self.generation_seed,
+                "inference_run_id": self.inference_run_id,
+            }
+            missing = [name for name, value in required.items() if value is None or value == ""]
+            if missing:
+                raise ValidationError(f"{label}: generated take requires {', '.join(missing)}")
 
 
 @dataclass(frozen=True)
@@ -248,6 +317,12 @@ class ManualRating:
     rater_pseudonym: str
     timestamp: str
     confidence: str | None = None
+    criterion: str | None = None
+    blind_label: str | None = None
+    session_id: str | None = None
+    presentation_order: int | None = None
+    rater_language_qualification: str | None = None
+    protocol_version: str | None = None
     notes: str = ""
 
     def __post_init__(self) -> None:
@@ -260,6 +335,12 @@ class ManualRating:
     def validate(self, label: str = "rating") -> None:
         if type(self.score) is not int or self.score not in {0, 1, 2}:
             raise ValidationError(f"{label}.score: must be integer 0, 1, or 2")
+        if self.presentation_order is not None and (
+            isinstance(self.presentation_order, bool)
+            or not isinstance(self.presentation_order, int)
+            or self.presentation_order < 0
+        ):
+            raise ValidationError(f"{label}.presentation_order: must be a nonnegative integer")
 
     @classmethod
     def from_mapping(cls, raw: Mapping[str, Any], index: int) -> "ManualRating":
@@ -278,6 +359,12 @@ class ManualRating:
                 rater_pseudonym=str(item["rater_pseudonym"]),
                 timestamp=str(item["timestamp"]),
                 confidence=_optional_str(item.get("confidence")),
+                criterion=_optional_str(item.get("criterion")),
+                blind_label=_optional_str(item.get("blind_label")),
+                session_id=_optional_str(item.get("session_id")),
+                presentation_order=item.get("presentation_order"),
+                rater_language_qualification=_optional_str(item.get("rater_language_qualification")),
+                protocol_version=_optional_str(item.get("protocol_version")),
                 notes=str(item.get("notes", "")),
             )
         except KeyError as exc:
@@ -372,12 +459,17 @@ def validate_related(
     item_ids = {item.id for item in manifest.items}
     take_list = tuple(takes)
     take_ids: set[str] = set()
+    take_blind_labels: set[str] = set()
     warnings: list[str] = []
     for take in take_list:
         take.validate()
         if take.id in take_ids:
             raise ValidationError(f"takes.{take.id}: duplicate take id")
         take_ids.add(take.id)
+        if take.blind_label is not None:
+            if take.blind_label in take_blind_labels:
+                raise ValidationError(f"takes.{take.id}: duplicate blind label")
+            take_blind_labels.add(take.blind_label)
         if take.item_id not in item_ids:
             raise ValidationError(f"takes.{take.id}.item_id: unknown item {take.item_id}")
         if repository_root is not None:
@@ -388,11 +480,17 @@ def validate_related(
                     raise ValidationError(message)
                 warnings.append(message)
     rating_ids: set[str] = set()
+    rating_keys: set[tuple[str, str, str]] = set()
     for rating in ratings:
         rating.validate()
         if rating.id in rating_ids:
             raise ValidationError(f"ratings.{rating.id}: duplicate rating id")
         rating_ids.add(rating.id)
+        if rating.criterion is not None:
+            key = (rating.audio_take_id, rating.criterion, rating.rater_pseudonym)
+            if key in rating_keys:
+                raise ValidationError(f"ratings.{rating.id}: duplicate audio/criterion/rater key")
+            rating_keys.add(key)
         if rating.item_id not in item_ids:
             raise ValidationError(f"ratings.{rating.id}.item_id: unknown item {rating.item_id}")
         if rating.audio_take_id not in take_ids:
@@ -402,6 +500,8 @@ def validate_related(
             raise ValidationError(
                 f"ratings.{rating.id}.item_id: {rating.item_id} disagrees with take {take.id} item {take.item_id}"
             )
+        if rating.blind_label is not None and rating.audio_take_id == rating.blind_label:
+            raise ValidationError(f"ratings.{rating.id}: rater-facing row must not expose take ID")
     return warnings
 
 

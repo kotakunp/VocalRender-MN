@@ -59,6 +59,7 @@ class SVSDataConfig:
 
 @dataclass
 class TrainConfig:
+    seed: int = 42
     sample_rate: int = 44100
     batch_size: int = 1
     grad_accum_steps: int = 1
@@ -66,7 +67,11 @@ class TrainConfig:
     # DataLoader prefetch depth per worker (passed through to torch
     # DataLoader). Only honored when num_workers > 0.
     prefetch_factor: int = 4
-    num_iters: int = 100_000
+    # ``total_steps`` is the sole runtime training horizon.  The two legacy
+    # aliases remain loadable so old configs fail loudly on disagreement
+    # instead of silently choosing one.
+    total_steps: int = 100_000
+    num_iters: Optional[int] = None
     log_interval: int = 100
     valid_interval: int = 1_000
     audio_eval_interval: int = -1
@@ -77,7 +82,7 @@ class TrainConfig:
     learning_rate: float = 1e-4
     weight_decay: float = 1e-2
     warmup_steps: int = 1_000
-    max_steps: int = 100_000
+    max_steps: Optional[int] = None
     max_epochs: float = 0.0
     lr_scheduler: str = "cosine"
     max_batch_tokens: int = 0
@@ -144,10 +149,12 @@ _SVS_GROUP_FIELDS = {
         "prompt_max_frames",
     },
     "train": {
+        "seed",
         "sample_rate",
         "batch_size",
         "grad_accum_steps",
         "num_workers",
+        "total_steps",
         "num_iters",
         "log_interval",
         "valid_interval",
@@ -195,7 +202,9 @@ def _ensure_mapping(value: Any, name: str) -> Dict[str, Any]:
     return deepcopy(value)
 
 
-def _normalize_grouped_config(raw_config: Dict[str, Any], group_fields: Dict[str, set[str]]) -> Dict[str, Dict[str, Any]]:
+def _normalize_grouped_config(
+    raw_config: Dict[str, Any], group_fields: Dict[str, set[str]]
+) -> Dict[str, Dict[str, Any]]:
     raw = deepcopy(raw_config)
     normalized = {group: _ensure_mapping(raw.get(group), group) for group in group_fields}
     consumed = {group for group in group_fields if group in raw}
@@ -219,7 +228,34 @@ def _build_model_config(data: Dict[str, Any]) -> ModelConfig:
 
 
 def _build_train_config(data: Dict[str, Any]) -> TrainConfig:
-    return TrainConfig(**data)
+    values = deepcopy(data)
+    explicit_total = values.get("total_steps")
+    legacy = {name: values.get(name) for name in ("num_iters", "max_steps") if values.get(name) is not None}
+
+    if explicit_total is None:
+        unique_legacy = {int(value) for value in legacy.values()}
+        if len(unique_legacy) > 1:
+            raise ValueError(
+                "Conflicting legacy training horizons: " + ", ".join(f"{key}={value}" for key, value in legacy.items())
+            )
+        explicit_total = unique_legacy.pop() if unique_legacy else 100_000
+
+    canonical = int(explicit_total)
+    if canonical <= 0:
+        raise ValueError(f"train.total_steps must be positive, got {canonical}")
+    conflicts = {key: value for key, value in legacy.items() if int(value) != canonical}
+    if conflicts:
+        raise ValueError(
+            f"train.total_steps={canonical} conflicts with legacy aliases: "
+            + ", ".join(f"{key}={value}" for key, value in conflicts.items())
+        )
+
+    values["total_steps"] = canonical
+    # Preserve aliases as read-only compatibility values for downstream code
+    # that has not yet migrated; training code must use ``total_steps``.
+    values["num_iters"] = canonical
+    values["max_steps"] = canonical
+    return TrainConfig(**values)
 
 
 def _build_eval_config(data: Dict[str, Any]) -> EvalConfig:

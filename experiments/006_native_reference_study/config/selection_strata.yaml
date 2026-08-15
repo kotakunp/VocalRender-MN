@@ -1,0 +1,47 @@
+schema_version: 1
+description: Reviewed Standard Khalkha context strata; labels never derive from legacy fields.
+manifest: ../../../benchmarks/MN-PHON-250/manifest.yaml
+context_annotations: context_annotations.yaml
+diversity_fields:
+  L: [structural_context, vowel_context_class, cluster_or_ng_context, target_consonant, trigger_type]
+  G: [structural_context, vowel_context_class, cluster_or_ng_context, target_consonant, trigger_type]
+  H: [structural_context, vowel_context_class, cluster_or_ng_context, target_consonant, trigger_type]
+  PALATALIZATION: [structural_context, vowel_context_class, cluster_or_ng_context, target_consonant, trigger_type]
+definitions:
+  word_initial: target occurs at the start of the reviewed lexical item.
+  intervocalic: target is between reviewed vowel contexts.
+  preconsonantal_cluster: target is in a reviewed consonant-cluster context.
+  word_final: target occurs at the end of the reviewed lexical item.
+  internal: target is neither word-initial nor word-final.
+  front: reviewed adjacent vowel context is front.
+  back: reviewed adjacent vowel context is back.
+  ng: reviewed adjacent cluster is ng.
+  explicit_soft_sign: reviewed trigger is the written soft sign.
+  contextual: reviewed trigger is contextual rather than an explicit soft sign.
+quotas:
+  - {id: l_word_initial, group: L, field: structural_context, allowed_values: [word_initial], minimum_count: 1, required: true}
+  - {id: l_intervocalic, group: L, field: structural_context, allowed_values: [intervocalic], minimum_count: 1, required: true}
+  - {id: l_cluster, group: L, field: structural_context, allowed_values: [preconsonantal_cluster], minimum_count: 1, required: true}
+  - {id: l_word_final, group: L, field: structural_context, allowed_values: [word_final], minimum_count: 1, required: true}
+  - {id: l_front_vowel, group: L, field: vowel_context_class, allowed_values: [front], minimum_count: 1, required: true}
+  - {id: l_back_vowel, group: L, field: vowel_context_class, allowed_values: [back], minimum_count: 1, required: true}
+  - {id: l_palatalized, group: L, field: trigger_type, allowed_values: [explicit_soft_sign, contextual], minimum_count: 1, required: false}
+  - {id: g_front_vowel, group: G, field: vowel_context_class, allowed_values: [front], minimum_count: 1, required: true}
+  - {id: g_back_vowel, group: G, field: vowel_context_class, allowed_values: [back], minimum_count: 1, required: true}
+  - {id: g_intervocalic, group: G, field: structural_context, allowed_values: [intervocalic], minimum_count: 1, required: true}
+  - {id: g_word_final, group: G, field: structural_context, allowed_values: [word_final], minimum_count: 1, required: true}
+  - {id: g_cluster, group: G, field: structural_context, allowed_values: [preconsonantal_cluster], minimum_count: 1, required: true}
+  - {id: g_ng, group: G, field: cluster_or_ng_context, allowed_values: [ng], minimum_count: 1, required: true}
+  - {id: g_word_initial, group: G, field: structural_context, allowed_values: [word_initial], minimum_count: 1, required: false}
+  - {id: h_front_vowel, group: H, field: vowel_context_class, allowed_values: [front], minimum_count: 1, required: true}
+  - {id: h_back_vowel, group: H, field: vowel_context_class, allowed_values: [back], minimum_count: 1, required: true}
+  - {id: h_word_initial, group: H, field: structural_context, allowed_values: [word_initial], minimum_count: 1, required: true}
+  - {id: h_intervocalic, group: H, field: structural_context, allowed_values: [intervocalic], minimum_count: 1, required: true}
+  - {id: h_cluster, group: H, field: structural_context, allowed_values: [preconsonantal_cluster], minimum_count: 1, required: true}
+  - {id: h_word_final, group: H, field: structural_context, allowed_values: [word_final], minimum_count: 1, required: false}
+  - {id: pal_soft_final, group: PALATALIZATION, field: structural_context, allowed_values: [word_final], conditions: {trigger_type: explicit_soft_sign}, minimum_count: 1, required: true}
+  - {id: pal_soft_internal, group: PALATALIZATION, field: structural_context, allowed_values: [internal], conditions: {trigger_type: explicit_soft_sign}, minimum_count: 1, required: true}
+  - {id: pal_contextual, group: PALATALIZATION, field: trigger_type, allowed_values: [contextual], minimum_count: 1, required: true}
+  - {id: pal_complete_pair, group: PALATALIZATION, field: approved_complete_contrast_pair, allowed_values: [any], minimum_count: 1, required: true}
+  - {id: pal_consonant_diversity, group: PALATALIZATION, field: target_consonant, allowed_values: [distinct], minimum_count: 3, required: true}
+  - {id: pal_trigger_diversity, group: PALATALIZATION, field: trigger_type, allowed_values: [explicit_soft_sign, contextual], minimum_count: 2, required: true}

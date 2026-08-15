@@ -16,7 +16,7 @@ from typing import Dict, List, Optional, Tuple
 import torch
 from datasets import Dataset
 
-from .svs_loading import load_preprocessed_svs_datasets
+from .svs_loading import load_preprocessed_svs_datasets  # noqa: F401
 
 
 class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
@@ -49,7 +49,7 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         prepended at the sequence front — matching the V2 TTS
         pretraining layout.
     """
-    
+
     # Special token IDs for prompt audio boundaries (pre-SVS: inherited
     # from VoxCPM2 pretraining as `<|audio_prompt_start|>` /
     # `<|audio_prompt_end|>` — semantically compatible with SVS prompt-audio
@@ -67,11 +67,11 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         "paired": "pair_mask_prob",
         "independent": "indep_mask_prob",
     }
-    
+
     def __init__(
         self,
         dataset: Dataset,
-        mask_strategy = "none",
+        mask_strategy="none",
         mask_params: Optional[Dict] = None,
         pitch_token_ids: Optional[set] = None,
         note_token_ids: Optional[set] = None,
@@ -87,7 +87,7 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         self.dataset = dataset
         self.mask_params = mask_params or {}
         self.mask_token_id = mask_token_id
-        
+
         # --- Build strategy probability table --------------------------
         # Accept str ("none" / legacy single strategy) or list of names.
         if isinstance(mask_strategy, list):
@@ -97,23 +97,22 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
             active_strategies = [mask_strategy]
         else:
             active_strategies = []
-        
+
         self._strategy_probs: List[Tuple[str, float]] = []
         total_prob = 0.0
         for name in active_strategies:
             key = self._STRATEGY_PROB_KEYS.get(name)
             if key is None:
-                raise ValueError(f"Unknown mask strategy: {name!r}. "
-                                 f"Choose from {list(self._STRATEGY_PROB_KEYS)}")
+                raise ValueError(f"Unknown mask strategy: {name!r}. " f"Choose from {list(self._STRATEGY_PROB_KEYS)}")
             prob = float(self.mask_params.get(key, 0.0))
             if prob > 0:
                 self._strategy_probs.append((name, prob))
                 total_prob += prob
         if total_prob > 1.0 + 1e-6:
             raise ValueError(f"Sum of mask strategy probabilities ({total_prob:.4f}) > 1.0")
-        
+
         self._masking_enabled = len(self._strategy_probs) > 0
-        
+
         # Prompt audio config
         self.prompt_audio_prob = prompt_audio_prob
         self.prompt_max_frames = prompt_max_frames
@@ -125,36 +124,28 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         self.text_tokenizer = text_tokenizer
 
         if not 0.0 <= self.prompt_audio_prob <= 1.0:
-            raise ValueError(
-                f"prompt_audio_prob must be in [0, 1], got {prompt_audio_prob}"
-            )
-        
+            raise ValueError(f"prompt_audio_prob must be in [0, 1], got {prompt_audio_prob}")
+
         # Build reverse lookup: sample_idx -> song_name (for same-song prompt lookup)
         self._idx_to_song: Dict[int, str] = {}
         if self.song_index:
             for song_name, indices in self.song_index.items():
                 for idx in indices:
                     self._idx_to_song[idx] = song_name
-        
+
         # Pre-compute frozen sets for fast O(1) lookup via torch.isin
         if pitch_token_ids:
-            self._pitch_ids_tensor = torch.tensor(
-                sorted(pitch_token_ids), dtype=torch.int32
-            )
+            self._pitch_ids_tensor = torch.tensor(sorted(pitch_token_ids), dtype=torch.int32)
         else:
             self._pitch_ids_tensor = torch.tensor([], dtype=torch.int32)
 
         if note_token_ids:
-            self._note_ids_tensor = torch.tensor(
-                sorted(note_token_ids), dtype=torch.int32
-            )
+            self._note_ids_tensor = torch.tensor(sorted(note_token_ids), dtype=torch.int32)
         else:
             self._note_ids_tensor = torch.tensor([], dtype=torch.int32)
 
         if bpm_token_ids:
-            self._bpm_ids_tensor = torch.tensor(
-                sorted(bpm_token_ids), dtype=torch.int32
-            )
+            self._bpm_ids_tensor = torch.tensor(sorted(bpm_token_ids), dtype=torch.int32)
         else:
             self._bpm_ids_tensor = torch.tensor([], dtype=torch.int32)
 
@@ -167,18 +158,16 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         if mask_token_id:
             svs_cond_ids.add(mask_token_id)
         if svs_cond_ids:
-            self._svs_cond_ids_tensor = torch.tensor(
-                sorted(svs_cond_ids), dtype=torch.int32
-            )
+            self._svs_cond_ids_tensor = torch.tensor(sorted(svs_cond_ids), dtype=torch.int32)
         else:
             self._svs_cond_ids_tensor = torch.tensor([], dtype=torch.int32)
 
     def __len__(self):
         return len(self.dataset)
-    
+
     def __getitem__(self, idx: int) -> Dict:
         item = self.dataset[idx]
-        
+
         # Convert lists back to tensors
         packed_text_tokens = torch.tensor(item["packed_text_tokens"], dtype=torch.int32)
         audio_feats = torch.tensor(item["audio_feats"], dtype=torch.float32)
@@ -186,36 +175,48 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         audio_mask = torch.tensor(item["audio_mask"], dtype=torch.int32)
         loss_mask = torch.tensor(item["loss_mask"], dtype=torch.int32)
         labels = torch.tensor(item["labels"], dtype=torch.int32)
-        
+
+        # A per-sample RNG makes worker-side augmentation reproducible across
+        # process restarts and dataloader fast-forward during exact resume.
+        sample_rng = random.Random(self.prompt_audio_seed + idx) if self.prompt_audio_seed is not None else random
+        sample_torch_generator = None
+        if self.prompt_audio_seed is not None:
+            sample_torch_generator = torch.Generator().manual_seed(self.prompt_audio_seed + idx)
+
         # Apply pitch/note masking (training-time data augmentation)
         # Skip for weak-label samples — their BPM/pitch/note are already <SVS_MASK>
         has_score = item.get("has_score", True)
         if has_score and self._masking_enabled:
-            selected = self._select_mask_strategy()
+            selected = self._select_mask_strategy(sample_rng)
             if selected == "global":
                 # Global mask with melisma collapse — modifies all tensors
-                packed_text_tokens, audio_feats, text_mask, audio_mask, loss_mask, labels = \
+                packed_text_tokens, audio_feats, text_mask, audio_mask, loss_mask, labels = (
                     self._apply_global_mask_collapse(
-                        packed_text_tokens, audio_feats, text_mask, audio_mask, loss_mask, labels)
+                        packed_text_tokens, audio_feats, text_mask, audio_mask, loss_mask, labels
+                    )
+                )
             elif selected == "paired":
-                packed_text_tokens = self._mask_paired(packed_text_tokens.clone())
+                packed_text_tokens = self._mask_paired(packed_text_tokens.clone(), generator=sample_torch_generator)
             elif selected == "independent":
-                packed_text_tokens = self._mask_independent(packed_text_tokens.clone())
+                packed_text_tokens = self._mask_independent(
+                    packed_text_tokens.clone(), generator=sample_torch_generator
+                )
 
         if self.prompt_audio_prob > 0:
-            if self.prompt_audio_seed is not None:
-                rng = random.Random(self.prompt_audio_seed + idx)
-            else:
-                rng = random
+            rng = sample_rng
 
             if rng.random() < self.prompt_audio_prob:
                 # Baseline SVS: prepend same-song prompt at the front.
-                packed_text_tokens, audio_feats, text_mask, audio_mask, loss_mask, labels = \
-                    self._prepend_prompt_audio(
-                        idx, packed_text_tokens, audio_feats,
-                        text_mask, audio_mask, loss_mask, labels,
-                        rng=rng,
-                    )
+                packed_text_tokens, audio_feats, text_mask, audio_mask, loss_mask, labels = self._prepend_prompt_audio(
+                    idx,
+                    packed_text_tokens,
+                    audio_feats,
+                    text_mask,
+                    audio_mask,
+                    loss_mask,
+                    labels,
+                    rng=rng,
+                )
 
         total_length = packed_text_tokens.shape[0]
 
@@ -235,7 +236,7 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
     # ------------------------------------------------------------------
     # Prompt audio prepending
     # ------------------------------------------------------------------
-    
+
     def _prepend_audio_prefix(
         self,
         prompt_audio_region: torch.Tensor,
@@ -261,11 +262,14 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         prompt_audio_mask = torch.tensor([0] + [1] * T_prompt + [0], dtype=torch.int32)
         prompt_loss_mask = torch.zeros(T_prompt + 2, dtype=torch.int32)
         prompt_labels = torch.zeros(T_prompt + 2, dtype=torch.int32)
-        prompt_audio_padded = torch.cat([
-            torch.zeros(1, P, D, dtype=torch.float32),
-            prompt_audio_region.to(torch.float32),
-            torch.zeros(1, P, D, dtype=torch.float32),
-        ], dim=0)
+        prompt_audio_padded = torch.cat(
+            [
+                torch.zeros(1, P, D, dtype=torch.float32),
+                prompt_audio_region.to(torch.float32),
+                torch.zeros(1, P, D, dtype=torch.float32),
+            ],
+            dim=0,
+        )
 
         packed_text_tokens = torch.cat([prompt_text, packed_text_tokens])
         audio_feats = torch.cat([prompt_audio_padded, audio_feats], dim=0)
@@ -315,9 +319,7 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         T_prompt = int(prompt_audio_region.shape[0])
         if T_prompt > self.prompt_max_frames:
             crop_start = rng.randint(0, T_prompt - self.prompt_max_frames)
-            prompt_audio_region = prompt_audio_region[
-                crop_start:crop_start + self.prompt_max_frames
-            ]
+            prompt_audio_region = prompt_audio_region[crop_start : crop_start + self.prompt_max_frames]
         return prompt_audio_region
 
     def _prepend_prompt_audio(
@@ -350,91 +352,91 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
     # Strategy selection
     # ------------------------------------------------------------------
 
-    def _select_mask_strategy(self) -> str:
+    def _select_mask_strategy(self, rng=random) -> str:
         """Randomly select a masking strategy based on configured probabilities.
-        
+
         Returns one of the strategy names or ``"none"``.
         """
-        roll = random.random()
+        roll = rng.random()
         cumulative = 0.0
         for name, prob in self._strategy_probs:
             cumulative += prob
             if roll < cumulative:
                 return name
         return "none"
-    
+
     # ------------------------------------------------------------------
     # Masking helpers
     # ------------------------------------------------------------------
-    
-    def _mask_independent(self, tokens: torch.Tensor) -> torch.Tensor:
+
+    def _mask_independent(self, tokens: torch.Tensor, *, generator: torch.Generator | None = None) -> torch.Tensor:
         """Mask each pitch / note token independently.
-        
+
         Uses ``pitch_mask_rate`` and ``note_mask_rate`` from mask_params
         (default 1.0 = mask all when strategy is selected).
         """
         pitch_rate = self.mask_params.get("pitch_mask_rate", 1.0)
         note_rate = self.mask_params.get("note_mask_rate", 1.0)
-        
+
         if pitch_rate > 0 and len(self._pitch_ids_tensor) > 0:
             is_pitch = torch.isin(tokens, self._pitch_ids_tensor)
             if pitch_rate >= 1.0:
                 tokens[is_pitch] = self.mask_token_id
             else:
-                mask_draw = torch.rand(tokens.shape) < pitch_rate
+                mask_draw = torch.rand(tokens.shape, generator=generator) < pitch_rate
                 tokens[is_pitch & mask_draw] = self.mask_token_id
-        
+
         if note_rate > 0 and len(self._note_ids_tensor) > 0:
             is_note = torch.isin(tokens, self._note_ids_tensor)
             if note_rate >= 1.0:
                 tokens[is_note] = self.mask_token_id
             else:
-                mask_draw = torch.rand(tokens.shape) < note_rate
+                mask_draw = torch.rand(tokens.shape, generator=generator) < note_rate
                 tokens[is_note & mask_draw] = self.mask_token_id
-        
+
         return tokens
-    
-    def _mask_paired(self, tokens: torch.Tensor) -> torch.Tensor:
+
+    def _mask_paired(self, tokens: torch.Tensor, *, generator: torch.Generator | None = None) -> torch.Tensor:
         """Mask adjacent (pitch, note) pairs together.
-        
+
         In the aggregated prompt layout, pitch and note tokens always
         appear as adjacent pairs: [..., <P_x>, <NOTE_y>, ...].
-        
+
         Uses ``pair_mask_rate`` from mask_params (default 1.0 = mask
         all pairs when strategy is selected).
         """
         pair_rate = self.mask_params.get("pair_mask_rate", 1.0)
         if pair_rate <= 0:
             return tokens
-        
+
         is_pitch = torch.isin(tokens, self._pitch_ids_tensor)
         is_note = torch.isin(tokens, self._note_ids_tensor)
-        
+
         # Find positions where tokens[i] is pitch and tokens[i+1] is note
         n = tokens.shape[0]
         if n < 2:
             return tokens
-        
+
         pair_starts = is_pitch[:-1] & is_note[1:]
         pair_indices = torch.where(pair_starts)[0]
-        
+
         if len(pair_indices) == 0:
             return tokens
-        
+
         if pair_rate >= 1.0:
             # Mask all pairs
             for idx in pair_indices:
                 tokens[idx] = self.mask_token_id
                 tokens[idx + 1] = self.mask_token_id
         else:
-            mask_draw = torch.rand(len(pair_indices)) < pair_rate
+            mask_draw = torch.rand(len(pair_indices), generator=generator) < pair_rate
             for idx, do_mask in zip(pair_indices, mask_draw):
                 if do_mask:
                     tokens[idx] = self.mask_token_id
                     tokens[idx + 1] = self.mask_token_id
-        
+
         return tokens
-    
+
     def _apply_global_mask_collapse(
         self,
         packed_text_tokens: torch.Tensor,
@@ -445,29 +447,29 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
         labels: torch.Tensor,
     ):
         """Global mask with melisma collapse.
-        
+
         Masks ALL pitch, note & BPM tokens AND collapses melisma so
         each word has exactly one <SVS_MASK> pair, exactly matching
         the weak-label token structure.
-        
+
         Since removing tokens changes sequence length, this method
         operates on all tensors together (not just tokens).
-        
+
         Note: Strategy selection (coin flip) is handled by
         ``_select_mask_strategy``; this method always applies.
         """
         tokens = packed_text_tokens.clone()
         n = len(tokens)
-        
+
         # Classify each token
         is_pitch = torch.isin(tokens, self._pitch_ids_tensor)
         is_note = torch.isin(tokens, self._note_ids_tensor)
         is_bpm = torch.isin(tokens, self._bpm_ids_tensor)
         is_score = is_pitch | is_note  # pitch or note token
-        
+
         # Mask all BPM tokens
         tokens[is_bpm] = self.mask_token_id
-        
+
         # Walk through the sequence, find consecutive runs of score tokens
         # (pitch/note groups).  Within each group, keep only the first
         # pitch-note pair and mark the rest for removal.
@@ -477,13 +479,13 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
             if not is_score[i]:
                 i += 1
                 continue
-            
+
             # Found start of a score-token group
             group_start = i
             while i < n and is_score[i]:
                 i += 1
             group_end = i  # exclusive
-            
+
             # Count pitch tokens → each pitch starts one pair
             pair_count = 0
             first_pair_end = group_start  # will be updated
@@ -499,12 +501,12 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
                             first_pair_end = k + 2
                         else:
                             first_pair_end = k + 1
-            
+
             # Mark everything after the first pair for removal
             if pair_count > 1:
                 for k in range(first_pair_end, group_end):
                     remove_mask[k] = True
-        
+
         # Remove extra melisma tokens from all tensors
         if remove_mask.any():
             keep = ~remove_mask
@@ -514,19 +516,19 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
             audio_mask = audio_mask[keep]
             loss_mask = loss_mask[keep]
             labels = labels[keep]
-        
+
         return tokens, audio_feats, text_mask, audio_mask, loss_mask, labels
-    
+
     @staticmethod
     def collate_fn(batch: List[Dict]) -> Dict[str, torch.Tensor]:
         """
         Collate preprocessed SVS batch.
-        
+
         Pads all sequences to the maximum length in the batch.
         """
         # Find max length
         max_len = max(sample["total_length"] for sample in batch)
-        
+
         # Pad and stack tensors
         packed_text_list = []
         audio_feats_list = []
@@ -541,9 +543,7 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
 
             # Pad packed_text_tokens
             if pad_len > 0:
-                packed_text = torch.nn.functional.pad(
-                    sample["packed_text_tokens"], (0, pad_len), value=0
-                )
+                packed_text = torch.nn.functional.pad(sample["packed_text_tokens"], (0, pad_len), value=0)
             else:
                 packed_text = sample["packed_text_tokens"][:max_len]
             packed_text_list.append(packed_text)
@@ -551,10 +551,7 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
             # Pad audio_feats [T, P, D]
             audio_feats = sample["audio_feats"]
             if pad_len > 0:
-                pad_feats = torch.zeros(
-                    (pad_len, audio_feats.shape[1], audio_feats.shape[2]),
-                    dtype=audio_feats.dtype
-                )
+                pad_feats = torch.zeros((pad_len, audio_feats.shape[1], audio_feats.shape[2]), dtype=audio_feats.dtype)
                 audio_feats = torch.cat([audio_feats, pad_feats], dim=0)
             else:
                 audio_feats = audio_feats[:max_len]
@@ -595,11 +592,11 @@ class HFPreprocessedSVSDataset(torch.utils.data.Dataset):
 
 # DynamicBatchSampler lives in its own module; re-export here for
 # backward compatibility with existing imports.
-from .dynamic_batch import DynamicBatchSampler  # noqa: F401
+from .dynamic_batch import DynamicBatchSampler  # noqa: E402,F401
 
 # Raw folder-based pipeline and shared annotation helpers live in
 # svs_raw_data; re-export here for backward compatibility.
-from .svs_raw_data import (  # noqa: F401
+from .svs_raw_data import (  # noqa: E402,F401
     convert_annotation_to_syllables,
     convert_words_to_syllables,
     expand_syllables,
@@ -637,7 +634,7 @@ def build_preprocessed_svs_dataloader(
 ) -> torch.utils.data.DataLoader:
     """
     Build DataLoader for preprocessed SVS dataset.
-    
+
     Args:
         hf_dataset: HuggingFace dataset with preprocessed data
         accelerator: Training accelerator
@@ -674,19 +671,22 @@ def build_preprocessed_svs_dataloader(
         prompt_audio_seed=prompt_audio_seed,
         text_tokenizer=text_tokenizer,
     )
-    
+
     if max_batch_tokens > 0:
         # Extract lengths directly from HuggingFace dataset column (instant!)
         # This avoids iterating through the dataset which would be slow
         lengths = hf_dataset["total_length"]  # Direct column access
-        
+
         # When prompt audio is enabled, increase estimated lengths to
         # account for the same-song prompt prepended at the sequence front
         # at runtime.
         if prompt_audio_prob > 0 and prompt_max_frames > 0:
-            avg_prompt_overhead = int((prompt_max_frames * 0.75 + 2) * prompt_audio_prob + 0.5)
-            lengths = [l + avg_prompt_overhead for l in lengths]
-        
+            # Token budgets are safety limits, so reserve the worst possible
+            # prompt length rather than an average that can admit oversized
+            # runtime batches.
+            max_prompt_overhead = prompt_max_frames + 2
+            lengths = [length + max_prompt_overhead for length in lengths]
+
         # Use dynamic batching with distributed support
         # For HYBRID_SHARD: all ranks inside the same shard group process the
         # same micro-batch (params sharded, same data).  Partition data across
@@ -699,8 +699,9 @@ def build_preprocessed_svs_dataloader(
             drop_last=drop_last,
             rank=accelerator.dp_rank,
             world_size=accelerator.dp_world_size,
+            seed=prompt_audio_seed if prompt_audio_seed is not None else 42,
         )
-        
+
         # Note: When using batch_sampler, we can't use accelerator.prepare_dataloader
         # directly because it conflicts with batch_sampler. Create manually.
         loader = torch.utils.data.DataLoader(
@@ -712,7 +713,7 @@ def build_preprocessed_svs_dataloader(
         )
         # Store batch_sampler reference for epoch management in training loop
         # Use object.__setattr__ to bypass PyTorch DataLoader's attribute restrictions
-        object.__setattr__(loader, '_dynamic_sampler', batch_sampler)
+        object.__setattr__(loader, "_dynamic_sampler", batch_sampler)
         return loader
     else:
         # Use fixed batch size

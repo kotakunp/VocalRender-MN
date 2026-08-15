@@ -7,7 +7,7 @@ variant for inference scripts).
 """
 
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, Tuple
 
 import torch
 import torch.nn as nn
@@ -29,15 +29,25 @@ class SVSPreprocessor:
         pretrained_path: str,
         sample_rate: int = 44100,
         device: str = "cuda",
+        allow_cpu_fallback: bool = False,
     ):
         self.sample_rate = sample_rate
-        self.device = torch.device(device if torch.cuda.is_available() else "cpu")
+        requested_device = str(device)
+        if requested_device.startswith("cuda") and not torch.cuda.is_available():
+            if not allow_cpu_fallback:
+                raise RuntimeError(
+                    f"CUDA device {requested_device!r} was requested but CUDA is unavailable. "
+                    "Choose device='cpu' explicitly for an intentional CPU run."
+                )
+            requested_device = "cpu"
+        self.device = torch.device(requested_device)
 
         # Load config
         config_path = Path(pretrained_path) / "config.json"
         print(f"Loading config from {config_path}...")
-        with open(config_path, 'r') as f:
+        with open(config_path, "r") as f:
             import json as json_lib
+
             config_dict = json_lib.load(f)
 
         self.patch_size = config_dict.get("patch_size", 4)
@@ -49,7 +59,11 @@ class SVSPreprocessor:
         print(f"Loading AudioVAE from {pretrained_path} (architecture: {architecture})...")
 
         if architecture == "voxcpm2":
-            from vocalrender.modules.audiovae.audio_vae_v2 import AudioVAE as AudioVAEV2, AudioVAEConfig as AudioVAEConfigV2
+            from vocalrender.modules.audiovae.audio_vae_v2 import (
+                AudioVAE as AudioVAEV2,
+                AudioVAEConfig as AudioVAEConfigV2,
+            )
+
             audio_vae_config_dict = config_dict.get("audio_vae_config", None)
             if audio_vae_config_dict:
                 audio_vae_config = AudioVAEConfigV2(**audio_vae_config_dict)
@@ -58,6 +72,7 @@ class SVSPreprocessor:
                 self.audio_vae = AudioVAEV2()
         else:
             from vocalrender.modules.audiovae.audio_vae import AudioVAE, AudioVAEConfig
+
             audio_vae_config_dict = config_dict.get("audio_vae_config", None)
             if audio_vae_config_dict:
                 audio_vae_config = AudioVAEConfig(**audio_vae_config_dict)
@@ -72,6 +87,7 @@ class SVSPreprocessor:
         if vae_safetensors_path.exists():
             try:
                 from safetensors.torch import load_file
+
                 vae_state_dict = load_file(str(vae_safetensors_path), device="cpu")
                 print(f"  Loaded AudioVAE from safetensors: {vae_safetensors_path}")
             except ImportError:
@@ -93,6 +109,7 @@ class SVSPreprocessor:
         # Load tokenizer only
         print(f"Loading tokenizer from {pretrained_path}...")
         from transformers import LlamaTokenizerFast
+
         self.tokenizer = LlamaTokenizerFast.from_pretrained(pretrained_path)
 
         # Special token IDs
@@ -122,7 +139,7 @@ class SVSPreprocessor:
             pid = self.tokenizer.convert_tokens_to_ids(pt)
             if pid != self.tokenizer.unk_token_id:
                 try:
-                    val = int(pt.split('_')[1][:-1])
+                    val = int(pt.split("_")[1][:-1])
                     self.pitch_to_id[val] = pid
                 except Exception:
                     pass
@@ -144,7 +161,7 @@ class SVSPreprocessor:
             bid = self.tokenizer.convert_tokens_to_ids(bt)
             if bid != self.tokenizer.unk_token_id:
                 try:
-                    val = int(bt.split('_')[1][:-1])
+                    val = int(bt.split("_")[1][:-1])
                     self.bpm_to_id[val] = bid
                 except Exception:
                     pass
@@ -192,10 +209,7 @@ class SVSPreprocessor:
 
         if audio_feats.size(1) % self.patch_size != 0:
             audio_feats_ = audio_feats.transpose(1, 2)
-            padding = nn.functional.pad(
-                audio_feats_,
-                (0, self.patch_size - audio_feats.size(1) % self.patch_size)
-            )
+            padding = nn.functional.pad(audio_feats_, (0, self.patch_size - audio_feats.size(1) % self.patch_size))
             audio_feats = padding.transpose(1, 2)
 
         audio_duration = audio_feats.size(1) / 25.0
@@ -229,7 +243,7 @@ class SVSPreprocessor:
         # 2. Pad all waveforms to max_len and stack into batch [B, 1, max_len]
         batch = torch.zeros(len(wavs), 1, max_len)
         for i, wav in enumerate(wavs):
-            batch[i, 0, :wav.size(-1)] = wav
+            batch[i, 0, : wav.size(-1)] = wav
 
         batch = batch.to(self.device)
 
@@ -376,11 +390,13 @@ class SVSPreprocessor:
         # 3. Build packed text tokens
         text_pad = torch.zeros(audio_length, dtype=torch.int32)
         audio_end = self.audio_prompt_end_id if is_prompt else self.audio_end_id
-        packed_text = torch.cat([
-            svs_seq,
-            text_pad,
-            torch.tensor([audio_end], dtype=torch.int32),
-        ])
+        packed_text = torch.cat(
+            [
+                svs_seq,
+                text_pad,
+                torch.tensor([audio_end], dtype=torch.int32),
+            ]
+        )
 
         # 4. Pad audio features
         audio_pad_before = torch.zeros(
@@ -394,23 +410,33 @@ class SVSPreprocessor:
         padded_audio_feats = torch.cat([audio_pad_before, audio_feats, audio_pad_after], dim=0)
 
         # 5. Build masks
-        text_mask = torch.cat([
-            torch.ones(text_length, dtype=torch.int32),
-            torch.zeros(audio_length, dtype=torch.int32),
-            torch.ones(1, dtype=torch.int32),
-        ])
+        text_mask = torch.cat(
+            [
+                torch.ones(text_length, dtype=torch.int32),
+                torch.zeros(audio_length, dtype=torch.int32),
+                torch.ones(1, dtype=torch.int32),
+            ]
+        )
 
-        audio_mask = torch.cat([
-            torch.zeros(text_length, dtype=torch.int32),
-            torch.ones(audio_length, dtype=torch.int32),
-            torch.zeros(1, dtype=torch.int32),
-        ])
+        audio_mask = torch.cat(
+            [
+                torch.zeros(text_length, dtype=torch.int32),
+                torch.ones(audio_length, dtype=torch.int32),
+                torch.zeros(1, dtype=torch.int32),
+            ]
+        )
 
-        loss_mask = torch.cat([
-            torch.zeros(text_length, dtype=torch.int32),
-            torch.zeros(audio_length, dtype=torch.int32) if is_prompt else torch.ones(audio_length, dtype=torch.int32),
-            torch.zeros(1, dtype=torch.int32),
-        ])
+        loss_mask = torch.cat(
+            [
+                torch.zeros(text_length, dtype=torch.int32),
+                (
+                    torch.zeros(audio_length, dtype=torch.int32)
+                    if is_prompt
+                    else torch.ones(audio_length, dtype=torch.int32)
+                ),
+                torch.zeros(1, dtype=torch.int32),
+            ]
+        )
 
         # 6. Build labels
         labels = torch.zeros(text_length + audio_length + 1, dtype=torch.int32)

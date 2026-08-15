@@ -1,0 +1,11 @@
+{
+  "schema_version": "milestone-run-index/v1",
+  "experiment": "001_upstream_smoke_test",
+  "records": [
+    "run.json",
+    "run-20260815T150614Z-runtime-preflight.json"
+  ],
+  "latest": "run-20260815T150614Z-runtime-preflight.json",
+  "latest_status": "blocked",
+  "notes": "Records are append-only. The original run.json is preserved; latest points to the newest preflight evidence."
+}

@@ -6,11 +6,15 @@ Handles model weights, optimizer state, scheduler state, runtime resume
 state, and extended SVS tokenizer.
 """
 
+import hashlib
 import json
+import os
 import shutil
 import sys
 import time
+import uuid
 from pathlib import Path
+from pathlib import PurePosixPath
 from typing import Optional
 
 import torch
@@ -19,9 +23,145 @@ from .accelerator import Accelerator
 
 try:
     from safetensors.torch import save_file, load_file
+
     SAFETENSORS_AVAILABLE = True
 except ImportError:
     SAFETENSORS_AVAILABLE = False
+
+
+CHECKPOINT_MANIFEST = "checkpoint_manifest.json"
+LATEST_POINTER = "checkpoint_pointer.json"
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _write_json(path: Path, payload: dict) -> None:
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        json.dump(payload, handle, indent=2, ensure_ascii=False, sort_keys=True)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def _write_checkpoint_manifest(folder: Path, *, step: int, tag: str) -> dict:
+    files = {}
+    for path in sorted(p for p in folder.rglob("*") if p.is_file()):
+        relative = path.relative_to(folder).as_posix()
+        if relative == CHECKPOINT_MANIFEST:
+            continue
+        files[relative] = {"size": path.stat().st_size, "sha256": _sha256(path)}
+    if not files:
+        raise ValueError(f"Refusing to publish an empty checkpoint at {folder}")
+    manifest = {"version": 1, "tag": tag, "step": int(step), "files": files}
+    _write_json(folder / CHECKPOINT_MANIFEST, manifest)
+    return manifest
+
+
+def verify_checkpoint(folder: Path) -> dict:
+    """Verify the complete file set and checksums of a published checkpoint."""
+    manifest_path = folder / CHECKPOINT_MANIFEST
+    if not manifest_path.is_file():
+        raise ValueError(f"Checkpoint is not published: missing {manifest_path}")
+    with manifest_path.open("r", encoding="utf-8") as handle:
+        manifest = json.load(handle)
+    files = manifest.get("files")
+    if manifest.get("version") != 1 or not isinstance(files, dict) or not files:
+        raise ValueError(f"Invalid checkpoint manifest: {manifest_path}")
+    for relative, expected in files.items():
+        parsed = PurePosixPath(relative)
+        if parsed.is_absolute() or ".." in parsed.parts or parsed.as_posix() != relative:
+            raise ValueError(f"Unsafe checkpoint manifest path: {relative!r}")
+        path = folder / relative
+        if not path.is_file():
+            raise ValueError(f"Checkpoint file is missing: {path}")
+        if path.stat().st_size != expected.get("size"):
+            raise ValueError(f"Checkpoint size mismatch for {path}")
+        if _sha256(path) != expected.get("sha256"):
+            raise ValueError(f"Checkpoint checksum mismatch for {path}")
+    actual_files = {
+        path.relative_to(folder).as_posix()
+        for path in folder.rglob("*")
+        if path.is_file() and path.name != CHECKPOINT_MANIFEST
+    }
+    if actual_files != set(files):
+        raise ValueError(f"Checkpoint file set does not match manifest: {folder}")
+    return manifest
+
+
+def resolve_latest_checkpoint(save_dir: Path) -> Optional[Path]:
+    """Resolve and verify the cross-platform ``latest`` pointer."""
+    latest = save_dir / "latest"
+    if not latest.exists() and not latest.is_symlink():
+        return None
+    if latest.is_symlink():
+        target = latest.resolve(strict=True)
+    elif (latest / LATEST_POINTER).is_file():
+        with (latest / LATEST_POINTER).open("r", encoding="utf-8") as handle:
+            pointer = json.load(handle)
+        tag = pointer.get("target")
+        if not isinstance(tag, str) or Path(tag).name != tag:
+            raise ValueError(f"Invalid latest checkpoint target in {latest / LATEST_POINTER}")
+        target = save_dir / tag
+        try:
+            target.resolve(strict=True).relative_to(save_dir.resolve(strict=True))
+        except (FileNotFoundError, ValueError) as exc:
+            raise ValueError(f"Latest checkpoint target escapes or is missing: {target}") from exc
+        expected_manifest_hash = pointer.get("manifest_sha256")
+        manifest_path = target / CHECKPOINT_MANIFEST
+        if not manifest_path.is_file() or expected_manifest_hash != _sha256(manifest_path):
+            raise ValueError(f"Latest pointer manifest hash mismatch for {target}")
+    else:
+        target = latest
+    try:
+        resolved_target = target.resolve(strict=True)
+        resolved_target.relative_to(save_dir.resolve(strict=True))
+    except (FileNotFoundError, ValueError) as exc:
+        raise ValueError(f"Latest checkpoint target escapes or is missing: {target}") from exc
+    verify_checkpoint(resolved_target)
+    return resolved_target
+
+
+def _publish_latest_pointer(save_dir: Path, target: Path) -> None:
+    nonce = uuid.uuid4().hex
+    staged = save_dir / f".latest.tmp-{nonce}"
+    backup = save_dir / f".latest.previous-{nonce}"
+    latest = save_dir / "latest"
+    staged.mkdir()
+    _write_json(
+        staged / LATEST_POINTER,
+        {
+            "version": 1,
+            "target": target.name,
+            "manifest_sha256": _sha256(target / CHECKPOINT_MANIFEST),
+        },
+    )
+
+    had_latest = latest.exists() or latest.is_symlink()
+    if had_latest and latest.is_dir() and not latest.is_symlink() and not (latest / LATEST_POINTER).is_file():
+        shutil.rmtree(staged)
+        raise ValueError(f"Refusing to replace non-pointer directory {latest}; move it explicitly before training")
+    try:
+        if had_latest:
+            latest.replace(backup)
+        staged.replace(latest)
+        if resolve_latest_checkpoint(save_dir) != target.resolve():
+            raise RuntimeError(f"Latest pointer did not resolve to {target}")
+    except Exception:
+        if latest.exists() and (latest / LATEST_POINTER).is_file():
+            shutil.rmtree(latest)
+        if backup.exists() or backup.is_symlink():
+            backup.replace(latest)
+        raise
+    if backup.is_symlink():
+        backup.unlink()
+    elif backup.exists():
+        shutil.rmtree(backup)
 
 
 def load_checkpoint(
@@ -31,6 +171,7 @@ def load_checkpoint(
     save_dir: Path,
     rank: int = 0,
     accelerator: Optional[Accelerator] = None,
+    expected_run_id: Optional[str] = None,
 ):
     """Load the latest checkpoint if it exists.
 
@@ -42,11 +183,17 @@ def load_checkpoint(
     Returns:
         Tuple of ``(resume_step, local_runtime_state)``.
     """
-    latest = save_dir / "latest"
-    if not latest.exists():
+    latest_folder = resolve_latest_checkpoint(save_dir)
+    if latest_folder is None:
         return 0, None
-
-    latest_folder = latest
+    if expected_run_id is not None:
+        metadata_path = latest_folder / "training_metadata.json"
+        if not metadata_path.is_file():
+            raise ValueError(f"Checkpoint is missing training provenance: {metadata_path}")
+        with metadata_path.open("r", encoding="utf-8") as handle:
+            metadata = json.load(handle)
+        if metadata.get("run_id") != expected_run_id:
+            raise ValueError("Checkpoint run_id does not match the immutable run manifest")
     unwrapped = Accelerator.unwrap(model)
     lora_cfg = unwrapped.lora_config
     local_runtime_state = None
@@ -79,7 +226,12 @@ def load_checkpoint(
         if use_fsdp:
             accelerator.load_model_state_dict(model, state_dict, strict=False)
         else:
-            unwrapped.load_state_dict(state_dict, strict=False)
+            incompatible = unwrapped.load_state_dict(state_dict, strict=False)
+            if incompatible.unexpected_keys:
+                raise ValueError("Unexpected LoRA checkpoint keys: " + ", ".join(sorted(incompatible.unexpected_keys)))
+            disallowed_missing = [key for key in incompatible.missing_keys if "lora_" in key]
+            if disallowed_missing:
+                raise ValueError("Missing required LoRA checkpoint keys: " + ", ".join(sorted(disallowed_missing)))
 
         if rank == 0:
             print(f"Loaded LoRA weights from {lora_weights_path}", file=sys.stderr)
@@ -102,7 +254,14 @@ def load_checkpoint(
         if use_fsdp:
             accelerator.load_model_state_dict(model, state_dict, strict=False)
         else:
-            unwrapped.load_state_dict(state_dict, strict=False)
+            incompatible = unwrapped.load_state_dict(state_dict, strict=False)
+            unexpected = sorted(incompatible.unexpected_keys)
+            disallowed_missing = sorted(key for key in incompatible.missing_keys if not key.startswith("audio_vae."))
+            if unexpected or disallowed_missing:
+                raise ValueError(
+                    "Full-model checkpoint mismatch: "
+                    f"unexpected={unexpected}, missing_non_audio_vae={disallowed_missing}"
+                )
         if rank == 0:
             print(f"Loaded model weights from {model_path}", file=sys.stderr)
 
@@ -174,6 +333,7 @@ def save_checkpoint(
             transient folders so only the newest remains. Permanent
             checkpoints are never auto-pruned.
     """
+
     def log(msg):
         print(msg, file=sys.stderr, flush=True)
 
@@ -184,8 +344,11 @@ def save_checkpoint(
 
     save_dir.mkdir(parents=True, exist_ok=True)
     tag = f"step_{step:07d}_transient" if is_transient else f"step_{step:07d}"
-    folder = save_dir / tag
-    folder.mkdir(parents=True, exist_ok=True)
+    final_folder = save_dir / tag
+    if final_folder.exists():
+        raise FileExistsError(f"Checkpoint already exists: {final_folder}")
+    folder = save_dir / f".{tag}.tmp-{uuid.uuid4().hex}"
+    folder.mkdir(parents=True, exist_ok=False)
 
     # Use pre-gathered state dicts if available (FSDP path), else compute here
     if full_state_dict is not None:
@@ -255,30 +418,18 @@ def save_checkpoint(
         torch.save(runtime_state, folder / "runtime_state.pth")
         log("[Checkpoint] Saved runtime resume state")
 
-    # Point ``latest`` at the new checkpoint via a relative symlink.
-    # This avoids copying 20-30 GB of model/optimizer weights every save
-    # and works across NFS / GPFS mounts (relative target stays valid if
-    # the parent directory is moved).
-    latest_link = save_dir / "latest"
-    try:
-        if latest_link.is_symlink() or latest_link.exists():
-            if latest_link.is_dir() and not latest_link.is_symlink():
-                shutil.rmtree(latest_link)  # clean up old copytree-style dirs
-            else:
-                latest_link.unlink()
-        latest_link.symlink_to(tag)  # relative: latest -> step_0050000
-        log(f"[Checkpoint] Updated 'latest' symlink -> {tag}")
-    except Exception as e:
-        log(f"[Checkpoint] Warning: failed to update latest symlink at {latest_link}: {e}")
+    # Publish only after every payload has been hashed and verified. ``latest``
+    # is a small directory pointer rather than a symlink, so publication works
+    # on Windows without developer-mode or administrator privileges.
+    _write_checkpoint_manifest(folder, step=step, tag=tag)
+    verify_checkpoint(folder)
+    folder.replace(final_folder)
+    _publish_latest_pointer(save_dir, final_folder)
+    log(f"[Checkpoint] Published and verified checkpoint {tag}")
 
     if is_transient:
         for entry in save_dir.iterdir():
-            if (
-                entry.is_dir()
-                and not entry.is_symlink()
-                and entry.name.endswith("_transient")
-                and entry.name != tag
-            ):
+            if entry.is_dir() and not entry.is_symlink() and entry.name.endswith("_transient") and entry.name != tag:
                 try:
                     shutil.rmtree(entry)
                     log(f"[Checkpoint] Pruned old transient checkpoint: {entry.name}")

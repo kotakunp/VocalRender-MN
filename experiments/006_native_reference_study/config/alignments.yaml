@@ -1,0 +1,20 @@
+schema_version: 1
+study_id: native-reference-v1
+alignments:
+  - item_id: MNPHON_161
+    source_text: хүүхэд
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: хүү
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: хэд
+        source_span: [3, 6]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: null
+    review_date: null
+    review_status: unreviewed
+    alignment_note: "Draft regression fixture only; requires manual adjudication before freeze."

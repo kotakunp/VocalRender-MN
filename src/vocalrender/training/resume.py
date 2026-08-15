@@ -9,6 +9,7 @@ checkpoint recovery.
 import random
 from typing import Optional
 
+import numpy as np
 import torch
 
 from .accelerator import Accelerator
@@ -38,6 +39,7 @@ def capture_local_runtime_state(
         "batches_seen_in_epoch": int(batches_seen_in_epoch),
         "samples_seen": int(samples_seen),
         "python_rng_state": random.getstate(),
+        "numpy_rng_state": np.random.get_state(),
         "torch_rng_state": torch.get_rng_state().cpu(),
     }
     if torch.cuda.is_available():
@@ -108,6 +110,9 @@ def restore_local_runtime_state(
     python_rng_state = runtime_state.get("python_rng_state")
     if python_rng_state is not None:
         random.setstate(python_rng_state)
+    numpy_rng_state = runtime_state.get("numpy_rng_state")
+    if numpy_rng_state is not None:
+        np.random.set_state(numpy_rng_state)
     torch_rng_state = runtime_state.get("torch_rng_state")
     if torch_rng_state is not None:
         torch.set_rng_state(torch_rng_state.cpu())

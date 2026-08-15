@@ -1,0 +1,14 @@
+schema_version: 1
+study_id: native-reference-v1
+manifest: ../../../benchmarks/MN-PHON-250/manifest.yaml
+selection_strata: selection_strata.yaml
+context_annotations: context_annotations.yaml
+alignments: alignments.yaml
+scores_dir: scores
+selection_output: ../results/selection_manifest.yaml
+review_cycles: ../results/review_cycles.yaml
+seed_namespace: mnphon-native-v1
+group_size: 8
+bpm: 96
+score_note: <NOTE_2>
+score_midi_pitch: 60
