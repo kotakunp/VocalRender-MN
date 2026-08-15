@@ -1,0 +1,99 @@
+{
+  "schema_version": "milestone-run/v1",
+  "run_id": "20260815T120850Z-frontend-baseline",
+  "experiment": "004_frontend_baseline",
+  "status": "success",
+  "generated_at": "2026-08-15T12:08:50Z",
+  "started_at": "2026-08-15T12:08:50Z",
+  "finished_at": "2026-08-15T12:08:50Z",
+  "git_sha": "1394fb413594550cba0c7ec6f65f423bc072f45d",
+  "command": "python scripts/mn/prepare_score.py examples/mn_score_input.json --output <temporary>/score.json --force",
+  "environment": {
+    "python": "3.12.13",
+    "implementation": "CPython",
+    "platform": "Windows-11",
+    "checkpoint_loaded": false,
+    "inference": "not_performed"
+  },
+  "input": {
+    "path": "examples/mn_score_input.json",
+    "sha256": "572e8dee6892d590c827a6508e1a3e41694f187ff6a469e305e244b8b8b5e5a8"
+  },
+  "inputs": [
+    {"id": "frontend-score", "path": "experiments/004_frontend_baseline/config/score.json", "sha256": "572e8dee6892d590c827a6508e1a3e41694f187ff6a469e305e244b8b8b5e5a8"},
+    {"id": "tokenizer-audit", "path": "experiments/002_tokenizer_audit/results/tokenizer_audit.json", "sha256": "6a6f3eeb0ea83e7b44e0bc77d22ae9b20fb15db95e60b198b2712ce8865d67b2"}
+  ],
+  "output": {
+    "format": "VocalRender JSON score array",
+    "path": "temporary/score.json",
+    "sha256": "ee4e83d1ea382d75034ba443f1f9f8cf54b2d64c273c7fdeb34680678dcb6eb7",
+    "bytes": 1192,
+    "entry": {
+      "word": ["би", "хайр"],
+      "pitch": [60, 64, 67],
+      "note": ["<NOTE_8>", "<NOTE_8>", "<NOTE_4>"],
+      "pitch2word": [0, 0, 1],
+      "bpm": 96,
+      "item_name": "mn_demo",
+      "mn_frontend": {
+        "schema_version": 1,
+        "prompt_audio": "data/raw/native_speech/demo_prompt.wav",
+        "metadata": {
+          "research_note": "Orthographic lyrics are preserved; pronunciation remains unresolved.",
+          "normalization_diagnostics": []
+        },
+        "units": [
+          {
+            "index": 0,
+            "text": "би",
+            "source_span": null,
+            "normalization": {"original": "би", "normalized": "би", "issues": []},
+            "pronunciation": null
+          },
+          {
+            "index": 1,
+            "text": "хайр",
+            "source_span": null,
+            "normalization": {"original": "хайр", "normalized": "хайр", "issues": []},
+            "pronunciation": null
+          }
+        ]
+      }
+    }
+  },
+  "outputs": [
+    {"path": "temporary/score.json", "sha256": "ee4e83d1ea382d75034ba443f1f9f8cf54b2d64c273c7fdeb34680678dcb6eb7", "bytes": 1192}
+  ],
+  "frontend": {
+    "unit_count": 2,
+    "note_count": 3,
+    "normalization_diagnostic_count": 0,
+    "unresolved_pronunciation_count": 2,
+    "melisma": {"unit_index": 0, "text": "би", "note_indices": [0, 1]},
+    "pronunciation_policy": "No phones or syllable boundaries were inferred."
+  },
+  "tokenizer_audit": {
+    "status": "traceable_existing_audit",
+    "source": "experiments/002_tokenizer_audit/results/tokenizer_audit.json",
+    "sha256": "6a6f3eeb0ea83e7b44e0bc77d22ae9b20fb15db95e60b198b2712ce8865d67b2",
+    "audited_records": 1260,
+    "unknown_rate": 0.0,
+    "round_trip_mismatch_rate": 0.0,
+    "median_tokens_per_character": 1.0,
+    "p90_tokens_per_character": 1.375,
+    "p95_tokens_per_character": 1.5714285714285714,
+    "max_tokens_per_character": 3.0,
+    "fragmented_records": 68
+  },
+  "evaluation": {
+    "inference": "not_performed",
+    "listening": "not_performed",
+    "native_evaluation": "not_performed"
+  },
+  "warnings": [
+    "The prompt audio path is preserved as an input reference; no audio was loaded or rendered.",
+    "Tokenizer metrics describe tokenization mechanics only, not pronunciation or native quality."
+  ],
+  "blocker": null,
+  "notes": "This baseline validates explicit score preservation only; inference, listening, and native evaluation were not performed."
+}

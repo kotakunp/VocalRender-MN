@@ -1,0 +1,88 @@
+{
+  "schema_version": "milestone-run/v1",
+  "run_id": "20260815T120721Z-context-mining",
+  "experiment": "003_phonetic_benchmark",
+  "status": "success",
+  "command": "python scripts/mn/mine_contexts.py --config experiments/003_phonetic_benchmark/config/context_mining.yaml --output-json experiments/003_phonetic_benchmark/results/context_candidates.json",
+  "git_sha": "1394fb413594550cba0c7ec6f65f423bc072f45d",
+  "started_at": "2026-08-15T12:07:21.4080487Z",
+  "finished_at": "2026-08-15T12:13:46.0923049Z",
+  "environment": {
+    "python": "3.12.13",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "runtime_path": "bundled workspace Python",
+    "packages": {
+      "black": "26.5.1",
+      "flake8": "7.3.0",
+      "pytest": "9.1.1",
+      "PyYAML": "6.0.3"
+    },
+    "cuda_probe": "not run for this text-only experiment"
+  },
+  "commands": [
+    {
+      "name": "benchmark_validator",
+      "command": "python scripts/mn/validate_benchmark.py benchmarks/MN-PHON-250/manifest.yaml",
+      "exit_code": 0,
+      "started_at": "2026-08-15T12:07:21.4080487Z",
+      "finished_at": "2026-08-15T12:07:21.6303512Z",
+      "elapsed_seconds": 0.222,
+      "stdout_summary": "250 valid items; 0 audio takes; 0 ratings; 0 warnings"
+    },
+    {
+      "name": "context_mining",
+      "command": "python scripts/mn/mine_contexts.py --config experiments/003_phonetic_benchmark/config/context_mining.yaml --output-json experiments/003_phonetic_benchmark/results/context_candidates.json",
+      "exit_code": 0,
+      "started_at": "2026-08-15T12:13:45.6889755Z",
+      "finished_at": "2026-08-15T12:13:46.0923049Z",
+      "elapsed_seconds": 0.403,
+      "stdout_summary": "no stdout; output JSON written"
+    }
+  ],
+  "input_hashes": {
+    "experiments/003_phonetic_benchmark/config/context_mining.yaml": "283d4b83b11a0179bec90d350b255397b4473d8745d1ab733d20845eff0540cd",
+    "benchmarks/MN-PHON-250/manifest.yaml": "c741bbc0b605b054c64c6621817fac726a0e47d34d94bab8198038af1d7f0abe",
+    "resources/manifest.yaml": "11fd74cbb4b593a117d61297136e9a49ef8eddbc4543eaa4f44d16a95f487659",
+    "resources/unimorph_khk/khk": "4ff606bbf23b8de81a6f6ec9aedab44136f38c11e45607130a328e1a2d388630",
+    "resources/unimorph_khk/khk.derivations": "baa8dae98ee6aa89c7833a52b7a84e5527dc73109e435f99578f023d06e7e446",
+    "resources/unimorph_khk/khk.segmentations": "6e54e55c3dd56442c0d33a2f362704cc702f29e587bd15c308a13e9910be4452"
+  },
+  "inputs": [
+    {"id": "context-config", "path": "experiments/003_phonetic_benchmark/config/context_mining.yaml", "sha256": "283d4b83b11a0179bec90d350b255397b4473d8745d1ab733d20845eff0540cd"},
+    {"id": "benchmark-manifest", "path": "benchmarks/MN-PHON-250/manifest.yaml", "sha256": "c741bbc0b605b054c64c6621817fac726a0e47d34d94bab8198038af1d7f0abe"},
+    {"id": "resource-manifest", "path": "resources/manifest.yaml", "sha256": "11fd74cbb4b593a117d61297136e9a49ef8eddbc4543eaa4f44d16a95f487659"},
+    {"id": "unimorph-khk", "path": "resources/unimorph_khk/khk", "sha256": "4ff606bbf23b8de81a6f6ec9aedab44136f38c11e45607130a328e1a2d388630"}
+  ],
+  "results": {
+    "benchmark_items": 250,
+    "audio_takes": 0,
+    "ratings": 0,
+    "benchmark_warnings": 0,
+    "candidate_count": 2858,
+    "candidate_counts_by_source": {
+      "unimorph_lemma": 1404,
+      "unimorph_surface": 1454
+    },
+    "candidate_counts_by_group": {
+      "G": 800,
+      "H": 770,
+      "L": 800,
+      "NG": 100,
+      "PALATALIZATION": 388
+    },
+    "candidate_warnings": []
+  },
+  "outputs": [
+    {
+      "path": "experiments/003_phonetic_benchmark/results/context_candidates.json",
+      "bytes": 1530982,
+      "sha256": "98243c481d19edf0702ada631f46302d25da9913309da8f65726771ae202b530",
+      "schema_version": "context-mining/v1"
+    }
+  ],
+  "warnings": [],
+  "blocker": null,
+  "pronunciation_claims": "none; orthographic evidence only",
+  "notes": "The checked-in run uses only the unimorph_khk source manifest; the unknown-rights frequency lexicon is excluded. No audio, rating, native-speaker, IPA, phoneme, phone, or allophone evidence was consumed or inferred."
+}

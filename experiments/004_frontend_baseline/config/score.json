@@ -1,0 +1,23 @@
+{
+  "item_name": "mn_demo",
+  "prompt_audio": "data/raw/native_speech/demo_prompt.wav",
+  "bpm": 96,
+  "units": [
+    {
+      "text": "би",
+      "notes": [
+        {"midi_pitch": 60, "note_value": "<NOTE_8>"},
+        {"midi_pitch": 64, "note_value": "<NOTE_8>"}
+      ]
+    },
+    {
+      "text": "хайр",
+      "notes": [
+        {"midi_pitch": 67, "note_value": "<NOTE_4>"}
+      ]
+    }
+  ],
+  "metadata": {
+    "research_note": "Orthographic lyrics are preserved; pronunciation remains unresolved."
+  }
+}

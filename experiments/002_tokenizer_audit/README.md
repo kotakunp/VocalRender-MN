@@ -14,6 +14,13 @@ rates describe tokenizer mechanics, not pronunciation or native quality. Do
 not modify the tokenizer until this baseline is reviewed together with audio
 and benchmark evidence.
 
+The Milestone 0 run at source revision `1394fb4` completed successfully with
+1,260 records, zero unknown tokens, zero round-trip mismatches, and 68 records
+above the configured fragmentation threshold. The machine-readable evidence is
+in `results/run.json`; detailed per-record data remains in
+`results/tokenizer_audit.json`. These are tokenizer observations, not evidence
+of Mongolian pronunciation quality.
+
 The checked-in config sets `frequency_limit: 0` because the local frequency
 CSV has unknown source and redistribution rights. Its content hash is still
 recorded when the file is present, but its words are excluded from the

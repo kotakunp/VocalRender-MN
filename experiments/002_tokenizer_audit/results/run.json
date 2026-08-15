@@ -1,0 +1,37 @@
+{
+  "schema_version": "milestone-run/v1",
+  "run_id": "20260815T120658Z-tokenizer-audit",
+  "status": "success",
+  "experiment": "002_tokenizer_audit",
+  "command": "python scripts/mn/audit_tokenizer.py --checkpoint pretrained_models/VocalRender-Pro --benchmark benchmarks/MN-PHON-250/manifest.yaml --resources-root resources --config experiments/002_tokenizer_audit/config/audit.yaml --output-dir experiments/002_tokenizer_audit/results --offline --generated-at 2026-08-15T12:06:58.078Z",
+  "git_sha": "1394fb413594550cba0c7ec6f65f423bc072f45d",
+  "started_at": "2026-08-15T12:06:58.078Z",
+  "finished_at": "2026-08-15T12:07:03.000Z",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Windows 11 x86_64",
+    "packages": {"transformers": "5.15.0", "tokenizers": "0.22.2"}
+  },
+  "inputs": [
+    {"id": "audit-config", "path": "experiments/002_tokenizer_audit/config/audit.yaml", "sha256": "d160b58f582fcffbcdfaa0a31ccdabf904c10e86050f5354a14f4b1f0eb0abc9"},
+    {"id": "benchmark-manifest", "path": "benchmarks/MN-PHON-250/manifest.yaml", "sha256": "c741bbc0b605b054c64c6621817fac726a0e47d34d94bab8198038af1d7f0abe"},
+    {"id": "tokenizer-json", "path": "pretrained_models/VocalRender-Pro/tokenizer.json", "sha256": "d8d49570fd9105591f83281955e6b0055ac5323de1da2faba8eba6f810ccabf2"},
+    {"id": "tokenizer-config", "path": "pretrained_models/VocalRender-Pro/tokenizer_config.json", "sha256": "88d835b87c320d491b1ee2b367dd4f6287c0fde399ea26f81fe9478c057f1d26"},
+    {"id": "unimorph-khk", "path": "resources/unimorph_khk/khk", "sha256": "4ff606bbf23b8de81a6f6ec9aedab44136f38c11e45607130a328e1a2d388630"}
+  ],
+  "outputs": [
+    {"path": "experiments/002_tokenizer_audit/results/tokenizer_audit.json", "sha256": "6a6f3eeb0ea83e7b44e0bc77d22ae9b20fb15db95e60b198b2712ce8865d67b2", "bytes": 1264206},
+    {"path": "experiments/002_tokenizer_audit/results/tokenizer_audit.md", "sha256": "fcfd386ea2346249072707885a7cfa72075d46c8fe88b55f1cd5643dc37a0228", "bytes": 2338}
+  ],
+  "metrics": {
+    "records": 1260,
+    "unknown_rate": 0.0,
+    "roundtrip_mismatch_rate": 0.0,
+    "median_tokens_per_character": 1.0,
+    "p95_tokens_per_character": 1.5714285714285714,
+    "fragmented_records": 68
+  },
+  "warnings": [],
+  "blocker": null,
+  "notes": "Tokenizer mechanics only; fragmentation is not pronunciation or native-quality evidence. Frequency rows were excluded because their source and redistribution rights remain unresolved."
+}

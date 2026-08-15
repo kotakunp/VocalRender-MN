@@ -383,7 +383,7 @@
     "unimorph_limit": 1000
   },
   "config_path": "experiments/002_tokenizer_audit/config/audit.yaml",
-  "generated_at": "2026-08-15T10:43:37.344012+00:00",
+  "generated_at": "2026-08-15T12:06:58.078Z",
   "input_source_ids": [
     "benchmark",
     "special_probe",

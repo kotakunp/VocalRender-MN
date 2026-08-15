@@ -1,6 +1,6 @@
 schema_version: context-mining/v1
 groups: [L, G, H, PALATALIZATION, NG]
-source: both
+source: unimorph
 limit_per_pattern: 100
 unimorph_limit: 5000
 min_frequency: 0.0

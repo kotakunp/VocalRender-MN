@@ -1,0 +1,41 @@
+{
+  "schema_version": "milestone-run/v1",
+  "run_id": "20260815T121001Z-upstream-smoke-preflight",
+  "status": "blocked",
+  "experiment": "001_upstream_smoke_test",
+  "command": "python scripts/infer_vocalrender_svs_single.py --ckpt_dir pretrained_models/VocalRender-Pro --json_file examples/opencpop_demo.json --item_name 2003000087 --prompt_audio examples/prompt_audio/2003000081.wav --output outputs/plan009_upstream_smoke.wav",
+  "git_sha": "1394fb413594550cba0c7ec6f65f423bc072f45d",
+  "started_at": "2026-08-15T12:10:01.966Z",
+  "finished_at": "2026-08-15T12:10:01.966Z",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Windows 11 x86_64",
+    "packages": {"torch": "2.13.0+cpu"},
+    "cuda_available": false,
+    "cuda_runtime": null,
+    "gpu": null
+  },
+  "inputs": [
+    {"id": "smoke-config", "path": "experiments/001_upstream_smoke_test/config/run.yaml", "sha256": "980dca08b8de28157853139ffea01e6c0e23a51c68d0f5c421d0d821ed9b8f21", "bytes": 393},
+    {"id": "checkpoint-config", "path": "pretrained_models/VocalRender-Pro/config.json", "sha256": "405f0dcd92f7feba6011ed4eac5c8d4f74cba9712f07fd5cfa3063bbdd95402c", "bytes": 4336},
+    {"id": "checkpoint-tokenizer", "path": "pretrained_models/VocalRender-Pro/tokenizer.json", "sha256": "d8d49570fd9105591f83281955e6b0055ac5323de1da2faba8eba6f810ccabf2", "bytes": 6777048},
+    {"id": "checkpoint-tokenizer-config", "path": "pretrained_models/VocalRender-Pro/tokenizer_config.json", "sha256": "88d835b87c320d491b1ee2b367dd4f6287c0fde399ea26f81fe9478c057f1d26", "bytes": 619},
+    {"id": "upstream-example", "path": "examples/opencpop_demo.json", "sha256": "70ddd60fc40b1d0961516ec709b5f67356b7317c10442f386b94f37d597a77cb", "bytes": 1908},
+    {"id": "prompt-audio", "path": "examples/prompt_audio/2003000081.wav", "sha256": "b7ff71b97d2560e7031490e48459c1bb55beedd3f7ce6fecf9841c9afd711a94", "bytes": 543872, "sample_rate": 44100, "channels": 1, "duration_seconds": 6.16585}
+  ],
+  "outputs": [],
+  "warnings": [
+    "The upstream script automatically falls back from CUDA to CPU when CUDA is unavailable."
+  ],
+  "blocker": {
+    "code": "cuda_unavailable_cpu_only_torch",
+    "message": "PyTorch 2.13.0+cpu reports no CUDA runtime or device; bounded policy disallows loading the 9.5 GB checkpoint for CPU inference.",
+    "remediation": "Use an approved CUDA-enabled PyTorch environment with a compatible GPU budget, then append a new run record."
+  },
+  "attempt": {
+    "preflight_completed": true,
+    "model_load_started": false,
+    "generation_started": false
+  },
+  "notes": "No audio was generated. This is an infrastructure blocker, not evidence about the checkpoint or Mongolian frontend."
+}

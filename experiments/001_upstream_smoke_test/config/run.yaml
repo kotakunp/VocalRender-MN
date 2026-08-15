@@ -1,0 +1,13 @@
+schema_version: upstream-smoke-config/v1
+checkpoint: pretrained_models/VocalRender-Pro
+json_file: examples/opencpop_demo.json
+item_name: "2003000087"
+prompt_audio: examples/prompt_audio/2003000081.wav
+output: outputs/plan009_upstream_smoke.wav
+requested_device: cuda
+max_normal_attempts: 1
+max_environment_retries: 1
+require_local_files: true
+allow_downloads: false
+allow_cpu_fallback: false
+
