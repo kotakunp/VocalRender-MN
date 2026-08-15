@@ -1,0 +1,4 @@
+schema_version: 1
+benchmark_id: MN-PHON-250
+description: Manual 2/1/0 ratings for declared audio takes. Empty until reviewed.
+ratings: []

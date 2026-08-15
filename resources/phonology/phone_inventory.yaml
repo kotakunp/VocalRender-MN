@@ -1,0 +1,38 @@
+schema_version: 1
+description: Incomplete research-target inventory; null symbols are intentional.
+phones:
+  - id: orthographic_l
+    symbol: null
+    level: phonemic
+    articulatory_tags: [lateral, target_l]
+    status: research_required
+    evidence: []
+    notes: Orthographic Л requires reviewed phonemic and surface analysis.
+  - id: orthographic_g
+    symbol: null
+    level: phonemic
+    articulatory_tags: [dorsal, target_g]
+    status: research_required
+    evidence: []
+    notes: Orthographic Г has unresolved context-sensitive research targets.
+  - id: orthographic_h
+    symbol: null
+    level: phonemic
+    articulatory_tags: [dorsal, fricative, target_h]
+    status: research_required
+    evidence: []
+    notes: Orthographic Х has unresolved dorsal fricative distinctions.
+  - id: soft_sign_palatalization
+    symbol: null
+    level: phonemic
+    articulatory_tags: [palatalization, soft_sign]
+    status: research_required
+    evidence: []
+    notes: Soft-sign and secondary-articulation behavior remains unresolved.
+  - id: dorsal_distinction
+    symbol: null
+    level: surface
+    articulatory_tags: [dorsal, context_sensitive]
+    status: research_required
+    evidence: []
+    notes: Dorsal distinctions must be established from reviewed evidence.

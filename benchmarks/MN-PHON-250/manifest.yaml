@@ -1,352 +1,4014 @@
+schema_version: 2
 benchmark:
+  id: MN-PHON-250
   name: MN-SVS Targeted Phonetic Benchmark
   version: "1.0"
   dialect_target: "Standard Khalkha Mongolian"
   item_count: 250
-
-sections:
-
-  # ============================================================
-  # SECTION 1: Orthographic Л (/ɮ/, /ɮʲ/)
-  # Target phenomena: lateral realization, frication, palatalization,
-  # and position/vowel context effects.
-  # ============================================================
-
-  L:
-
-    carrier_CV:
-      001: ла
-      002: лэ
-      003: ли
-      004: ло
-      005: лө
-      006: лу
-      007: лү
-
-    carrier_VC:
-      008: ал
-      009: эл
-      010: ил
-      011: ол
-      012: өл
-      013: ул
-      014: үл
-
-    carrier_VCV:
-      015: ала
-      016: элэ
-      017: или
-      018: оло
-      019: өлө
-      020: улу
-      021: үлү
-
-    lexical_word_initial:
-      022: лаа
-      023: лонх
-      024: лууван
-      025: лимон
-      026: лам
-      027: лааз
-      028: луу
-      029: лагерь
-
-    lexical_intervocalic:
-      030: далай
-      031: олон
-      032: өлөн
-      033: улаан
-      034: солонго
-      035: залуу
-      036: аялал
-      037: алиа
-      038: шилэг
-
-    lexical_preconsonantal:
-      039: алдаа
-      040: элс
-      041: илч
-      042: олгох
-      043: өлсөх
-      044: улс
-      045: үлдэх
-      046: толгой
-      047: балта
-
-    lexical_word_final:
-      048: мал
-      049: хэл
-      050: шил
-      051: цол
-      052: бүл
-      053: гал
-      054: дөл
-
-    lexical_palatalized_l:
-      055: толь
-      056: соль
-      057: алиа
-      058: салиа
-      059: сийлбэр
-      060: сольно
-
-
-  # ============================================================
-  # SECTION 2: Orthographic Г (/ɢ/, /ɡ/, /χ/, /x/, /ŋ/)
-  # Target phenomena: dorsal stop vs. fricative, back/front vowel
-  # split, surface devoicing, intervocalic lenition, final -Г vs -НГ.
-  # ============================================================
-
-  G:
-
-    carrier_CV:
-      061: га
-      062: гэ
-      063: ги
-      064: го
-      065: гө
-      066: гу
-      067: гү
-
-    carrier_VC:
-      068: аг
-      069: эг
-      070: иг
-      071: ог
-      072: өг
-      073: уг
-      074: үг
-
-    carrier_VCV:
-      075: ага
-      076: эгэ
-      077: иги
-      078: ого
-      079: өгө
-      080: угу
-      081: үгү
-
-    lexical_word_initial_back:
-      082: гар
-      083: гол
-      084: гутал
-      085: газар
-      086: гомдол
-      087: ган
-      088: гуурс
-
-    lexical_word_initial_front:
-      089: гэр
-      090: гүү
-      091: гишүүн
-      092: гэгээ
-      093: гөлөг
-      094: гишүү
-      095: гэрэл
-
-    lexical_intervocalic:
-      096: агаар
-      097: ногоон
-      098: тогоо
-      099: сугаа
-      100: бөгөөд
-      101: төгөл
-      102: багана
-      103: игээ
-      104: дагаа
-
-    lexical_preconsonantal:
-      105: багш
-      106: эгч
-      107: богц
-      108: өгсөх
-      109: угж
-      110: үгс
-      111: магтах
-      112: тогтолцоо
-      113: багцаа
-
-    lexical_word_final_back_stop:
-      114: аяг
-      115: сураг
-      116: аймаг
-      117: заг
-      118: байраг
-
-    lexical_word_final_front_stop:
-      119: бүлэг
-      120: цэцэг
-      121: нэг
-      122: бичиг
-      123: хэрэг
-
-    lexical_velar_nasal_ng:
-      124: санг
-      125: мөнгө
-      126: сонгох
-      127: анги
-      128: байшинг
-      129: аранга
-      130: занг
-
-
-  # ============================================================
-  # SECTION 3: Orthographic Х (/χ/, /x/)
-  # Target phenomena: velar vs. uvular fricative realizations,
-  # vowel context, preconsonantal cluster behavior.
-  # ============================================================
-
-  H:
-
-    carrier_CV:
-      131: ха
-      132: хэ
-      133: хи
-      134: хо
-      135: хө
-      136: ху
-      137: хү
-
-    carrier_VC:
-      138: ах
-      139: эх
-      140: их
-      141: ох
-      142: өх
-      143: ух
-      144: үх
-
-    carrier_VCV:
-      145: аха
-      146: эхэ
-      147: ихи
-      148: охо
-      149: өхө
-      150: уху
-      151: үхү
-
-    lexical_word_initial_back:
-      152: хаалга
-      153: хот
-      154: хуулбар
-      155: харанхуй
-      156: хаан
-      157: хоол
-      158: хуур
-
-    lexical_word_initial_front:
-      159: хэв
-      160: хөл
-      161: хүүхэд
-      162: хичээл
-      163: хэрэг
-      164: хэнгэрэг
-      165: хөмсөг
-
-    lexical_intervocalic:
-      166: ахаас
-      167: байхаас
-      168: дахаар
-      169: тухай
-      170: цохоо
-      171: сахал
-      172: ухаан
-      173: шахаа
-
-    lexical_preconsonantal:
-      174: ахлах
-      175: эхлэл
-      176: шахмал
-      177: охид
-      178: зөхөх
-      179: тухлах
-      180: ахмад
-      181: ахна
-      182: тахлах
-
-    lexical_word_final:
-      183: ах
-      184: их
-      185: байх
-      186: орхих
-      187: түүх
-      188: зохих
-      189: шахах
-      190: цохих
-
-
-  # ============================================================
-  # SECTION 4: Palatalization, Soft Signs & Phonemic Contrasts
-  # Target phenomena: explicit soft sign (ь), contextual palatalization
-  # induced by front vowels (/i/), and hard/soft minimal contrast pairs.
-  # ============================================================
-
-  PALATALIZATION:
-
-    explicit_soft_sign_final:
-      191: морь
-      192: тавь
-      193: барь
-      194: соль
-      195: холь
-      196: харь
-      197: сурь
-      198: гарь
-      199: өрвь
-      200: зарь
-
-    explicit_soft_sign_internal:
-      201: амьдрал
-      202: барьц
-      203: харьцах
-      204: хольц
-      205: амьтан
-      206: тавьц
-      207: морьд
-      208: харьцаа
-      209: сольцоо
-      210: амьд
-
-    contextual_palatalization_Ci:
-      211: хонины
-      212: салхи
-      213: багшийн
-      214: ариун
-      215: энгийн
-      216: зочин
-      217: алиманд
-      218: ахиад
-      219: тахиа
-      220: моринд
-      221: цахилгаан
-      222: тархи
-      223: танхил
-      224: анги
-      225: ахиц
-
-    minimal_contrast_pairs_hard_vs_soft:
-      226: бар
-      227: барь
-      228: тав
-      229: тавь
-      230: давар
-      231: давир
-      232: хана
-      233: ханиа
-      234: он
-      235: оль
-      236: сур
-      237: сурь
-      238: ган
-      239: гань
-      240: хараа
-      241: хариа
-      242: бодис
-      243: бодисон
-      244: алба
-      245: аливаа
-      246: толгой
-      247: толь
-      248: хол
-      249: холь
-      250: сална
+  source_draft: legacy nested MN-PHON-250 draft
+  source_draft_sha256: bd0449a988191254f3515f80b7ed2367da4e8da00da24a73ab54b9594592a8d0
+research_hypotheses:
+  - id: legacy_ipa_comments
+    status: hypothesis
+    note: IPA-like comments in the source draft are retained only as unresolved research questions.
+items:
+  - id: MNPHON_001
+    number: 1
+    text: "ла"
+    target_group: L
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_002
+    number: 2
+    text: "лэ"
+    target_group: L
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_003
+    number: 3
+    text: "ли"
+    target_group: L
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_004
+    number: 4
+    text: "ло"
+    target_group: L
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_005
+    number: 5
+    text: "лө"
+    target_group: L
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_006
+    number: 6
+    text: "лу"
+    target_group: L
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_007
+    number: 7
+    text: "лү"
+    target_group: L
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "ү"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_008
+    number: 8
+    text: "ал"
+    target_group: L
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_009
+    number: 9
+    text: "эл"
+    target_group: L
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "л"
+    left_context: "э"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_010
+    number: 10
+    text: "ил"
+    target_group: L
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "л"
+    left_context: "и"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_011
+    number: 11
+    text: "ол"
+    target_group: L
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_012
+    number: 12
+    text: "өл"
+    target_group: L
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "л"
+    left_context: "ө"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_013
+    number: 13
+    text: "ул"
+    target_group: L
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "л"
+    left_context: "у"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_014
+    number: 14
+    text: "үл"
+    target_group: L
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "л"
+    left_context: "ү"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_015
+    number: 15
+    text: "ала"
+    target_group: L
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_016
+    number: 16
+    text: "элэ"
+    target_group: L
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "л"
+    left_context: "э"
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_017
+    number: 17
+    text: "или"
+    target_group: L
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "л"
+    left_context: "и"
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_018
+    number: 18
+    text: "оло"
+    target_group: L
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_019
+    number: 19
+    text: "өлө"
+    target_group: L
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "л"
+    left_context: "ө"
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_020
+    number: 20
+    text: "улу"
+    target_group: L
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "л"
+    left_context: "у"
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_021
+    number: 21
+    text: "үлү"
+    target_group: L
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "л"
+    left_context: "ү"
+    right_context: "ү"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_022
+    number: 22
+    text: "лаа"
+    target_group: L
+    legacy_category: lexical_word_initial
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_023
+    number: 23
+    text: "лонх"
+    target_group: L
+    legacy_category: lexical_word_initial
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_024
+    number: 24
+    text: "лууван"
+    target_group: L
+    legacy_category: lexical_word_initial
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_025
+    number: 25
+    text: "лимон"
+    target_group: L
+    legacy_category: lexical_word_initial
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_026
+    number: 26
+    text: "лам"
+    target_group: L
+    legacy_category: lexical_word_initial
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_027
+    number: 27
+    text: "лааз"
+    target_group: L
+    legacy_category: lexical_word_initial
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_028
+    number: 28
+    text: "луу"
+    target_group: L
+    legacy_category: lexical_word_initial
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_029
+    number: 29
+    text: "лагерь"
+    target_group: L
+    legacy_category: lexical_word_initial
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "л"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_030
+    number: 30
+    text: "далай"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_031
+    number: 31
+    text: "олон"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_032
+    number: 32
+    text: "өлөн"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: "ө"
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_033
+    number: 33
+    text: "улаан"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: "у"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_034
+    number: 34
+    text: "солонго"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_035
+    number: 35
+    text: "залуу"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_036
+    number: 36
+    text: "аялал"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_037
+    number: 37
+    text: "алиа"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_038
+    number: 38
+    text: "шилэг"
+    target_group: L
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "л"
+    left_context: "и"
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_039
+    number: 39
+    text: "алдаа"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: "д"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_040
+    number: 40
+    text: "элс"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "э"
+    right_context: "с"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_041
+    number: 41
+    text: "илч"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "и"
+    right_context: "ч"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_042
+    number: 42
+    text: "олгох"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: "г"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_043
+    number: 43
+    text: "өлсөх"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "ө"
+    right_context: "с"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_044
+    number: 44
+    text: "улс"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "у"
+    right_context: "с"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_045
+    number: 45
+    text: "үлдэх"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "ү"
+    right_context: "д"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_046
+    number: 46
+    text: "толгой"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: "г"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_047
+    number: 47
+    text: "балта"
+    target_group: L
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: "т"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_048
+    number: 48
+    text: "мал"
+    target_group: L
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_049
+    number: 49
+    text: "хэл"
+    target_group: L
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "л"
+    left_context: "э"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_050
+    number: 50
+    text: "шил"
+    target_group: L
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "л"
+    left_context: "и"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_051
+    number: 51
+    text: "цол"
+    target_group: L
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_052
+    number: 52
+    text: "бүл"
+    target_group: L
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "л"
+    left_context: "ү"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_053
+    number: 53
+    text: "гал"
+    target_group: L
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_054
+    number: 54
+    text: "дөл"
+    target_group: L
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "л"
+    left_context: "ө"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_055
+    number: 55
+    text: "толь"
+    target_group: L
+    legacy_category: lexical_palatalized_l
+    lexicality: lexical
+    context: "palatalized"
+    position: null
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: "ь"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_056
+    number: 56
+    text: "соль"
+    target_group: L
+    legacy_category: lexical_palatalized_l
+    lexicality: lexical
+    context: "palatalized"
+    position: null
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: "ь"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_057
+    number: 57
+    text: "алиа"
+    target_group: L
+    legacy_category: lexical_palatalized_l
+    lexicality: lexical
+    context: "palatalized"
+    position: null
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_058
+    number: 58
+    text: "салиа"
+    target_group: L
+    legacy_category: lexical_palatalized_l
+    lexicality: lexical
+    context: "palatalized"
+    position: null
+    target_grapheme: "л"
+    left_context: "а"
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_059
+    number: 59
+    text: "сийлбэр"
+    target_group: L
+    legacy_category: lexical_palatalized_l
+    lexicality: lexical
+    context: "palatalized"
+    position: null
+    target_grapheme: "л"
+    left_context: "й"
+    right_context: "б"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_060
+    number: 60
+    text: "сольно"
+    target_group: L
+    legacy_category: lexical_palatalized_l
+    lexicality: lexical
+    context: "palatalized"
+    position: null
+    target_grapheme: "л"
+    left_context: "о"
+    right_context: "ь"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_061
+    number: 61
+    text: "га"
+    target_group: G
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_062
+    number: 62
+    text: "гэ"
+    target_group: G
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_063
+    number: 63
+    text: "ги"
+    target_group: G
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_064
+    number: 64
+    text: "го"
+    target_group: G
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_065
+    number: 65
+    text: "гө"
+    target_group: G
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_066
+    number: 66
+    text: "гу"
+    target_group: G
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_067
+    number: 67
+    text: "гү"
+    target_group: G
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "ү"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_068
+    number: 68
+    text: "аг"
+    target_group: G
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_069
+    number: 69
+    text: "эг"
+    target_group: G
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "г"
+    left_context: "э"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_070
+    number: 70
+    text: "иг"
+    target_group: G
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "г"
+    left_context: "и"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_071
+    number: 71
+    text: "ог"
+    target_group: G
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "г"
+    left_context: "о"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_072
+    number: 72
+    text: "өг"
+    target_group: G
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "г"
+    left_context: "ө"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_073
+    number: 73
+    text: "уг"
+    target_group: G
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "г"
+    left_context: "у"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_074
+    number: 74
+    text: "үг"
+    target_group: G
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "г"
+    left_context: "ү"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_075
+    number: 75
+    text: "ага"
+    target_group: G
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_076
+    number: 76
+    text: "эгэ"
+    target_group: G
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "г"
+    left_context: "э"
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_077
+    number: 77
+    text: "иги"
+    target_group: G
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "г"
+    left_context: "и"
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_078
+    number: 78
+    text: "ого"
+    target_group: G
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "г"
+    left_context: "о"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_079
+    number: 79
+    text: "өгө"
+    target_group: G
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "г"
+    left_context: "ө"
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_080
+    number: 80
+    text: "угу"
+    target_group: G
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "г"
+    left_context: "у"
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_081
+    number: 81
+    text: "үгү"
+    target_group: G
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "г"
+    left_context: "ү"
+    right_context: "ү"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_082
+    number: 82
+    text: "гар"
+    target_group: G
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_083
+    number: 83
+    text: "гол"
+    target_group: G
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_084
+    number: 84
+    text: "гутал"
+    target_group: G
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_085
+    number: 85
+    text: "газар"
+    target_group: G
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_086
+    number: 86
+    text: "гомдол"
+    target_group: G
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_087
+    number: 87
+    text: "ган"
+    target_group: G
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_088
+    number: 88
+    text: "гуурс"
+    target_group: G
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_089
+    number: 89
+    text: "гэр"
+    target_group: G
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_090
+    number: 90
+    text: "гүү"
+    target_group: G
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "ү"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_091
+    number: 91
+    text: "гишүүн"
+    target_group: G
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_092
+    number: 92
+    text: "гэгээ"
+    target_group: G
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_093
+    number: 93
+    text: "гөлөг"
+    target_group: G
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_094
+    number: 94
+    text: "гишүү"
+    target_group: G
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_095
+    number: 95
+    text: "гэрэл"
+    target_group: G
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "г"
+    left_context: null
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_096
+    number: 96
+    text: "агаар"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_097
+    number: 97
+    text: "ногоон"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "о"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_098
+    number: 98
+    text: "тогоо"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "о"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_099
+    number: 99
+    text: "сугаа"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "у"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_100
+    number: 100
+    text: "бөгөөд"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "ө"
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_101
+    number: 101
+    text: "төгөл"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "ө"
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_102
+    number: 102
+    text: "багана"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_103
+    number: 103
+    text: "игээ"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "и"
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_104
+    number: 104
+    text: "дагаа"
+    target_group: G
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_105
+    number: 105
+    text: "багш"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: "ш"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_106
+    number: 106
+    text: "эгч"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "э"
+    right_context: "ч"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_107
+    number: 107
+    text: "богц"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "о"
+    right_context: "ц"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_108
+    number: 108
+    text: "өгсөх"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "ө"
+    right_context: "с"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_109
+    number: 109
+    text: "угж"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "у"
+    right_context: "ж"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_110
+    number: 110
+    text: "үгс"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "ү"
+    right_context: "с"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_111
+    number: 111
+    text: "магтах"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: "т"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_112
+    number: 112
+    text: "тогтолцоо"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "о"
+    right_context: "т"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_113
+    number: 113
+    text: "багцаа"
+    target_group: G
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: "ц"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_114
+    number: 114
+    text: "аяг"
+    target_group: G
+    legacy_category: lexical_word_final_back_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "я"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_115
+    number: 115
+    text: "сураг"
+    target_group: G
+    legacy_category: lexical_word_final_back_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_116
+    number: 116
+    text: "аймаг"
+    target_group: G
+    legacy_category: lexical_word_final_back_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_117
+    number: 117
+    text: "заг"
+    target_group: G
+    legacy_category: lexical_word_final_back_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_118
+    number: 118
+    text: "байраг"
+    target_group: G
+    legacy_category: lexical_word_final_back_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_119
+    number: 119
+    text: "бүлэг"
+    target_group: G
+    legacy_category: lexical_word_final_front_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "э"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_120
+    number: 120
+    text: "цэцэг"
+    target_group: G
+    legacy_category: lexical_word_final_front_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "э"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_121
+    number: 121
+    text: "нэг"
+    target_group: G
+    legacy_category: lexical_word_final_front_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "э"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_122
+    number: 122
+    text: "бичиг"
+    target_group: G
+    legacy_category: lexical_word_final_front_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "и"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_123
+    number: 123
+    text: "хэрэг"
+    target_group: G
+    legacy_category: lexical_word_final_front_stop
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "г"
+    left_context: "э"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_124
+    number: 124
+    text: "санг"
+    target_group: G
+    legacy_category: lexical_velar_nasal_ng
+    lexicality: lexical
+    context: null
+    position: null
+    target_grapheme: "г"
+    left_context: "н"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_125
+    number: 125
+    text: "мөнгө"
+    target_group: G
+    legacy_category: lexical_velar_nasal_ng
+    lexicality: lexical
+    context: null
+    position: null
+    target_grapheme: "г"
+    left_context: "н"
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_126
+    number: 126
+    text: "сонгох"
+    target_group: G
+    legacy_category: lexical_velar_nasal_ng
+    lexicality: lexical
+    context: null
+    position: null
+    target_grapheme: "г"
+    left_context: "н"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_127
+    number: 127
+    text: "анги"
+    target_group: G
+    legacy_category: lexical_velar_nasal_ng
+    lexicality: lexical
+    context: null
+    position: null
+    target_grapheme: "г"
+    left_context: "н"
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_128
+    number: 128
+    text: "байшинг"
+    target_group: G
+    legacy_category: lexical_velar_nasal_ng
+    lexicality: lexical
+    context: null
+    position: null
+    target_grapheme: "г"
+    left_context: "н"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_129
+    number: 129
+    text: "аранга"
+    target_group: G
+    legacy_category: lexical_velar_nasal_ng
+    lexicality: lexical
+    context: null
+    position: null
+    target_grapheme: "г"
+    left_context: "н"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_130
+    number: 130
+    text: "занг"
+    target_group: G
+    legacy_category: lexical_velar_nasal_ng
+    lexicality: lexical
+    context: null
+    position: null
+    target_grapheme: "г"
+    left_context: "н"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_131
+    number: 131
+    text: "ха"
+    target_group: H
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_132
+    number: 132
+    text: "хэ"
+    target_group: H
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_133
+    number: 133
+    text: "хи"
+    target_group: H
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_134
+    number: 134
+    text: "хо"
+    target_group: H
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_135
+    number: 135
+    text: "хө"
+    target_group: H
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_136
+    number: 136
+    text: "ху"
+    target_group: H
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_137
+    number: 137
+    text: "хү"
+    target_group: H
+    legacy_category: carrier_CV
+    lexicality: carrier
+    context: "CV"
+    position: "initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "ү"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_138
+    number: 138
+    text: "ах"
+    target_group: H
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_139
+    number: 139
+    text: "эх"
+    target_group: H
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "х"
+    left_context: "э"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_140
+    number: 140
+    text: "их"
+    target_group: H
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "х"
+    left_context: "и"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_141
+    number: 141
+    text: "ох"
+    target_group: H
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "х"
+    left_context: "о"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_142
+    number: 142
+    text: "өх"
+    target_group: H
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "х"
+    left_context: "ө"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_143
+    number: 143
+    text: "ух"
+    target_group: H
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "х"
+    left_context: "у"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_144
+    number: 144
+    text: "үх"
+    target_group: H
+    legacy_category: carrier_VC
+    lexicality: carrier
+    context: "VC"
+    position: "final"
+    target_grapheme: "х"
+    left_context: "ү"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_145
+    number: 145
+    text: "аха"
+    target_group: H
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_146
+    number: 146
+    text: "эхэ"
+    target_group: H
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "х"
+    left_context: "э"
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_147
+    number: 147
+    text: "ихи"
+    target_group: H
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "х"
+    left_context: "и"
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_148
+    number: 148
+    text: "охо"
+    target_group: H
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "х"
+    left_context: "о"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_149
+    number: 149
+    text: "өхө"
+    target_group: H
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "х"
+    left_context: "ө"
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_150
+    number: 150
+    text: "уху"
+    target_group: H
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "х"
+    left_context: "у"
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_151
+    number: 151
+    text: "үхү"
+    target_group: H
+    legacy_category: carrier_VCV
+    lexicality: carrier
+    context: "VCV"
+    position: "medial"
+    target_grapheme: "х"
+    left_context: "ү"
+    right_context: "ү"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_152
+    number: 152
+    text: "хаалга"
+    target_group: H
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_153
+    number: 153
+    text: "хот"
+    target_group: H
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_154
+    number: 154
+    text: "хуулбар"
+    target_group: H
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_155
+    number: 155
+    text: "харанхуй"
+    target_group: H
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_156
+    number: 156
+    text: "хаан"
+    target_group: H
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_157
+    number: 157
+    text: "хоол"
+    target_group: H
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_158
+    number: 158
+    text: "хуур"
+    target_group: H
+    legacy_category: lexical_word_initial_back
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "у"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_159
+    number: 159
+    text: "хэв"
+    target_group: H
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_160
+    number: 160
+    text: "хөл"
+    target_group: H
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_161
+    number: 161
+    text: "хүүхэд"
+    target_group: H
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_162
+    number: 162
+    text: "хичээл"
+    target_group: H
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_163
+    number: 163
+    text: "хэрэг"
+    target_group: H
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_164
+    number: 164
+    text: "хэнгэрэг"
+    target_group: H
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "э"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_165
+    number: 165
+    text: "хөмсөг"
+    target_group: H
+    legacy_category: lexical_word_initial_front
+    lexicality: lexical
+    context: null
+    position: "word_initial"
+    target_grapheme: "х"
+    left_context: null
+    right_context: "ө"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_166
+    number: 166
+    text: "ахаас"
+    target_group: H
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_167
+    number: 167
+    text: "байхаас"
+    target_group: H
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "х"
+    left_context: "й"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_168
+    number: 168
+    text: "дахаар"
+    target_group: H
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_169
+    number: 169
+    text: "тухай"
+    target_group: H
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "х"
+    left_context: "у"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_170
+    number: 170
+    text: "цохоо"
+    target_group: H
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "х"
+    left_context: "о"
+    right_context: "о"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_171
+    number: 171
+    text: "сахал"
+    target_group: H
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_172
+    number: 172
+    text: "ухаан"
+    target_group: H
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "х"
+    left_context: "у"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_173
+    number: 173
+    text: "шахаа"
+    target_group: H
+    legacy_category: lexical_intervocalic
+    lexicality: lexical
+    context: null
+    position: "intervocalic"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: "а"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_174
+    number: 174
+    text: "ахлах"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_175
+    number: 175
+    text: "эхлэл"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: "э"
+    right_context: "л"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_176
+    number: 176
+    text: "шахмал"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: "м"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_177
+    number: 177
+    text: "охид"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: "о"
+    right_context: "и"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_178
+    number: 178
+    text: "зөхөх"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_179
+    number: 179
+    text: "тухлах"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_180
+    number: 180
+    text: "ахмад"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: "м"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_181
+    number: 181
+    text: "ахна"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: "н"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_182
+    number: 182
+    text: "тахлах"
+    target_group: H
+    legacy_category: lexical_preconsonantal
+    lexicality: lexical
+    context: null
+    position: "preconsonantal"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_183
+    number: 183
+    text: "ах"
+    target_group: H
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "х"
+    left_context: "а"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_184
+    number: 184
+    text: "их"
+    target_group: H
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "х"
+    left_context: "и"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_185
+    number: 185
+    text: "байх"
+    target_group: H
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "х"
+    left_context: "й"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_186
+    number: 186
+    text: "орхих"
+    target_group: H
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_187
+    number: 187
+    text: "түүх"
+    target_group: H
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "х"
+    left_context: "ү"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_188
+    number: 188
+    text: "зохих"
+    target_group: H
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_189
+    number: 189
+    text: "шахах"
+    target_group: H
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_190
+    number: 190
+    text: "цохих"
+    target_group: H
+    legacy_category: lexical_word_final
+    lexicality: lexical
+    context: null
+    position: "word_final"
+    target_grapheme: "х"
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_191
+    number: 191
+    text: "морь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_192
+    number: 192
+    text: "тавь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "в"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_193
+    number: 193
+    text: "барь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_194
+    number: 194
+    text: "соль"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "л"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_195
+    number: 195
+    text: "холь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "л"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_196
+    number: 196
+    text: "харь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_197
+    number: 197
+    text: "сурь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_198
+    number: 198
+    text: "гарь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_199
+    number: 199
+    text: "өрвь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "в"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_200
+    number: 200
+    text: "зарь"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_final
+    lexicality: unknown
+    context: "soft_sign"
+    position: "final"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_201
+    number: 201
+    text: "амьдрал"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "м"
+    right_context: "д"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_202
+    number: 202
+    text: "барьц"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: "ц"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_203
+    number: 203
+    text: "харьцах"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: "ц"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_204
+    number: 204
+    text: "хольц"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "л"
+    right_context: "ц"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_205
+    number: 205
+    text: "амьтан"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "м"
+    right_context: "т"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_206
+    number: 206
+    text: "тавьц"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "в"
+    right_context: "ц"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_207
+    number: 207
+    text: "морьд"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: "д"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_208
+    number: 208
+    text: "харьцаа"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "р"
+    right_context: "ц"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_209
+    number: 209
+    text: "сольцоо"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "л"
+    right_context: "ц"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_210
+    number: 210
+    text: "амьд"
+    target_group: PALATALIZATION
+    legacy_category: explicit_soft_sign_internal
+    lexicality: unknown
+    context: "soft_sign"
+    position: "internal"
+    target_grapheme: "ь"
+    left_context: "м"
+    right_context: "д"
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_211
+    number: 211
+    text: "хонины"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_212
+    number: 212
+    text: "салхи"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_213
+    number: 213
+    text: "багшийн"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_214
+    number: 214
+    text: "ариун"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_215
+    number: 215
+    text: "энгийн"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_216
+    number: 216
+    text: "зочин"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_217
+    number: 217
+    text: "алиманд"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_218
+    number: 218
+    text: "ахиад"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_219
+    number: 219
+    text: "тахиа"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_220
+    number: 220
+    text: "моринд"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_221
+    number: 221
+    text: "цахилгаан"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_222
+    number: 222
+    text: "тархи"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_223
+    number: 223
+    text: "танхил"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_224
+    number: 224
+    text: "анги"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_225
+    number: 225
+    text: "ахиц"
+    target_group: PALATALIZATION
+    legacy_category: contextual_palatalization_Ci
+    lexicality: unknown
+    context: "Ci"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_226
+    number: 226
+    text: "бар"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_227
+    number: 227
+    text: "барь"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_228
+    number: 228
+    text: "тав"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_229
+    number: 229
+    text: "тавь"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_230
+    number: 230
+    text: "давар"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_231
+    number: 231
+    text: "давир"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_232
+    number: 232
+    text: "хана"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_233
+    number: 233
+    text: "ханиа"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_234
+    number: 234
+    text: "он"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_235
+    number: 235
+    text: "оль"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_236
+    number: 236
+    text: "сур"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_237
+    number: 237
+    text: "сурь"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_238
+    number: 238
+    text: "ган"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_239
+    number: 239
+    text: "гань"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_240
+    number: 240
+    text: "хараа"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_241
+    number: 241
+    text: "хариа"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_242
+    number: 242
+    text: "бодис"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_243
+    number: 243
+    text: "бодисон"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_244
+    number: 244
+    text: "алба"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_245
+    number: 245
+    text: "аливаа"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_246
+    number: 246
+    text: "толгой"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_247
+    number: 247
+    text: "толь"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_248
+    number: 248
+    text: "хол"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_249
+    number: 249
+    text: "холь"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
+  - id: MNPHON_250
+    number: 250
+    text: "сална"
+    target_group: PALATALIZATION
+    legacy_category: minimal_contrast_pairs_hard_vs_soft
+    lexicality: contrast
+    context: "hard_vs_soft"
+    position: null
+    target_grapheme: null
+    left_context: null
+    right_context: null
+    expected_phoneme: null
+    expected_phone: null
+    evidence: []
+    status: untested
+    notes: "Migration preserves the legacy group/category; phonology is unresolved."
