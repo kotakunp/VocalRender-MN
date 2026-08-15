@@ -10,7 +10,10 @@ dist/
 # Model assets & data (download / generate locally)
 pretrained_models/
 checkpoints/
-data/
+data/*
+!data/raw/
+data/raw/*
+!data/raw/manifest.yaml
 output/
 outputs/
 log/
