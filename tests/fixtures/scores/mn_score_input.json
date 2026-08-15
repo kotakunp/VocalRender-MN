@@ -1,0 +1,15 @@
+{
+  "item_name": "mn_fixture",
+  "bpm": 96,
+  "prompt_audio": "fixture_prompt.wav",
+  "metadata": {"source": "synthetic", "review": "unresolved"},
+  "units": [
+    {"text": "би", "notes": [{"midi_pitch": 60, "note_value": "<NOTE_8>"}]},
+    {"text": "хайр", "notes": [
+      {"midi_pitch": 64, "note_value": "<NOTE_8>"},
+      {"midi_pitch": 67, "note_value": "<NOTE_8>"}
+    ]},
+    {"text": "би", "notes": [{"midi_pitch": 69, "note_value": "<NOTE_4>"}]},
+    {"text": "AP", "notes": [{"midi_pitch": 0, "note_value": "<NOTE_4>"}]}
+  ]
+}

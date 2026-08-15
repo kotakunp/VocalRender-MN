@@ -1,0 +1,8 @@
+{
+  "item_name": "mn_fixture",
+  "word": ["би", "хайр", "би", "AP"],
+  "pitch": [60, 64, 67, 69, 0],
+  "note": ["<NOTE_8>", "<NOTE_8>", "<NOTE_8>", "<NOTE_4>", "<NOTE_4>"],
+  "pitch2word": [0, 1, 1, 2, 3],
+  "bpm": 96
+}

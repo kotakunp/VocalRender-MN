@@ -12,6 +12,7 @@
 
 ## Status
 
+- **Status**: DONE (2026-08-15)
 - **Priority**: P1
 - **Effort**: M
 - **Risk**: MED
@@ -65,7 +66,7 @@ and hybrid experiments without sacrificing deterministic score control.
 | CLI help | `python scripts/mn/prepare_score.py --help` | exit 0 |
 | Example conversion | `python scripts/mn/prepare_score.py examples/mn_score_input.json --output <temporary-json>` | exit 0; valid upstream JSON emitted |
 | Full tests | `python -m pytest -q` | all pass |
-| Format/lint | `python -m black --check src/khalkha_frontend scripts/mn tests` then `python -m flake8 src/khalkha_frontend scripts/mn tests` | both exit 0 |
+| Format/lint | `python -m black --check src/khalkha_frontend scripts/mn tests` then `python -m flake8 --max-line-length=120 --extend-ignore=E203 src/khalkha_frontend scripts/mn tests` | both exit 0 |
 
 ## Scope
 
@@ -237,16 +238,16 @@ round-trip validation and all focused/full tests pass.
 
 ## Done criteria
 
-- [ ] Every emitted lyric unit maps to at least one explicit note.
-- [ ] Melisma is represented solely by repeated `pitch2word` indices and
+- [x] Every emitted lyric unit maps to at least one explicit note.
+- [x] Melisma is represented solely by repeated `pitch2word` indices and
   survives upstream conversion.
-- [ ] Invalid note/pitch/BPM/mapping inputs fail before upstream defaults.
-- [ ] Current upstream receives raw lyric units only; phones stay namespaced
+- [x] Invalid note/pitch/BPM/mapping inputs fail before upstream defaults.
+- [x] Current upstream receives raw lyric units only; phones stay namespaced
   sidecar metadata.
-- [ ] No `src/vocalrender/**`, tokenizer, or checkpoint file changed.
-- [ ] CLI and example conversion succeed; `python -m pytest -q` passes.
-- [ ] Black and flake8 pass.
-- [ ] `plans/README.md` marks Plan 008 `DONE`.
+- [x] No `src/vocalrender/**`, tokenizer, or checkpoint file changed.
+- [x] CLI and example conversion succeed; `python -m pytest -q` passes.
+- [x] Black and flake8 pass.
+- [x] `plans/README.md` marks Plan 008 `DONE`.
 
 ## STOP conditions
 

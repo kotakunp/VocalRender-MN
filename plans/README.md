@@ -28,16 +28,16 @@ create `codex/` task branches or persistent task worktrees.
 | [005](005-canonicalize-phonetic-benchmark.md) | Canonicalize MN-PHON-250 and its manual evaluation metadata | P1 | L | 002, 003 | DONE |
 | [006](006-scaffold-evidence-gated-phonology.md) | Scaffold evidence-gated syllabification, G2P, and allophones | P1 | L | 003, 005 | DONE |
 | [007](007-build-tokenizer-audit.md) | Build a read-only Mongolian tokenizer audit | P1 | M | 003, 004, 005 | DONE |
-| [008](008-add-vocalrender-score-adapter.md) | Add a score-preserving VocalRender adapter | P1 | M | 003, 006 | TODO |
+| [008](008-add-vocalrender-score-adapter.md) | Add a score-preserving VocalRender adapter | P1 | M | 003, 006 | DONE |
 | [009](009-run-reproducible-milestone-experiments.md) | Run and document reproducible Milestone 0 experiments | P2 | M | 004, 005, 006, 007, 008 | TODO |
 
 Status values: `TODO`, `IN PROGRESS`, `DONE`, `BLOCKED: <reason>`, or
 `REJECTED: <reason>`.
 
-Plans 001–007 were implemented and integration-validated on 2026-08-15. Plans
-008–009 remain intentionally pending: the evidence-gated frontend and baseline
-artifacts now exist, but no model/tokenizer mutation, score adapter, inference
-run, training, or phonetic claim was added as part of this implementation pass.
+Plans 001–008 were implemented and integration-validated on 2026-08-15. Plan
+009 remains intentionally pending: the evidence-gated frontend, baseline
+artifacts, and score-preserving adapter now exist, but no model/tokenizer
+mutation, inference run, training, or phonetic claim was added.
 
 ## Dependency graph
 

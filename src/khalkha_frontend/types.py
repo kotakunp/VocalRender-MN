@@ -192,6 +192,8 @@ def _freeze(value: Any) -> Any:
         return tuple(_freeze(item) for item in value)
     if isinstance(value, set):
         return frozenset(_freeze(item) for item in value)
+    if isinstance(value, tuple):
+        return tuple(_freeze(item) for item in value)
     return value
 
 
@@ -207,6 +209,10 @@ class PronunciationUnit:
     manual_override: str | None = None
 
     def __post_init__(self) -> None:
+        if not isinstance(self.orthographic_text, str) or not self.orthographic_text.strip():
+            raise ValueError("pronunciation orthographic_text must be nonempty")
+        if self.orthographic_text != self.orthographic_text.strip():
+            raise ValueError("pronunciation orthographic_text must not contain surrounding whitespace")
         evidence = _evidence(self.evidence_refs)
         phonemes = _symbols(self.phonemic_symbols)
         phones = _symbols(self.surface_phones)
@@ -328,3 +334,112 @@ class PronunciationOverride:
         object.__setattr__(self, "evidence", _evidence(self.evidence))
         if not self.evidence:
             raise ValueError("pronunciation overrides require an evidence reference")
+
+
+@dataclass(frozen=True)
+class ScoreNote:
+    """One explicit MIDI pitch and upstream note-duration token."""
+
+    midi_pitch: int
+    note_value: str
+
+    def __post_init__(self) -> None:
+        if isinstance(self.midi_pitch, bool) or not isinstance(self.midi_pitch, int):
+            raise TypeError("midi_pitch must be an integer")
+        if not 0 <= self.midi_pitch <= 127:
+            raise ValueError("midi_pitch must be in the inclusive range 0..127")
+        if not isinstance(self.note_value, str) or not self.note_value.strip():
+            raise ValueError("note_value must be a nonempty string")
+        if self.note_value != self.note_value.strip():
+            raise ValueError("note_value must not contain surrounding whitespace")
+
+
+@dataclass(frozen=True)
+class LyricScoreUnit:
+    """An explicitly aligned lyric unit with one or more score notes."""
+
+    text: str
+    notes: tuple[ScoreNote, ...]
+    pronunciation: PronunciationUnit | None = None
+    source_span: tuple[int, int] | None = None
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.text, str) or not self.text.strip():
+            raise ValueError("lyric score unit text must be nonempty")
+        if self.text != self.text.strip():
+            raise ValueError("lyric score unit text must be normalized and trimmed")
+        notes = tuple(self.notes)
+        if not notes:
+            raise ValueError("every lyric score unit requires at least one note")
+        if not all(isinstance(note, ScoreNote) for note in notes):
+            raise TypeError("lyric score unit notes must be ScoreNote values")
+        object.__setattr__(self, "notes", notes)
+        if self.pronunciation is not None and not isinstance(self.pronunciation, PronunciationUnit):
+            raise TypeError("pronunciation must be an evidence-gated PronunciationUnit or None")
+        if self.source_span is not None:
+            span = tuple(self.source_span)
+            if len(span) != 2 or any(isinstance(value, bool) or not isinstance(value, int) for value in span):
+                raise TypeError("source_span must contain two integer offsets")
+            if span[0] < 0 or span[1] < span[0]:
+                raise ValueError("source_span must be nonnegative and ordered")
+            object.__setattr__(self, "source_span", span)
+
+
+@dataclass(frozen=True)
+class KhalkhaScore:
+    """Complete neutral score input with explicit lyric-note alignment."""
+
+    units: tuple[LyricScoreUnit, ...]
+    bpm: int
+    item_name: str
+    prompt_audio: str | None = None
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        units = tuple(self.units)
+        if not units:
+            raise ValueError("KhalkhaScore requires at least one lyric score unit")
+        if not all(isinstance(unit, LyricScoreUnit) for unit in units):
+            raise TypeError("units must contain LyricScoreUnit values")
+        object.__setattr__(self, "units", units)
+        if isinstance(self.bpm, bool) or not isinstance(self.bpm, int):
+            raise TypeError("bpm must be an integer")
+        if not 1 <= self.bpm <= 255:
+            raise ValueError("bpm must be in the upstream range 1..255")
+        if not isinstance(self.item_name, str) or not self.item_name.strip():
+            raise ValueError("item_name must be nonempty")
+        if self.item_name != self.item_name.strip():
+            raise ValueError("item_name must not contain surrounding whitespace")
+        if any(separator in self.item_name for separator in ("/", "\\", "\x00")):
+            raise ValueError("item_name must be metadata, not a file path")
+        if self.item_name in {".", ".."}:
+            raise ValueError("item_name must not contain path traversal")
+        if self.prompt_audio is not None and (not isinstance(self.prompt_audio, str) or not self.prompt_audio.strip()):
+            raise ValueError("prompt_audio must be a nonempty string when supplied")
+        if self.prompt_audio is not None and self.prompt_audio != self.prompt_audio.strip():
+            raise ValueError("prompt_audio must not contain surrounding whitespace")
+        if not isinstance(self.metadata, Mapping):
+            raise TypeError("metadata must be a mapping")
+        object.__setattr__(self, "metadata", MappingProxyType(_freeze(dict(self.metadata))))
+
+
+@dataclass(frozen=True)
+class VocalRenderScoreEntry:
+    """Validated neutral representation of the upstream score JSON fields."""
+
+    word: tuple[str, ...]
+    pitch: tuple[int, ...]
+    note: tuple[str, ...]
+    pitch2word: tuple[int, ...]
+    bpm: int
+    item_name: str | None = None
+    mn_frontend: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "word", tuple(self.word))
+        object.__setattr__(self, "pitch", tuple(self.pitch))
+        object.__setattr__(self, "note", tuple(self.note))
+        object.__setattr__(self, "pitch2word", tuple(self.pitch2word))
+        if not isinstance(self.mn_frontend, Mapping):
+            raise TypeError("mn_frontend must be a mapping")
+        object.__setattr__(self, "mn_frontend", MappingProxyType(_freeze(dict(self.mn_frontend))))

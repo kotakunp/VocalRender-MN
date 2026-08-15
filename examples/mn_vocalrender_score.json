@@ -1,0 +1,42 @@
+[
+  {
+    "word": ["би", "хайр"],
+    "pitch": [60, 64, 67],
+    "note": ["<NOTE_8>", "<NOTE_8>", "<NOTE_4>"],
+    "pitch2word": [0, 0, 1],
+    "bpm": 96,
+    "item_name": "mn_demo",
+    "mn_frontend": {
+      "schema_version": 1,
+      "prompt_audio": "data/raw/native_speech/demo_prompt.wav",
+      "metadata": {
+        "research_note": "Orthographic lyrics are preserved; pronunciation remains unresolved.",
+        "normalization_diagnostics": []
+      },
+      "units": [
+        {
+          "index": 0,
+          "text": "би",
+          "source_span": null,
+          "normalization": {
+            "original": "би",
+            "normalized": "би",
+            "issues": []
+          },
+          "pronunciation": null
+        },
+        {
+          "index": 1,
+          "text": "хайр",
+          "source_span": null,
+          "normalization": {
+            "original": "хайр",
+            "normalized": "хайр",
+            "issues": []
+          },
+          "pronunciation": null
+        }
+      ]
+    }
+  }
+]

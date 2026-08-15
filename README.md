@@ -120,6 +120,26 @@ hf download pymaster/VocalRender \
 
 Each checkpoint download is about 9.5 GB.
 
+## Preparing an explicit Mongolian score
+
+The Khalkha adapter preserves score control and requires every lyric unit to
+carry its explicit note list. It does not infer syllable boundaries or
+pronunciation, and it does not load a checkpoint:
+
+```bash
+python scripts/mn/prepare_score.py \
+    examples/mn_score_input.json \
+    --output /tmp/mn_vocalrender_score.json
+```
+
+The emitted JSON is an array using VocalRender's `word`, `pitch`, `note`,
+`pitch2word`, and `bpm` fields. Multiple notes for one unit are represented by
+repeated `pitch2word` indices. `mn_frontend` retains normalization diagnostics,
+unresolved pronunciation metadata, and prompt-audio provenance as a sidecar;
+the released inference path still consumes raw lyric text and requires prompt
+audio for timbre conditioning. Use `--force` to replace an existing file, or
+`--output -` for stdout.
+
 ## Batch inference
 
 Batch inference runs over a preprocessed validation set and writes generated

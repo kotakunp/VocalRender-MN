@@ -1,0 +1,17 @@
+{
+  "unsupported_note": {
+    "item_name": "bad_note",
+    "bpm": 96,
+    "units": [{"text": "би", "notes": [{"midi_pitch": 60, "note_value": "<NOTE_7>"}]}]
+  },
+  "missing_notes": {
+    "item_name": "missing_notes",
+    "bpm": 96,
+    "units": [{"text": "би"}]
+  },
+  "full_text_without_alignment": {
+    "item_name": "ambiguous",
+    "bpm": 96,
+    "text": "би хайр"
+  }
+}
