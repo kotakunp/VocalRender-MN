@@ -1,0 +1,5 @@
+schema_version: tokenizer-audit/v1
+fragmentation_threshold: 1.5
+frequency_limit: 1000
+unimorph_limit: 1000
+offline: true
