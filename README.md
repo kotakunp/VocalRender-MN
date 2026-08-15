@@ -140,6 +140,14 @@ the released inference path still consumes raw lyric text and requires prompt
 audio for timbre conditioning. Use `--force` to replace an existing file, or
 `--output -` for stdout.
 
+For the Mongolian research foundation, see the
+[data-source inventory](DATA_SOURCES.md), the
+[MN-PHON-250 benchmark](benchmarks/MN-PHON-250/README.md), the
+[experiment contract and records](experiments/README.md), and the
+[Milestone 0 report](reports/milestone-0.md). These artifacts keep unresolved
+pronunciation and licensing questions explicit; they do not change the
+released model's inference contract.
+
 ## Batch inference
 
 Batch inference runs over a preprocessed validation set and writes generated

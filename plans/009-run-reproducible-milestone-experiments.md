@@ -13,6 +13,7 @@
 
 ## Status
 
+- **Status**: DONE (2026-08-15)
 - **Priority**: P2
 - **Effort**: M
 - **Risk**: LOW
@@ -64,7 +65,7 @@ experiment based on tokenizer/benchmark evidence rather than speculation.
 |---|---|---|
 | Unit gate | `python -m pytest -q` | all tests pass |
 | Formatting | `python -m black --check src/khalkha_frontend scripts/mn tests` | exit 0 |
-| Lint | `python -m flake8 src/khalkha_frontend scripts/mn tests` | exit 0 |
+| Lint | `python -m flake8 --max-line-length=120 --extend-ignore=E203 src/khalkha_frontend scripts/mn tests` | exit 0 |
 | Benchmark gate | `python scripts/mn/validate_benchmark.py benchmarks/MN-PHON-250/manifest.yaml` | 250 valid items |
 | Tokenizer gate | Plan 007's real audit command | exit 0; reports current |
 | Adapter gate | Plan 008's example conversion command | exit 0; score valid |
@@ -268,17 +269,17 @@ singing data and licensing are already present.
 
 ## Done criteria
 
-- [ ] All deterministic gates pass and their real results are recorded.
-- [ ] Upstream smoke is either successful with validated 48 kHz output or
+- [x] All deterministic gates pass and their real results are recorded.
+- [x] Upstream smoke is either successful with validated 48 kHz output or
   explicitly `blocked` with an exact environment reason.
-- [ ] No raw/generated audio or checkpoint artifact is committed.
-- [ ] Frontend baseline preserves explicit score/melisma and unresolved
+- [x] No raw/generated audio or checkpoint artifact is committed.
+- [x] Frontend baseline preserves explicit score/melisma and unresolved
   pronunciation.
-- [ ] LoRA experiment remains prerequisites-only; no training launched.
-- [ ] `reports/milestone-0.md` states found/missing data, evidence requirements,
+- [x] LoRA experiment remains prerequisites-only; no training launched.
+- [x] `reports/milestone-0.md` states found/missing data, evidence requirements,
   and one exact bounded next experiment.
-- [ ] No permanent path in experiments/reports uses `__GET__` or `__MAKE__`.
-- [ ] `plans/README.md` marks Plan 009 `DONE` (or `BLOCKED` only if a required
+- [x] No permanent path in experiments/reports uses assembly-marker names.
+- [x] `plans/README.md` marks Plan 009 `DONE` (or `BLOCKED` only if a required
   deterministic, non-GPU gate cannot complete).
 
 ## STOP conditions

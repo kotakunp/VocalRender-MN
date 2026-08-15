@@ -29,15 +29,16 @@ create `codex/` task branches or persistent task worktrees.
 | [006](006-scaffold-evidence-gated-phonology.md) | Scaffold evidence-gated syllabification, G2P, and allophones | P1 | L | 003, 005 | DONE |
 | [007](007-build-tokenizer-audit.md) | Build a read-only Mongolian tokenizer audit | P1 | M | 003, 004, 005 | DONE |
 | [008](008-add-vocalrender-score-adapter.md) | Add a score-preserving VocalRender adapter | P1 | M | 003, 006 | DONE |
-| [009](009-run-reproducible-milestone-experiments.md) | Run and document reproducible Milestone 0 experiments | P2 | M | 004, 005, 006, 007, 008 | TODO |
+| [009](009-run-reproducible-milestone-experiments.md) | Run and document reproducible Milestone 0 experiments | P2 | M | 004, 005, 006, 007, 008 | DONE |
 
 Status values: `TODO`, `IN PROGRESS`, `DONE`, `BLOCKED: <reason>`, or
 `REJECTED: <reason>`.
 
-Plans 001–008 were implemented and integration-validated on 2026-08-15. Plan
-009 remains intentionally pending: the evidence-gated frontend, baseline
-artifacts, and score-preserving adapter now exist, but no model/tokenizer
-mutation, inference run, training, or phonetic claim was added.
+Plans 001–009 were implemented and integration-validated on 2026-08-15. The
+evidence-gated frontend, baseline artifacts, score-preserving adapter, and
+reproducible experiment records now exist. The upstream smoke is explicitly
+blocked by the CPU-only environment; no model/tokenizer mutation, training, or
+phonetic claim was added.
 
 ## Dependency graph
 
