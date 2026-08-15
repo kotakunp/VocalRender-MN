@@ -1,0 +1,98 @@
+schema_version: 1
+resources:
+  - id: mbspeech_reference_transcripts
+    name: MBSpeech transcript/reference collection
+    local_path: data/raw/speech/mbspeech
+    source_url: null
+    upstream_repository: null
+    version_or_revision: null
+    acquired_on: null
+    license:
+      identifier: null
+      source: null
+    redistribution: unknown
+    training_use: unknown
+    research_evaluation_use: unknown
+    contains_personal_data: unknown
+    checksums: []
+    notes: Local inventory contains 90 pipe-delimited transcript CSVs; no audio was observed, so treat as transcript/reference-only until verified.
+  - id: spoken_words_reference_audio
+    name: Spoken-word audio and alignment metadata
+    local_path: data/raw/speech/spoken_words
+    source_url: null
+    upstream_repository: null
+    version_or_revision: null
+    acquired_on: null
+    license:
+      identifier: null
+      source: null
+    redistribution: unknown
+    training_use: unknown
+    research_evaluation_use: unknown
+    contains_personal_data: unknown
+    checksums: []
+    notes: Common Voice-derived clips and metadata are local reference material; terms and consent scope require verification.
+  - id: benchmark_tts_collection
+    name: Benchmark TTS collection
+    local_path: data/raw/benchmark_tts
+    source_url: null
+    upstream_repository: null
+    version_or_revision: null
+    acquired_on: null
+    license:
+      identifier: null
+      source: null
+    redistribution: unknown
+    training_use: unknown
+    research_evaluation_use: unknown
+    contains_personal_data: unknown
+    checksums: []
+    notes: Placeholder local collection category; no payload is included in this milestone.
+  - id: native_speech_collection
+    name: Native speech collection
+    local_path: data/raw/native_speech
+    source_url: null
+    upstream_repository: null
+    version_or_revision: null
+    acquired_on: null
+    license:
+      identifier: null
+      source: null
+    redistribution: unknown
+    training_use: unknown
+    research_evaluation_use: unknown
+    contains_personal_data: unknown
+    checksums: []
+    notes: Placeholder local collection category; acquisition and consent evidence are not established.
+  - id: native_singing_collection
+    name: Native singing collection
+    local_path: data/raw/native_singing
+    source_url: null
+    upstream_repository: null
+    version_or_revision: null
+    acquired_on: null
+    license:
+      identifier: null
+      source: null
+    redistribution: unknown
+    training_use: unknown
+    research_evaluation_use: unknown
+    contains_personal_data: unknown
+    checksums: []
+    notes: Placeholder local collection category; no singing payload is included in this milestone.
+  - id: music3_generated_outputs
+    name: Music3 generated-output collection
+    local_path: data/raw/music3
+    source_url: null
+    upstream_repository: null
+    version_or_revision: null
+    acquired_on: null
+    license:
+      identifier: null
+      source: null
+    redistribution: unknown
+    training_use: unknown
+    research_evaluation_use: unknown
+    contains_personal_data: unknown
+    checksums: []
+    notes: Placeholder for generated outputs; service terms and provenance must be recorded per acquisition or generation.
