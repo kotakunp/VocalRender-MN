@@ -76,7 +76,7 @@ Repository = "https://github.com/pymaster17/VocalRender.git"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["vocalrender*"]
+include = ["vocalrender*", "khalkha_frontend*"]
 
 [tool.setuptools.package-dir]
 "" = "src"
@@ -97,3 +97,10 @@ extend-exclude = '''
   | dist
 )/
 '''
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers --strict-config"
+markers = [
+    "integration: may require local checkpoints or GPU and is excluded from ordinary unit verification",
+]
