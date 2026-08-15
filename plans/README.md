@@ -14,6 +14,9 @@ Each executor must read its plan fully, run the drift check first, honor every
 STOP condition, and update the status row below when done. Do not assume context
 from the source prompt or from another plan.
 
+Repository workflow: implement the remaining plans directly on `main`. Do not
+create `codex/` task branches or persistent task worktrees.
+
 ## Execution order and status
 
 | Plan | Title | Priority | Effort | Depends on | Status |

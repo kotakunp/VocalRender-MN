@@ -96,7 +96,7 @@ and hybrid experiments without sacrificing deterministic score control.
 
 ## Git workflow
 
-- Branch: `codex/008-vocalrender-score-adapter`
+- Branch: `main` (work directly; do not create a task branch)
 - Suggested commit: `feat: add score-preserving Khalkha VocalRender adapter`.
 - Do not push/open a PR unless instructed.
 

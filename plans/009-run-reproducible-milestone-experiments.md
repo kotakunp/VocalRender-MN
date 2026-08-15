@@ -103,7 +103,7 @@ experiment based on tokenizer/benchmark evidence rather than speculation.
 
 ## Git workflow
 
-- Branch: `codex/009-milestone-zero-experiments`
+- Branch: `main` (work directly; do not create a task branch)
 - Suggested commits:
   `docs: record Milestone 0 experiments` and
   `docs: publish VocalRender-MN foundation report`.
