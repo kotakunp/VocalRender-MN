@@ -1,5 +1,3 @@
-# fmt: off
-
 from vocalrender.training.svs_raw_data import (
     convert_annotation_to_syllables,
     expand_syllables,
@@ -65,5 +63,3 @@ def test_unmapped_lyric_unit_is_skipped_by_current_behavior():
     )
 
     assert syllables == [{"char": "сайн", "pitch": 60, "note": "<NOTE_4>"}]
-
-# fmt: on

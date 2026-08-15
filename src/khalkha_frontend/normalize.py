@@ -1,5 +1,3 @@
-# fmt: off
-
 """Conservative Unicode normalization for Standard Khalkha text.
 
 Only reversible Unicode and whitespace operations are performed. Digits,
@@ -15,9 +13,7 @@ from .types import NormalizedText, TextIssue, TextIssueKind
 _CYRILLIC = re.compile(r"[\u0400-\u04ff]")
 _LATIN_RUN = re.compile(r"[A-Za-z]+")
 _DIGIT_RUN = re.compile(r"\d+")
-_ABBREVIATION = re.compile(
-    r"(?<!\w)(?:[А-ЯЁӨҮ]){2,}(?!\w)|(?<!\w)(?:[А-ЯЁӨҮа-яёөү][.]){2,}"
-)
+_ABBREVIATION = re.compile(r"(?<!\w)(?:[А-ЯЁӨҮ]){2,}(?!\w)|(?<!\w)(?:[А-ЯЁӨҮа-яёөү][.]){2,}")
 
 
 def normalize_text(text: str, *, lowercase: bool = True) -> NormalizedText:
@@ -75,5 +71,3 @@ def normalize_text(text: str, *, lowercase: bool = True) -> NormalizedText:
                 )
             )
     return NormalizedText(text, normalized, tuple(issues))
-
-# fmt: on

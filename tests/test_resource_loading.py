@@ -1,5 +1,3 @@
-# fmt: off
-
 from pathlib import Path
 
 from khalkha_frontend import ResourcePaths
@@ -28,9 +26,7 @@ def test_missing_layout_returns_structured_problems(tmp_path):
 
     problems = paths.validate(require_raw_data=True)
 
-    assert all(
-        problem.path.is_absolute() and problem.message for problem in problems
-    )
+    assert all(problem.path.is_absolute() and problem.message for problem in problems)
     assert paths.speech in {problem.path for problem in problems}
 
 
@@ -48,5 +44,3 @@ def test_legacy_marker_tree_is_not_a_fallback(tmp_path):
 
     assert paths.unimorph_khk == tmp_path / "resources/unimorph_khk"
     assert paths.validate()
-
-# fmt: on

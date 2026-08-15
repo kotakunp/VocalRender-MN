@@ -1,5 +1,3 @@
-# fmt: off
-
 from pathlib import Path
 import subprocess
 
@@ -30,24 +28,15 @@ REQUIRED_FIELDS = {
 
 
 def _load_manifests():
-    return [
-        yaml.safe_load(path.read_text(encoding="utf-8"))
-        for path in MANIFEST_PATHS
-    ]
+    return [yaml.safe_load(path.read_text(encoding="utf-8")) for path in MANIFEST_PATHS]
 
 
 def _resources():
-    return [
-        resource
-        for manifest in _load_manifests()
-        for resource in manifest["resources"]
-    ]
+    return [resource for manifest in _load_manifests() for resource in manifest["resources"]]
 
 
 def test_manifests_have_schema_version_one():
-    assert all(
-        manifest["schema_version"] == 1 for manifest in _load_manifests()
-    )
+    assert all(manifest["schema_version"] == 1 for manifest in _load_manifests())
 
 
 def test_manifest_paths_are_unique_and_never_use_assembly_markers():
@@ -56,10 +45,7 @@ def test_manifest_paths_are_unique_and_never_use_assembly_markers():
 
     assert len({resource["id"] for resource in resources}) == len(resources)
     assert len(set(local_paths)) == len(local_paths)
-    assert all(
-        "__GET__" not in path and "__MAKE__" not in path
-        for path in local_paths
-    )
+    assert all("__GET__" not in path and "__MAKE__" not in path for path in local_paths)
 
 
 def test_manifest_entries_have_explicit_rights_fields():
@@ -117,10 +103,7 @@ def test_tracked_paths_have_no_marker_directories():
         capture_output=True,
         text=True,
     )
-    assert all(
-        "__GET__" not in path and "__MAKE__" not in path
-        for path in result.stdout.splitlines()
-    )
+    assert all("__GET__" not in path and "__MAKE__" not in path for path in result.stdout.splitlines())
 
 
 def test_tracked_files_do_not_include_audio_or_checkpoints():
@@ -146,9 +129,6 @@ def test_tracked_files_do_not_include_audio_or_checkpoints():
     }
     allowed_audio_prefixes = ("assets/audio/", "examples/prompt_audio/")
     assert all(
-        Path(path).suffix.lower() not in forbidden
-        or path.startswith(allowed_audio_prefixes)
+        Path(path).suffix.lower() not in forbidden or path.startswith(allowed_audio_prefixes)
         for path in result.stdout.splitlines()
     )
-
-# fmt: on

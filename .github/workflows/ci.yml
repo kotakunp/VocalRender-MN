@@ -27,4 +27,4 @@ jobs:
           [[ -d src/khalkha_frontend ]] && targets+=(src/khalkha_frontend)
           [[ -d scripts/mn ]] && targets+=(scripts/mn)
           python -m black --check "${targets[@]}"
-          python -m flake8 "${targets[@]}"
+          python -m flake8 --max-line-length=120 "${targets[@]}"

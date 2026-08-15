@@ -1,5 +1,3 @@
-# fmt: off
-
 """Injected resolution of semantic local resource paths.
 
 ResourcePaths locates data but never downloads or creates it. It recognizes
@@ -71,9 +69,7 @@ class ResourcePaths:
     def music3(self) -> Path:
         return self.root / "data" / "raw" / "music3"
 
-    def validate(
-        self, require_raw_data: bool = False
-    ) -> Tuple[ResourceProblem, ...]:
+    def validate(self, require_raw_data: bool = False) -> Tuple[ResourceProblem, ...]:
         """Return missing-path diagnostics without exiting or creating paths.
 
         No directories are created by validation.
@@ -101,5 +97,3 @@ def default_resource_paths() -> ResourcePaths:
     return ResourcePaths.from_repository_root(
         Path(__file__).resolve().parents[2],
     )
-
-# fmt: on

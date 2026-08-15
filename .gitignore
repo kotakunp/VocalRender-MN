@@ -10,6 +10,7 @@ dist/
 # Model assets & data (download / generate locally)
 pretrained_models/
 checkpoints/
+resources/lexicon/most_frequent_words.csv
 data/*
 !data/raw/
 data/raw/*

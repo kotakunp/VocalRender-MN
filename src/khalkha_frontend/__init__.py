@@ -1,5 +1,3 @@
-# fmt: off
-
 """Independent Khalkha text frontend primitives.
 
 The package normalizes text conservatively and represents unresolved
@@ -32,5 +30,3 @@ __all__ = [
     "TextIssueKind",
     "normalize_text",
 ]
-
-# fmt: on

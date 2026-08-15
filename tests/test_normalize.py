@@ -1,5 +1,3 @@
-# fmt: off
-
 import unicodedata
 
 import pytest
@@ -40,12 +38,8 @@ def test_abbreviation_and_control_are_typed_without_dropping_content():
     result = normalize_text("НҮБ\x00 т.н.")
 
     assert result.normalized == "нүб\x00 т.н."
-    assert TextIssueKind.ABBREVIATION in {
-        issue.kind for issue in result.issues
-    }
-    assert TextIssueKind.UNSUPPORTED_CHARACTER in {
-        issue.kind for issue in result.issues
-    }
+    assert TextIssueKind.ABBREVIATION in {issue.kind for issue in result.issues}
+    assert TextIssueKind.UNSUPPORTED_CHARACTER in {issue.kind for issue in result.issues}
 
 
 def test_empty_input_and_idempotence():
@@ -58,5 +52,3 @@ def test_empty_input_and_idempotence():
 def test_non_string_input_is_rejected():
     with pytest.raises(TypeError):
         normalize_text(None)
-
-# fmt: on

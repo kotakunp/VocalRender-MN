@@ -11,8 +11,8 @@ project's code license.
 
 | Manifest ID | Local path | Current intended use | Rights status |
 | --- | --- | --- | --- |
-| `unimorph_khk` | `resources/unimorph_khk` | Morphology/reference work | CC BY-SA 3.0 is stated in the local README; attribution/share-alike required; training status unknown |
-| `mongolian_frequency_lexicon` | `resources/lexicon` | Lexicon/reference work | License and permitted uses unknown |
+| `unimorph_khk` | `resources/unimorph_khk` | Morphology/reference work; source: `https://github.com/unimorph/khk` | CC BY-SA 3.0 is stated in the local README; attribution/share-alike required; training status unknown |
+| `mongolian_frequency_lexicon` | `resources/lexicon` | Lexicon/reference work; expected CSV is local-only and ignored | Source, license, redistribution, and training rights unknown |
 | `phonology_workspace` | `resources/phonology` | Evidence-backed phonology artifacts when available | No artifacts or rights evidence established |
 | `mbspeech_reference_transcripts` | `data/raw/speech/mbspeech` | Research/reference transcripts in Milestone 0 | License, redistribution, and training status unknown |
 | `spoken_words_reference_audio` | `data/raw/speech/spoken_words` | Research/reference audio and metadata | License, consent scope, redistribution, and training status unknown |

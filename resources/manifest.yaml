@@ -3,7 +3,7 @@ resources:
   - id: unimorph_khk
     name: UniMorph Khalkha Mongolian paradigms
     local_path: resources/unimorph_khk
-    source_url: https://github.com/unimorph/um-mongolian
+    source_url: https://github.com/unimorph/khk
     upstream_repository: https://github.com/kbatsuren/MorphyNet
     version_or_revision: null
     acquired_on: null
@@ -38,10 +38,8 @@ resources:
     training_use: unknown
     research_evaluation_use: unknown
     contains_personal_data: unknown
-    checksums:
-      - path: resources/lexicon/most_frequent_words.csv
-        sha256: c6386006d2588353842355a1626018d7e3fae9e7db14ac97b5f1134963148ccf
-    notes: Source and terms require verification before redistribution or training.
+    checksums: []
+    notes: The expected CSV is local-only and ignored; source, license, redistribution, and training rights remain unknown.
   - id: phonology_workspace
     name: Khalkha phonology workspace
     local_path: resources/phonology

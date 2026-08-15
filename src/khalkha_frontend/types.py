@@ -1,20 +1,12 @@
-# fmt: off
-
 """Neutral, uncertainty-preserving values shared by frontend stages."""
 
 from dataclasses import dataclass
 from enum import Enum
 from typing import Optional, Tuple
 
-_RESOLVED_ERROR = (
-    "resolved phone values require at least one evidence reference"
-)
-_OVERRIDE_EMPTY_ERROR = (
-    "overridden pronunciation requires a nonempty manual override"
-)
-_OVERRIDE_NOTE_ERROR = (
-    "overridden pronunciation requires an evidence/provenance note"
-)
+_RESOLVED_ERROR = "resolved phone values require at least one evidence reference"
+_OVERRIDE_EMPTY_ERROR = "overridden pronunciation requires a nonempty manual override"
+_OVERRIDE_NOTE_ERROR = "overridden pronunciation requires an evidence/provenance note"
 
 
 class ResolutionStatus(str, Enum):
@@ -74,6 +66,12 @@ class EvidenceRef:
     item_id: Optional[str] = None
     note: str = ""
 
+    def __post_init__(self) -> None:
+        for field_name in ("stable_id", "source_kind", "citation_or_path"):
+            value = getattr(self, field_name)
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"{field_name} must be a nonempty string")
+
 
 @dataclass(frozen=True)
 class PronunciationUnit:
@@ -88,16 +86,13 @@ class PronunciationUnit:
 
     def __post_init__(self) -> None:
         evidence = tuple(self.evidence_refs)
-        phonemes = (
-            tuple(self.phonemic_symbols) if self.phonemic_symbols else None
-        )
+        phonemes = tuple(self.phonemic_symbols) if self.phonemic_symbols else None
         phones = tuple(self.surface_phones) if self.surface_phones else None
         object.__setattr__(self, "evidence_refs", evidence)
         object.__setattr__(self, "phonemic_symbols", phonemes)
         object.__setattr__(self, "surface_phones", phones)
-        if self.status is ResolutionStatus.RESOLVED:
-            if (phonemes or phones) and not evidence:
-                raise ValueError(_RESOLVED_ERROR)
+        if self.status is ResolutionStatus.RESOLVED and not evidence:
+            raise ValueError(_RESOLVED_ERROR)
         if self.status is ResolutionStatus.OVERRIDDEN:
             if not self.manual_override or not self.manual_override.strip():
                 raise ValueError(_OVERRIDE_EMPTY_ERROR)
@@ -119,5 +114,3 @@ class FrontendResult:
         pronunciation_units = tuple(self.pronunciation_units)
         object.__setattr__(self, "pronunciation_units", pronunciation_units)
         object.__setattr__(self, "issues", tuple(self.issues))
-
-# fmt: on
