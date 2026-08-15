@@ -1,3 +1,4 @@
+import hashlib
 from pathlib import Path
 import subprocess
 
@@ -63,6 +64,16 @@ def test_manifest_entries_have_explicit_rights_fields():
             "prohibited",
             "unknown",
         }
+
+
+def test_declared_resource_checksums_match_available_payloads():
+    for resource in _resources():
+        for checksum in resource.get("checksums", []):
+            path = ROOT / checksum["path"]
+            if not path.is_file():
+                continue
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            assert digest == checksum["sha256"], checksum["path"]
 
 
 def test_semantic_resource_directories_exist():

@@ -16,11 +16,11 @@ resources:
     contains_personal_data: false
     checksums:
       - path: resources/unimorph_khk/khk
-        sha256: 4ff606bbf23b8de81a6f6ec9edab44136f38c11e45607130a328e1a2d388630
+        sha256: 4ff606bbf23b8de81a6f6ec9aedab44136f38c11e45607130a328e1a2d388630
       - path: resources/unimorph_khk/khk.derivations
         sha256: baa8dae98ee6aa89c7833a52b7a84e5527dc73109e435f99578f023d06e7e446
       - path: resources/unimorph_khk/khk.segmentations
-        sha256: 6e54e55c3dd56442c0d33a2f362704cc702f29e587bd15c308a13e9910be445
+        sha256: 6e54e55c3dd56442c0d33a2f362704cc702f29e587bd15c308a13e9910be4452
       - path: resources/unimorph_khk/README.md
         sha256: b6650de1904ff5dc79c2b34dfadc96c25a0d2d3f6e61717616438dc3e5f37ce2
     notes: Local README states MorphyNet attribution and CC BY-SA 3.0; preserve attribution and share-alike.
@@ -38,7 +38,9 @@ resources:
     training_use: unknown
     research_evaluation_use: unknown
     contains_personal_data: unknown
-    checksums: []
+    checksums:
+      - path: resources/lexicon/most_frequent_words.csv
+        sha256: c6386006d2588353842355a1626018d7e3fae9e7db14ac97b5f1134963148ccf
     notes: The expected CSV is local-only and ignored; source, license, redistribution, and training rights remain unknown.
   - id: phonology_workspace
     name: Khalkha phonology workspace

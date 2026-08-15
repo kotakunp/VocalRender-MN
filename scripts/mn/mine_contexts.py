@@ -130,6 +130,16 @@ def main(argv: list[str] | None = None) -> int:
             item.occurrence_index,
         ),
     )
+    if limit_per_pattern is not None:
+        counts: dict[tuple[str, str], int] = {}
+        limited = []
+        for item in ordered:
+            key = (item.group, item.pattern)
+            if counts.get(key, 0) >= int(limit_per_pattern):
+                continue
+            counts[key] = counts.get(key, 0) + 1
+            limited.append(item)
+        ordered = limited
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "schema_version": "context-mining/v1",
@@ -138,6 +148,12 @@ def main(argv: list[str] | None = None) -> int:
         "source_manifest_ids": source_ids,
         "generated_at": generated_at,
         "groups": groups,
+        "parameters": {
+            "source": source,
+            "limit_per_pattern": limit_per_pattern,
+            "min_frequency": min_frequency,
+            "unimorph_limit": unimorph_limit,
+        },
         "candidates": [candidate_to_dict(item) for item in ordered],
         "warnings": warnings,
     }

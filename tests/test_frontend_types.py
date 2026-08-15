@@ -1,3 +1,6 @@
+import subprocess
+import sys
+
 import pytest
 
 from khalkha_frontend import (
@@ -13,6 +16,18 @@ from khalkha_frontend import (
 EVIDENCE = EvidenceRef("bench-1", "benchmark", "benchmarks/MN-PHON-250", note="manual review")
 
 
+def test_package_import_does_not_load_vocalrender_or_torch():
+    subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import sys, khalkha_frontend; "
+            "assert 'torch' not in sys.modules; assert 'vocalrender' not in sys.modules",
+        ],
+        check=True,
+    )
+
+
 @pytest.mark.parametrize("field", ("stable_id", "source_kind", "citation_or_path"))
 def test_evidence_ref_requires_nonempty_identity_fields(field):
     values = {
@@ -24,6 +39,20 @@ def test_evidence_ref_requires_nonempty_identity_fields(field):
 
     with pytest.raises(ValueError):
         EvidenceRef(**values)
+
+
+def test_evidence_ref_benchmark_aliases_preserve_canonical_provenance():
+    reference = EvidenceRef(
+        id="native-review-1",
+        source="benchmarks/MN-PHON-250/evaluations.yaml",
+        kind="native_speaker_validation",
+        notes="reviewed item",
+    )
+
+    assert reference.stable_id == reference.id == "native-review-1"
+    assert reference.source_kind == reference.kind == "native_speaker_validation"
+    assert reference.citation_or_path == reference.source
+    assert reference.note == reference.notes == "reviewed item"
 
 
 def test_text_issue_rejects_invalid_spans():

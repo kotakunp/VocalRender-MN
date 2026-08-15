@@ -1,5 +1,8 @@
 schema_version: tokenizer-audit/v1
 fragmentation_threshold: 1.5
-frequency_limit: 1000
+# The local frequency CSV is excluded from committed reports until its source
+# and redistribution rights are verified. Researchers may override this for
+# local-only audits.
+frequency_limit: 0
 unimorph_limit: 1000
 offline: true

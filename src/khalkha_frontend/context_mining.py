@@ -283,7 +283,9 @@ def mine_unimorph(
                 groups=groups,
             )
         )
-    return _sort_and_limit(candidates, limit)
+    # ``limit`` bounds source rows, not output contexts. Callers that combine
+    # sources apply their output limit after deterministic cross-source sort.
+    return _sort_and_limit(candidates, None)
 
 
 def _sort_and_limit(
