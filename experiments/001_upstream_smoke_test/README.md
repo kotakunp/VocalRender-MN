@@ -28,12 +28,12 @@ or treat this blocker as evidence about Mongolian pronunciation.
 
 `results/run.json` is the original Plan 009 CPU-blocked record and is preserved.
 The newer `results/run-20260815T150614Z-runtime-preflight.json` records the
-fail-closed Plan 011 preflight. It stopped before model construction with
-`blocked_environment` because this host has PyTorch `2.13.0+cpu`, no CUDA
-runtime, and no visible CUDA device. The workspace probe reported 204.476 GiB
-free of 450.136 GiB; VRAM was not probed because there was no CUDA device.
+fail-closed Plan 011 preflight against PyTorch `2.13.0+cpu`. A later start
+record, `results/run-20260818T093537Z-runtime-preflight.json`, found this
+shell on Python 3.14.7 with no PyTorch import and no CUDA host. Both stopped
+before model construction. Neither is a model or Mongolian-quality result.
 
 The checked-in `results/index.json` is the append-only pointer. A future
 approved CUDA host must run the preflight first, then append a new record rather
-than rewriting either existing record. CPU inference requires an explicit
+than rewriting earlier records. CPU inference requires an explicit
 `--allow-cpu` opt-in and is not valid for this smoke.

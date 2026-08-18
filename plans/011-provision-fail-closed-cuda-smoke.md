@@ -10,7 +10,7 @@
 
 ## Status
 
-- **Status**: BLOCKED: current PyTorch build is CPU-only and exposes no CUDA device
+- **Status**: BLOCKED: no approved CUDA host; current shell Python 3.14.7 cannot import torch
 - **Priority**: P1
 - **Effort**: M
 - **Risk**: MEDIUM

@@ -1,0 +1,46 @@
+{
+  "schema_version": "milestone-run/v1",
+  "run_id": "20260818T093537Z-runtime-preflight",
+  "status": "blocked",
+  "experiment": "001_upstream_smoke_test",
+  "command": "python scripts/check_runtime.py --require-cuda --task inference --json-out outputs/runtime-preflight.json",
+  "git_sha": "8475af98f0a69c21e81a0d90a849bb0920e288e9",
+  "started_at": "2026-08-18T09:35:37.821Z",
+  "finished_at": "2026-08-18T09:35:38.100Z",
+  "environment": {
+    "python": "3.14.7",
+    "platform": "Windows 11 AMD64",
+    "packages": {},
+    "cuda_available": false,
+    "cuda_build": null,
+    "visible_devices": "<default>"
+  },
+  "inputs": [
+    {
+      "id": "smoke-config",
+      "path": "experiments/001_upstream_smoke_test/config/run.yaml",
+      "sha256": "980dca08b8de28157853139ffea01e6c0e23a51c68d0f5c421d0d821ed9b8f21"
+    }
+  ],
+  "outputs": [],
+  "warnings": [],
+  "blocker": {
+    "code": "torch_unavailable_no_cuda_host",
+    "category": "blocked_environment",
+    "message": "Plan 011 preflight could not start: this shell's Python 3.14.7 has no PyTorch install, no CUDA runtime, and no visible GPU. Model loading was not attempted.",
+    "remediation": "Provision an approved NVIDIA host with the project Python range and a CUDA-enabled PyTorch build, rerun check_runtime.py --require-cuda, then append a new run record."
+  },
+  "preflight": {
+    "status": "blocked_environment",
+    "requested_dtype": "float16",
+    "model_load_started": false,
+    "generation_started": false
+  },
+  "attempt": {
+    "preflight_completed": false,
+    "import_error": "ModuleNotFoundError: No module named 'torch'",
+    "model_load_started": false,
+    "generation_started": false
+  },
+  "notes": "Append-only Plan 011 start evidence. Prior CPU-only torch records are preserved. No CUDA smoke was attempted, no CPU fallback occurred, and no audio was generated."
+}
