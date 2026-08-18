@@ -29,11 +29,16 @@ or treat this blocker as evidence about Mongolian pronunciation.
 `results/run.json` is the original Plan 009 CPU-blocked record and is preserved.
 The newer `results/run-20260815T150614Z-runtime-preflight.json` records the
 fail-closed Plan 011 preflight against PyTorch `2.13.0+cpu`. A later start
-record, `results/run-20260818T093537Z-runtime-preflight.json`, found this
-shell on Python 3.14.7 with no PyTorch import and no CUDA host. Both stopped
-before model construction. Neither is a model or Mongolian-quality result.
+record, `results/run-20260818T093537Z-runtime-preflight.json`, found a
+shell on Python 3.14.7 with no PyTorch import. Both stopped before model
+construction.
 
-The checked-in `results/index.json` is the append-only pointer. A future
-approved CUDA host must run the preflight first, then append a new record rather
-than rewriting earlier records. CPU inference requires an explicit
-`--allow-cpu` opt-in and is not valid for this smoke.
+`results/run-20260818T095249Z-cuda-smoke.json` is the successful CUDA
+smoke: Python 3.12.13, PyTorch `2.10.0+cu128`, RTX 4070, no CPU fallback.
+It wrote a nonempty 48 kHz mono WAV at `outputs/upstream-smoke.wav`
+(6.08 s; SHA-256 in the run record). Generated audio stays ignored and is
+not a Mongolian-quality claim.
+
+The checked-in `results/index.json` is the append-only pointer. CPU
+inference requires an explicit `--allow-cpu` opt-in and is not valid for
+this smoke.

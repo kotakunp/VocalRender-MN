@@ -55,7 +55,7 @@ planned counts or turn fragmentation into a pronunciation claim.
 
 | Experiment | Status | Interpretation |
 | --- | --- | --- |
-| `001_upstream_smoke_test` | blocked | CPU-only PyTorch/no CUDA; model loading and generation were not started |
+| `001_upstream_smoke_test` | success | CUDA smoke produced a validated 48 kHz WAV; earlier blocked records kept |
 | `002_tokenizer_audit` | success | tokenizer mechanics only |
 | `003_phonetic_benchmark` | success | UniMorph orthographic candidates only |
 | `004_frontend_baseline` | success | explicit score preservation; no inference or listening |

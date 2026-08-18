@@ -10,7 +10,7 @@
 
 ## Status
 
-- **Status**: BLOCKED: no approved CUDA host; current shell Python 3.14.7 cannot import torch
+- **Status**: DONE
 - **Priority**: P1
 - **Effort**: M
 - **Risk**: MEDIUM
@@ -96,11 +96,11 @@ sample rate, channels, duration, finite samples, peak, and SHA-256.
 
 ## Done criteria
 
-- [ ] CUDA/device/storage failures are detected before model load.
-- [ ] A real upstream demo produces a validated 48 kHz WAV on CUDA.
-- [ ] Experiment 001 retains both the old blocker and new immutable run record.
-- [ ] No CPU fallback, download, checkpoint change, raw audio commit, or secret occurs.
-- [ ] Existing tests plus new preflight tests pass.
+- [x] CUDA/device/storage failures are detected before model load.
+- [x] A real upstream demo produces a validated 48 kHz WAV on CUDA.
+- [x] Experiment 001 retains both the old blocker and new immutable run record.
+- [x] No CPU fallback, download, checkpoint change, raw audio commit, or secret occurs.
+- [x] Existing tests plus new preflight tests pass.
 
 ## STOP conditions
 

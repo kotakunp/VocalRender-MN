@@ -1,0 +1,96 @@
+{
+  "schema_version": "milestone-run/v1",
+  "run_id": "20260818T095249Z-cuda-smoke",
+  "status": "success",
+  "experiment": "001_upstream_smoke_test",
+  "command": ".venv/Scripts/python.exe scripts/infer_vocalrender_svs_single.py --ckpt_dir pretrained_models/VocalRender-Pro --json_file examples/opencpop_demo.json --item_name 2003000087 --prompt_audio examples/prompt_audio/2003000081.wav --output outputs/upstream-smoke.wav --min-free-vram-gib 6",
+  "git_sha": "008268f9287ef2ea367e187c2eb74508e03bd991",
+  "started_at": "2026-08-18T09:52:49.000Z",
+  "finished_at": "2026-08-18T09:53:13.170Z",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Windows 11 AMD64",
+    "packages": {
+      "torch": "2.10.0+cu128",
+      "torchaudio": "2.10.0+cu128"
+    },
+    "cuda_available": true,
+    "cuda_build": "12.8",
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA GeForce RTX 4070",
+    "compute_capability": [8, 9],
+    "visible_devices": "<default>",
+    "requested_dtype": "bfloat16"
+  },
+  "inputs": [
+    {
+      "id": "smoke-config",
+      "path": "experiments/001_upstream_smoke_test/config/run.yaml",
+      "sha256": "980dca08b8de28157853139ffea01e6c0e23a51c68d0f5c421d0d821ed9b8f21",
+      "bytes": 393
+    },
+    {
+      "id": "checkpoint-config",
+      "path": "pretrained_models/VocalRender-Pro/config.json",
+      "sha256": "405f0dcd92f7feba6011ed4eac5c8d4f74cba9712f07fd5cfa3063bbdd95402c",
+      "bytes": 4336
+    },
+    {
+      "id": "checkpoint-tokenizer",
+      "path": "pretrained_models/VocalRender-Pro/tokenizer.json",
+      "sha256": "d8d49570fd9105591f83281955e6b0055ac5323de1da2faba8eba6f810ccabf2",
+      "bytes": 6777048
+    },
+    {
+      "id": "checkpoint-tokenizer-config",
+      "path": "pretrained_models/VocalRender-Pro/tokenizer_config.json",
+      "sha256": "88d835b87c320d491b1ee2b367dd4f6287c0fde399ea26f81fe9478c057f1d26",
+      "bytes": 619
+    },
+    {
+      "id": "demo-score",
+      "path": "examples/opencpop_demo.json",
+      "sha256": "70ddd60fc40b1d0961516ec709b5f67356b7317c10442f386b94f37d597a77cb",
+      "bytes": 1908
+    },
+    {
+      "id": "prompt-audio",
+      "path": "examples/prompt_audio/2003000081.wav",
+      "sha256": "b7ff71b97d2560e7031490e48459c1bb55beedd3f7ce6fecf9841c9afd711a94",
+      "bytes": 543872
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/upstream-smoke.wav",
+      "sha256": "dcda1cbb6090b92eb521d73711b527ea142194c1c147eda78d785be9fa4638a9",
+      "bytes": 583724,
+      "sample_rate": 48000,
+      "channels": 1,
+      "duration_seconds": 6.08,
+      "finite": true,
+      "peak": 0.899993896484375
+    }
+  ],
+  "warnings": [],
+  "blocker": null,
+  "preflight": {
+    "status": "ready",
+    "requested_dtype": "float16",
+    "min_free_vram_gib": 6.0,
+    "free_vram_gib": 10.846,
+    "total_vram_gib": 11.994,
+    "workspace_free_gib": 173.415,
+    "workspace_total_gib": 450.136,
+    "model_load_started": true,
+    "generation_started": true
+  },
+  "attempt": {
+    "preflight_completed": true,
+    "model_load_started": true,
+    "generation_started": true,
+    "cpu_fallback": false,
+    "elapsed_seconds": 23.84
+  },
+  "notes": "Append-only CUDA smoke success. Prior blocked records are preserved. Generated audio remains ignored and is not a Mongolian-quality claim. Minimum free VRAM gate is 6 GiB from measured 4070 load headroom."
+}
