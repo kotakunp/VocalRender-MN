@@ -1,0 +1,37 @@
+{
+  "bpm": 96,
+  "item_name": "MNPHON_039",
+  "metadata": {
+    "alignment_manifest_sha256": "ea3e9500e9f7dae361fc25a3de63b78a35eafd2b48872de7623e23d028490514",
+    "alignment_status": "approved",
+    "source_text": "алдаа"
+  },
+  "units": [
+    {
+      "notes": [
+        {
+          "midi_pitch": 60,
+          "note_value": "<NOTE_2>"
+        }
+      ],
+      "source_span": [
+        0,
+        2
+      ],
+      "text": "ал"
+    },
+    {
+      "notes": [
+        {
+          "midi_pitch": 60,
+          "note_value": "<NOTE_2>"
+        }
+      ],
+      "source_span": [
+        2,
+        5
+      ],
+      "text": "даа"
+    }
+  ]
+}

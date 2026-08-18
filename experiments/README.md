@@ -60,7 +60,9 @@ planned counts or turn fragmentation into a pronunciation claim.
 | `003_phonetic_benchmark` | success | UniMorph orthographic candidates only |
 | `004_frontend_baseline` | success | explicit score preservation; no inference or listening |
 | `005_vocalrender_mn_lora` | blocked | prerequisites-only; training is not authorized |
+| `006_native_reference_study` | frozen kit | 32 approved scores; 0 takes; 0 ratings; recordings are Plan 012 |
 
 The directories for experiments 001–004 are owned by their respective
 experiment executors. Experiment 005 intentionally has no executable config
-or result record until its prerequisites are approved.
+or result record until its prerequisites are approved. Experiment 006 is the
+Plan 010 study kit; it is not a listening result.

@@ -1,6 +1,8 @@
 {
-  "status": "blocked",
-  "reason": "No qualified reviewer-approved context annotations are present. Legacy benchmark labels are not eligible.",
-  "groups": [],
-  "additional_approvals_needed": ["qualified Standard Khalkha context review", "manual lyric-to-note alignment review", "approved consented native singer reference recordings"]
+  "status": "frozen",
+  "reason": "Study kit frozen with 32 approved alignments. Native-singer recordings remain Plan 012.",
+  "selected_count": 32,
+  "additional_approvals_needed": [
+    "approved consented native singer reference recordings"
+  ]
 }

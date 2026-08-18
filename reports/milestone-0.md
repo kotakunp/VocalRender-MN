@@ -134,39 +134,17 @@ speaker protocol. Recurring model output alone, generic multilingual behavior,
 LLM memory, and one synthetic take are insufficient. Every promoted rule must
 include regression tests and leave unresolved contexts unresolved.
 
-## 9. Exact next experiment
+## 9. Frozen native-reference study kit
 
-Run a 32-item native-reference pronunciation comparison before any LoRA work:
+Plan 010 supersedes the earlier position-only / one-note selection sketch.
+The frozen kit lives in
+[`experiments/006_native_reference_study`](../experiments/006_native_reference_study):
+reviewed context annotations, approved lyric-to-note alignments, and 32
+BPM-96 / C4 / `<NOTE_2>` scores under `config/scores/`. Selection used
+group-specific context quotas; SHA-256 broke ties only among equal-diversity
+sets. `хүүхэд` remains `хүү | хэд`.
 
-1. Select eight items from each canonical group (L, G, H, PALATALIZATION).
-   Rank items within each group by SHA-256 of
-   `mnphon-native-v1:<item_id>` and greedily select the lowest ranks while
-   covering initial, medial, and final positions where those positions exist.
-   Record the final item list and selection script output.
-2. For every item, obtain one consented Standard Khalkha native-speech
-   reference. Use a fixed explicit score of BPM 96 and one `<NOTE_2>` at MIDI
-   60 for the raw-Cyrillic VocalRender-Pro condition. Render only after the
-   upstream CUDA smoke succeeds. Where provider terms permit, add three
-   independently seeded Music3 takes; absence of Music3 does not block the
-   native/reference comparison.
-3. Record each take with `item_id`, pseudonymous `take_id`, source kind,
-   repository-relative path, SHA-256, sample rate, channels, duration,
-   consent/license evidence ID, system/version, seed, prompt hash, and score
-   hash. Never record personal names.
-4. Recruit at least three eligible native Standard Khalkha raters. Blind and
-   randomize source labels. Each rater assigns 0/1/2 for the declared target
-   criterion and may add a structured comment; listening and rating software
-   must not reveal system identity.
-5. Treat a context as a candidate recurring error only when at least two of
-   three raters score the generated realization 0 or 1 in at least three
-   distinct benchmark items while the corresponding native references have
-   median score 2. Propose a narrow rule only if linked linguistic/native
-   evidence supports the same scope; otherwise retain `research_required`.
-
-Success means all 32 selections and native references have complete provenance,
-each compared system take has three blinded ratings, and the analysis can name
-either a reproducible evidence-backed error scope or a documented null result.
-Stop if consent/license evidence is absent, CUDA smoke remains blocked, a take
-cannot be traced to its score/system, fewer than three raters complete the
-protocol, or the proposed interpretation exceeds its evidence. Do not start
-LoRA or bulk generation as part of this experiment.
+The kit is frozen with 0 takes and 0 ratings. Plan 012 is the same-score
+sung study and still requires a consented Standard Khalkha singer, three
+raters, and a successful Plan 011 CUDA smoke. Do not start LoRA or bulk
+generation from this kit.

@@ -1,6 +1,368 @@
+# Lyric-to-note alignment worksheet for the 32 selected study items.
+# Edit ONLY this file. Do not edit the MN-PHON-250 manifest.
+#
+# For each word, decide the sung units (syllable-like cuts), not melody.
+# Each unit already has one MIDI 60 <NOTE_2>. Do not change the notes.
+#
+# How to split a word, e.g. бүлэг -> бү | лэг:
+#   alignment_complexity: multi_unit
+#   lyric_units:
+#     - text: бү
+#       source_span: [0, 2]
+#       notes: [{midi_pitch: 60, note_value: "<NOTE_2>"}]
+#     - text: лэг
+#       source_span: [2, 5]
+#       notes: [{midi_pitch: 60, note_value: "<NOTE_2>"}]
+#
+# Rules:
+#   - source_span is [start, end) in Unicode characters
+#   - units must be contiguous, no overlap, start at 0, end at len(word)
+#   - unit text must equal source_text[start:end]
+#   - leave one-unit words as single_unit
+#   - MNPHON_161 хүүхэд MUST stay хүү | хэд
+#   - when you accept a row:
+#       reviewer_pseudonym: developer_01
+#       review_date: "YYYY-MM-DD"
+#       review_status: approved
+#       alignment_note: <short non-phonetic reason>
+#
+# Then:
+#   python scripts/mn/validate_study_alignments.py experiments/006_native_reference_study/config/alignments.yaml
+
 schema_version: 1
 study_id: native-reference-v1
 alignments:
+  # ---------------------------------------------------------------------------
+  # L
+  # ---------------------------------------------------------------------------
+
+  # лимон (5)
+  - item_id: MNPHON_025
+    source_text: лимон
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: ли
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: мон
+        source_span: [2, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # далай (5)
+  - item_id: MNPHON_030
+    source_text: далай
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: да
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: лай
+        source_span: [2, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # олон (4)
+  - item_id: MNPHON_031
+    source_text: олон
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: о
+        source_span: [0, 1]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: лон
+        source_span: [1, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # өлөн (4)
+  - item_id: MNPHON_032
+    source_text: өлөн
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: ө
+        source_span: [0, 1]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: лөн
+        source_span: [1, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # алдаа (5)
+  - item_id: MNPHON_039
+    source_text: алдаа
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: ал
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: даа
+        source_span: [2, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # мал (3)
+  - item_id: MNPHON_048
+    source_text: мал
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: мал
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # толь (4)
+  - item_id: MNPHON_055
+    source_text: толь
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: толь
+        source_span: [0, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # алиа (4)
+  - item_id: MNPHON_057
+    source_text: алиа
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: а
+        source_span: [0, 1]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: лиа
+        source_span: [1, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # ---------------------------------------------------------------------------
+  # G
+  # ---------------------------------------------------------------------------
+
+  # гол (3)
+  - item_id: MNPHON_083
+    source_text: гол
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: гол
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # ногоон (6)
+  - item_id: MNPHON_097
+    source_text: ногоон
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: но
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: гоон
+        source_span: [2, 6]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # эгч (3)
+  - item_id: MNPHON_106
+    source_text: эгч
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: эгч
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # сураг (5)
+  - item_id: MNPHON_115
+    source_text: сураг
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: су
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: раг
+        source_span: [2, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # аймаг (5)
+  - item_id: MNPHON_116
+    source_text: аймаг
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: ай
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: маг
+        source_span: [2, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # бүлэг (5)
+  - item_id: MNPHON_119
+    source_text: бүлэг
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: бү
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: лэг
+        source_span: [2, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # санг (4)
+  - item_id: MNPHON_124
+    source_text: санг
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: санг
+        source_span: [0, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # мөнгө (5)
+  - item_id: MNPHON_125
+    source_text: мөнгө
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: мөн
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: гө
+        source_span: [3, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # ---------------------------------------------------------------------------
+  # H
+  # ---------------------------------------------------------------------------
+
+  # хаалга (6)
+  - item_id: MNPHON_152
+    source_text: хаалга
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: хаал
+        source_span: [0, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: га
+        source_span: [4, 6]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # хөл (3)
+  - item_id: MNPHON_160
+    source_text: хөл
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: хөл
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # хүүхэд (6) — required fixture, do not collapse to one unit
   - item_id: MNPHON_161
     source_text: хүүхэд
     whitespace_policy: reject_whitespace
@@ -14,7 +376,238 @@ alignments:
         source_span: [3, 6]
         notes:
           - {midi_pitch: 60, note_value: "<NOTE_2>"}
-    reviewer_pseudonym: null
-    review_date: null
-    review_status: unreviewed
-    alignment_note: "Draft regression fixture only; requires manual adjudication before freeze."
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Required regression fixture хүү | хэд."
+
+  # хичээл (6)
+  - item_id: MNPHON_162
+    source_text: хичээл
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: хи
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: чээл
+        source_span: [2, 6]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # ахаас (5)
+  - item_id: MNPHON_166
+    source_text: ахаас
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: а
+        source_span: [0, 1]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: хаас
+        source_span: [1, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # шахмал (6)
+  - item_id: MNPHON_176
+    source_text: шахмал
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: шах
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: мал
+        source_span: [3, 6]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # их (2)
+  - item_id: MNPHON_184
+    source_text: их
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: их
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # байх (4)
+  - item_id: MNPHON_185
+    source_text: байх
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: байх
+        source_span: [0, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # ---------------------------------------------------------------------------
+  # PALATALIZATION
+  # ---------------------------------------------------------------------------
+
+  # тавь (4)
+  - item_id: MNPHON_192
+    source_text: тавь
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: тавь
+        source_span: [0, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # соль (4)
+  - item_id: MNPHON_194
+    source_text: соль
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: соль
+        source_span: [0, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # амьдрал (7)
+  - item_id: MNPHON_201
+    source_text: амьдрал
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: амьд
+        source_span: [0, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: рал
+        source_span: [4, 7]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # хонины (6)
+  - item_id: MNPHON_211
+    source_text: хонины
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: хо
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: ни
+        source_span: [2, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: ны
+        source_span: [4, 6]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # салхи (5)
+  - item_id: MNPHON_212
+    source_text: салхи
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: сал
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: хи
+        source_span: [3, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # зочин (5)
+  - item_id: MNPHON_216
+    source_text: зочин
+    whitespace_policy: reject_whitespace
+    alignment_complexity: multi_unit
+    lyric_units:
+      - text: зо
+        source_span: [0, 2]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+      - text: чин
+        source_span: [2, 5]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # бар (3)
+  - item_id: MNPHON_226
+    source_text: бар
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: бар
+        source_span: [0, 3]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."
+
+  # барь (4)
+  - item_id: MNPHON_227
+    source_text: барь
+    whitespace_policy: reject_whitespace
+    alignment_complexity: single_unit
+    lyric_units:
+      - text: барь
+        source_span: [0, 4]
+        notes:
+          - {midi_pitch: 60, note_value: "<NOTE_2>"}
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    alignment_note: "Reviewer-approved lyric units."

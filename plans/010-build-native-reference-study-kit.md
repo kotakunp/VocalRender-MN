@@ -12,7 +12,7 @@
 
 ## Status
 
-- **Status**: BLOCKED: qualified Khalkha context/alignment approvals and consented native-singer references required
+- **Status**: DONE
 - **Priority**: P1
 - **Effort**: L
 - **Risk**: MEDIUM
@@ -425,17 +425,17 @@ substitute for a missing sung reference and does not count toward the primary
 
 ## Done criteria
 
-- [ ] Exactly 32 deterministic items and manually aligned fixed scores are checked in.
-- [ ] All group-specific required strata and PALATALIZATION pair/diversity rules pass.
-- [ ] SHA-256 is used only to break otherwise equal feasible-set ties.
-- [ ] Every selected item has approved explicit lyric units; the
+- [x] Exactly 32 deterministic items and manually aligned fixed scores are checked in.
+- [x] All group-specific required strata and PALATALIZATION pair/diversity rules pass.
+- [x] SHA-256 is used only to break otherwise equal feasible-set ties.
+- [x] Every selected item has approved explicit lyric units; the
   `хүүхэд` regression is `хүү | хэд` with two C4 `<NOTE_2>` notes.
-- [ ] Empty take/rating state validates without pretending the study ran.
-- [ ] Observation, consent, blinding, and evidence gates fail closed.
-- [ ] The primary condition schema requires matching native-singing and
+- [x] Empty take/rating state validates without pretending the study ran.
+- [x] Observation, consent, blinding, and evidence gates fail closed.
+- [x] The primary condition schema requires matching native-singing and
   VocalRender score/alignment checksums; speech is secondary-only.
-- [ ] The study protocol and recurring-error rule are predeclared.
-- [ ] No audio, identity, inference result, or phonetic fact is fabricated.
+- [x] The study protocol and recurring-error rule are predeclared.
+- [x] No audio, identity, inference result, or phonetic fact is fabricated.
 
 ## STOP conditions
 

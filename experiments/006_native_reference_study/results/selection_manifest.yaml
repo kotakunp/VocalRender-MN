@@ -1,40 +1,1757 @@
 schema_version: 1
 study_id: native-reference-v1
-status: review_queue
+status: frozen
 source_manifest_sha256: c741bbc0b605b054c64c6621817fac726a0e47d34d94bab8198038af1d7f0abe
-context_annotations_sha256: e0d2a79dc34d56a9aaf2c2ee7d39765be816304806a25e8bb7683c944ce30b9a
-alignments_sha256: e5742758c3e8232943d03e5e9e2bc2e343d3fd6913150facfb67f02c18fcaf30
+context_annotations_sha256: 22031d6d2ac25d334c896d206fb9654c7684d6d5c9a4ab59fe0920279f89e1a5
+alignments_sha256: ea3e9500e9f7dae361fc25a3de63b78a35eafd2b48872de7623e23d028490514
 groups:
   L:
     group: L
-    selected_ids: []
-    feasible_sets: 0
-    diversity_vector: []
-    tie_cohort: []
-    blocker: no approved context annotations
+    selected_ids:
+    - MNPHON_025
+    - MNPHON_030
+    - MNPHON_031
+    - MNPHON_032
+    - MNPHON_039
+    - MNPHON_048
+    - MNPHON_055
+    - MNPHON_057
+    feasible_sets: 430
+    diversity_vector:
+    - 4
+    - 2
+    - 1
+    - 1
+    - 2
+    tie_cohort:
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_048
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_025
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_031
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_023
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_032
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_055
+      - MNPHON_057
+    - - MNPHON_022
+      - MNPHON_023
+      - MNPHON_030
+      - MNPHON_039
+      - MNPHON_040
+      - MNPHON_049
+      - MNPHON_055
+      - MNPHON_057
+    tie_cohort_count: 174
+    tie_cohort_truncated: true
+    tie_break_hashes:
+    - 4c3883e1b2f0e988dae7355adc4ff0523709cb7abb59d55a1b84c2d5dd1452b1
+    - 0f6e730f1969a0db7833773ebe5fd45fc56f61d97f47c97972a9af9eb7582bf1
+    - 68378943d8df7a121df5931a6e70d91f0b94ec3dffa0cfcde8e5b4adc9a90744
+    - 80697705d8beb40d3ac2eba72170f8f631bcbbaed531bd1690216db3cb233a9a
+    - 13c0d69b2fc1d37fd61bf1e817cd5db9b9fcb1adbf9e667c56664c27940376c0
+    - 2b9c95c129efbe51570ac9e4cbfed7fb55528a79240b29220ab7ff1e789e6913
+    - 7b42b95dd596fd25c70fc7b82674b855cc1b0881d9893bc8cc2765d59b26bb3e
+    - 309cdc00f506bfd6301658192d5a466ad9936bd0031706c4efb969c454d842d7
   G:
     group: G
-    selected_ids: []
-    feasible_sets: 0
-    diversity_vector: []
-    tie_cohort: []
-    blocker: no approved context annotations
+    selected_ids:
+    - MNPHON_083
+    - MNPHON_097
+    - MNPHON_106
+    - MNPHON_115
+    - MNPHON_116
+    - MNPHON_119
+    - MNPHON_124
+    - MNPHON_125
+    feasible_sets: 1644
+    diversity_vector:
+    - 5
+    - 2
+    - 2
+    - 1
+    - 0
+    tie_cohort:
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_089
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_096
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_096
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_096
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_089
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_090
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_090
+      - MNPHON_096
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_116
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_121
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_124
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_105
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_089
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_096
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_082
+      - MNPHON_083
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_121
+      - MNPHON_125
+    - - MNPHON_083
+      - MNPHON_090
+      - MNPHON_097
+      - MNPHON_106
+      - MNPHON_115
+      - MNPHON_119
+      - MNPHON_121
+      - MNPHON_125
+    tie_cohort_count: 1050
+    tie_cohort_truncated: true
+    tie_break_hashes:
+    - 3981d061cf4784ca9d6e3f0aa217e3a2627878cee7f7c1e04dee8921c09c3259
+    - 73043791daf34f43c5eb3fad9c84b931a9d27be9dcaad2f535c5d557af0517d2
+    - 3045b46278a23d08a2b24b48aec605b4bf11182447cfee5401e65079cfe70ed8
+    - 267d031cf05bfd1bb5bb4d7eda172babe550c2a86801c9dd1ec0fad4031db1a7
+    - 4be48ceb46aa564cc19f7626fb2fd0bcd49f9ed3bc822e6127fd71ae57de2dea
+    - 822e6a618db28abdc3a3c67c6b9303e9d6e7806042e19d0abf814075c24e6e13
+    - 920079564e31807a73d26dcc98c76cbf0ac4f3a048cd05accb0f3dfcf7714e76
+    - 9c1ca2e66f17cc69dcf8d59baf9bd044f8be3c9c4bd96d501fdec2bf46dbd246
   H:
     group: H
-    selected_ids: []
-    feasible_sets: 0
-    diversity_vector: []
-    tie_cohort: []
-    blocker: no approved context annotations
+    selected_ids:
+    - MNPHON_152
+    - MNPHON_160
+    - MNPHON_161
+    - MNPHON_162
+    - MNPHON_166
+    - MNPHON_176
+    - MNPHON_184
+    - MNPHON_185
+    feasible_sets: 406
+    diversity_vector:
+    - 4
+    - 2
+    - 1
+    - 1
+    - 0
+    tie_cohort:
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_160
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_152
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_152
+      - MNPHON_153
+      - MNPHON_162
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_153
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_184
+      - MNPHON_185
+    - - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_153
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_175
+      - MNPHON_176
+      - MNPHON_184
+    - - MNPHON_153
+      - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    - - MNPHON_160
+      - MNPHON_161
+      - MNPHON_162
+      - MNPHON_166
+      - MNPHON_169
+      - MNPHON_176
+      - MNPHON_183
+      - MNPHON_184
+    tie_cohort_count: 397
+    tie_cohort_truncated: true
+    tie_break_hashes:
+    - 42dc9e6d9bbfbff92e935833f0f88f72e42f389f5b19cf1ec2dbc3382b896310
+    - 64cc0dfe7ce582d02cd142e5c6d139c47c462f31cc72fe9ce3e4290a5e1156c6
+    - 4bceaf9c95f4fa3de66ff2e0858d08e6fc93691326f814f81e2752900b514d3a
+    - 128ae9bb53adf07f093bca5a33d46b863eae87205218bd186d9cc93b2ab69000
+    - a1bffc951ee1a2ce4c1d587704880160ba02ee5c28aef7cecb97ef0a84dce0c1
+    - 346877937c4ab63e0216a5ad893c15c89c8266ace2461152c4e42ea2e2d33c17
+    - 1607029641c7e09ad8ae8e046ef722e55a7e5d928224342ef7905ace598e9155
+    - a5997c18cf9a4f80424fc4ee6847c85ade1d89462f7760611fe394fe3549f948
   PALATALIZATION:
     group: PALATALIZATION
-    selected_ids: []
-    feasible_sets: 0
-    diversity_vector: []
-    tie_cohort: []
-    blocker: no approved context annotations
-selected_items: []
+    selected_ids:
+    - MNPHON_192
+    - MNPHON_194
+    - MNPHON_201
+    - MNPHON_211
+    - MNPHON_212
+    - MNPHON_216
+    - MNPHON_226
+    - MNPHON_227
+    feasible_sets: 104
+    diversity_vector:
+    - 3
+    - 1
+    - 0
+    - 7
+    - 2
+    tie_cohort:
+    - - MNPHON_192
+      - MNPHON_194
+      - MNPHON_201
+      - MNPHON_211
+      - MNPHON_212
+      - MNPHON_216
+      - MNPHON_226
+      - MNPHON_227
+    - - MNPHON_194
+      - MNPHON_201
+      - MNPHON_202
+      - MNPHON_211
+      - MNPHON_212
+      - MNPHON_216
+      - MNPHON_228
+      - MNPHON_229
+    - - MNPHON_191
+      - MNPHON_194
+      - MNPHON_201
+      - MNPHON_211
+      - MNPHON_212
+      - MNPHON_216
+      - MNPHON_228
+      - MNPHON_229
+    tie_cohort_count: 3
+    tie_cohort_truncated: false
+    tie_break_hashes:
+    - ce5bcc746e2cf3d61b077d68a670bd987789ccf690653f71d85bb0f988d6949a
+    - 9793ec2ad21d7fb119342df269ace1f7b499369f97fbccd6e0b21722aa3acf4a
+    - bb9c5e7f44c9a197b083b2ab5ef6962f44f9fc4e790b79acc49a4348f0e7a633
+    - a5416ed9f0e327a3c814913bef47c9682b92106beaa4da544733e475811aa3b2
+    - e5b6343a01f760cffd45e8f1aa534506ec4ecf2c4e52b410d66bfab53e7e7336
+    - bf0d578fd66d110088a7292e8e6d8cb497f2773a8f6c62a0f3977ecf532cedd5
+    - 05914a8b03d8f0d398f9c5cb852423602d73d2f46bdb1ba4c7ee58e60bd44a47
+    - 4681b46abccc1b7ee0059007eb08b3867e159a34ca8891a8ffcd378b8c8d0785
+selected_items:
+- MNPHON_025
+- MNPHON_030
+- MNPHON_031
+- MNPHON_032
+- MNPHON_039
+- MNPHON_048
+- MNPHON_055
+- MNPHON_057
+- MNPHON_083
+- MNPHON_097
+- MNPHON_106
+- MNPHON_115
+- MNPHON_116
+- MNPHON_119
+- MNPHON_124
+- MNPHON_125
+- MNPHON_152
+- MNPHON_160
+- MNPHON_161
+- MNPHON_162
+- MNPHON_166
+- MNPHON_176
+- MNPHON_184
+- MNPHON_185
+- MNPHON_192
+- MNPHON_194
+- MNPHON_201
+- MNPHON_211
+- MNPHON_212
+- MNPHON_216
+- MNPHON_226
+- MNPHON_227
 items_requiring_review: []
 selector_version: native-study-selector-v1
 seed_namespace: mnphon-native-v1
 deterministic_exclusions: []
+score_checksums:
+  MNPHON_025: e206021ce6fc8e0a3fad72fc6cde0963bc2ad96c330f7d4468240f27c2df807f
+  MNPHON_030: 1b901dffa94a8d25690328db0b9e0877ef2877f978600046e00529f5ca544b20
+  MNPHON_031: afebc550f15a4bc983a9f1e9ac6f68c8f862014456b20ec99d6b7c1893be701f
+  MNPHON_032: 36deb1f00539caf29560f074b6e1bc2b2fb9b2572420a28c14093d5e25850854
+  MNPHON_039: e3c72bb5132b6075e264b5deed863cf92e1730147b4bcc1e9aece511d665c8a7
+  MNPHON_048: e2b00b3c192dc8122cd9bd3f6494f7888345c158df6d22005147d17ad823661c
+  MNPHON_055: 0909535cd40426ad7a73e755f0750438ebf03a2e046f525dc563334bd6b4c8ca
+  MNPHON_057: aba5e21a3baf308c13cb9fdc9041128cd27b3daedb6d5a3e0cda2626019f746d
+  MNPHON_083: e50a1d03935401b5efe43df6eeb49351cf6a168be579b04a97b4d8a766089496
+  MNPHON_097: fcc320ff111953d28b6892d447215a8c8606e6f248e17a541791d48eb1cd6f0e
+  MNPHON_106: b41117538a79875bb2a70cf39a8415c14c8611ec2a54000c4ca2f2145a6935f0
+  MNPHON_115: 42f7f0e4c260d88f33330c6f903bdaef4316892fc4c77384d918323676896e6a
+  MNPHON_116: e55a0347b1cc748b4e9469cd65b40a88c82fb5f0bdd1eb65167f9575f9d0257f
+  MNPHON_119: 189be488046f9e47ef7e89fa3ac5f9e850396a474c1599b4c8ec4190a2ab687d
+  MNPHON_124: 9dbb23f9e8a4ea1b177a225652b2e5bf807921c65231c2979b35c5a8e68f49c9
+  MNPHON_125: 6ea4f16586e13d0f0aa07922b05c7b0944210084398b92be3903a53947f9f8a7
+  MNPHON_152: 5753205d7e1eff5c2645cb9da716b259e73c6b39695b98e273621b84cab928df
+  MNPHON_160: a4517425f422b51462088c154305779fe593ba2eda5d6775feb1926fd8447cef
+  MNPHON_161: 5aaadf60d5021092ec0e4d1a5836a843605437cfc0c30cd72d28956eb18c1bb0
+  MNPHON_162: b93c4dae814e8d38d99b3d338c844c7847f604acf7ca1730d06cebb49099ac23
+  MNPHON_166: 7c846f11bcde1fc5236256cc54487a95af4be75db8d936abf203ff0709ec3f5e
+  MNPHON_176: a665ee5090b78c6359b2fb82cdda39cc8f171b5a8b325aa9f574d32d47f87495
+  MNPHON_184: cf8601ec1d0f3da22bff17db1303451984764e7bfee5330aae7f414c0cd7210e
+  MNPHON_185: 58c833c5af5f606d3daf229b24dda30cb0f6cd571a7ee6615b45e44cbe751b83
+  MNPHON_192: a5ec4906b2395409a9ea11a1524a784259a2682ce568c2ce3a0b0272aa48718d
+  MNPHON_194: f4dccaf6bc3a7c324ff3e401e7b66032fa442636ed7c61bdd346540e7df45f9c
+  MNPHON_201: 5a849e893bcf861f7c94e5622aca640e4fadbb14f153eb5e70d86e68d62c16b9
+  MNPHON_211: f9c174aecebc37903d98f32c3a850dc3f5260c1af5c9a77104977f52a2018685
+  MNPHON_212: de321c88ce366216e60464460a4f5d2408fe73ee0de018c045c86ec269de43b6
+  MNPHON_216: 2d36d6ce3c3137fecef7c7ff8d5f2d90bac1fabce55d57a1b0ef1168f7e3c4ef
+  MNPHON_226: 68bc83b5f5ee74151916aa54d67b4d05fb63ad0d20c8d9b64e74ec79eda6c8c3
+  MNPHON_227: 3f80b85b191945a2fb3c0e6ad955c650cd75b110c2cd3e3841a1fdb341539b33

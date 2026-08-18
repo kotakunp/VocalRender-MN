@@ -1,4 +1,690 @@
+# Reviewed by developer_01 on 2026-08-18.
+# Labels are study-design annotations, not phonemes or phones.
+# Do not edit benchmarks/MN-PHON-250/manifest.yaml.
+#
+# Re-audit after edits:
+#   python scripts/mn/audit_study_contexts.py --config experiments/006_native_reference_study/config/selection_strata.yaml
+
 schema_version: 1
 benchmark_manifest_sha256: c741bbc0b605b054c64c6621817fac726a0e47d34d94bab8198038af1d7f0abe
-items: []
-contrast_pairs: []
+items:
+  # ---------------------------------------------------------------------------
+  # L (12)
+  # ---------------------------------------------------------------------------
+
+  # MNPHON_022 лаа
+  - item_id: MNPHON_022
+    structural_context: [word_initial]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_023 лонх
+  - item_id: MNPHON_023
+    structural_context: [word_initial]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_025 лимон
+  - item_id: MNPHON_025
+    structural_context: [word_initial]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_030 далай
+  - item_id: MNPHON_030
+    structural_context: [intervocalic]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_032 өлөн
+  - item_id: MNPHON_032
+    structural_context: [intervocalic]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_039 алдаа
+  - item_id: MNPHON_039
+    structural_context: [preconsonantal_cluster]
+    vowel_context_class: [front]
+    cluster_or_ng_context: [cluster]
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_040 элс
+  - item_id: MNPHON_040
+    structural_context: [preconsonantal_cluster]
+    vowel_context_class: [back]
+    cluster_or_ng_context: [cluster]
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_048 мал
+  - item_id: MNPHON_048
+    structural_context: [word_final]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_049 хэл
+  - item_id: MNPHON_049
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_031 олон
+  - item_id: MNPHON_031
+    structural_context: [intervocalic]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_055 толь
+  - item_id: MNPHON_055
+    structural_context: [word_final]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: [explicit_soft_sign]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_057 алиа
+  - item_id: MNPHON_057
+    structural_context: [intervocalic]
+    vowel_context_class: []
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: [contextual]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # ---------------------------------------------------------------------------
+  # G (14)
+  # ---------------------------------------------------------------------------
+
+  # MNPHON_082 гар
+  - item_id: MNPHON_082
+    structural_context: [word_initial]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_083 гол
+  - item_id: MNPHON_083
+    structural_context: [word_initial]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_089 гэр
+  - item_id: MNPHON_089
+    structural_context: [word_initial]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_090 гүү
+  - item_id: MNPHON_090
+    structural_context: [word_initial]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_096 агаар
+  - item_id: MNPHON_096
+    structural_context: [intervocalic]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_097 ногоон
+  - item_id: MNPHON_097
+    structural_context: [intervocalic]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_105 багш
+  - item_id: MNPHON_105
+    structural_context: [preconsonantal_cluster]
+    vowel_context_class: [front]
+    cluster_or_ng_context: [cluster]
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_106 эгч
+  - item_id: MNPHON_106
+    structural_context: [preconsonantal_cluster]
+    vowel_context_class: [front]
+    cluster_or_ng_context: [cluster]
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_115 сураг
+  - item_id: MNPHON_115
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_116 аймаг
+  - item_id: MNPHON_116
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_119 бүлэг
+  - item_id: MNPHON_119
+    structural_context: [word_final]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_121 нэг
+  - item_id: MNPHON_121
+    structural_context: [word_final]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_124 санг
+  - item_id: MNPHON_124
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: [ng]
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_125 мөнгө
+  - item_id: MNPHON_125
+    structural_context: [internal]
+    vowel_context_class: [front]
+    cluster_or_ng_context: [ng]
+    target_consonant: г
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # ---------------------------------------------------------------------------
+  # H (12)
+  # ---------------------------------------------------------------------------
+
+  # MNPHON_152 хаалга
+  - item_id: MNPHON_152
+    structural_context: [word_initial]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_153 хот
+  - item_id: MNPHON_153
+    structural_context: [word_initial]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_160 хөл
+  - item_id: MNPHON_160
+    structural_context: [word_initial]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_161 хүүхэд
+  - item_id: MNPHON_161
+    structural_context: [word_initial]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_162 хичээл
+  - item_id: MNPHON_162
+    structural_context: [word_initial]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_166 ахаас
+  - item_id: MNPHON_166
+    structural_context: [intervocalic]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_169 тухай
+  - item_id: MNPHON_169
+    structural_context: [intervocalic]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_175 эхлэл
+  - item_id: MNPHON_175
+    structural_context: [preconsonantal_cluster]
+    vowel_context_class: [front]
+    cluster_or_ng_context: [cluster]
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_176 шахмал
+  - item_id: MNPHON_176
+    structural_context: [preconsonantal_cluster]
+    vowel_context_class: [back]
+    cluster_or_ng_context: [cluster]
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_183 ах
+  - item_id: MNPHON_183
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_184 их
+  - item_id: MNPHON_184
+    structural_context: [word_final]
+    vowel_context_class: [front]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # MNPHON_185 байх
+  - item_id: MNPHON_185
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: []
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Reviewer-approved study-design labels."
+
+  # ---------------------------------------------------------------------------
+  # PALATALIZATION (12)
+  # target_consonant is the written consonant being palatalized, not ь.
+  # ---------------------------------------------------------------------------
+
+  # MNPHON_191 морь
+  - item_id: MNPHON_191
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: р
+    trigger_type: [explicit_soft_sign]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "target_consonant is the written р before ь."
+
+  # MNPHON_192 тавь
+  - item_id: MNPHON_192
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: в
+    trigger_type: [explicit_soft_sign]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "target_consonant is the written в before ь."
+
+  # MNPHON_194 соль
+  - item_id: MNPHON_194
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: л
+    trigger_type: [explicit_soft_sign]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "target_consonant is the written л before ь."
+
+  # MNPHON_201 амьдрал
+  - item_id: MNPHON_201
+    structural_context: [internal]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: м
+    trigger_type: [explicit_soft_sign]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "target_consonant is the written м before internal ь."
+
+  # MNPHON_202 барьц
+  - item_id: MNPHON_202
+    structural_context: [internal]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: р
+    trigger_type: [explicit_soft_sign]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "target_consonant is the written р before internal ь."
+
+  # MNPHON_211 хонины
+  - item_id: MNPHON_211
+    structural_context: [preconsonantal_cluster]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: н
+    trigger_type: [contextual]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "target_consonant is the written н before и. Fixed typo in structural_context."
+
+  # MNPHON_212 салхи
+  - item_id: MNPHON_212
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: х
+    trigger_type: [contextual]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "target_consonant is the written х before и."
+
+  # MNPHON_216 зочин
+  - item_id: MNPHON_216
+    structural_context: [internal]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: ч
+    trigger_type: [contextual]
+    contrast_pair_id: null
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "target_consonant is the written ч before и."
+
+  # MNPHON_226 бар | hard member of pal_bar_bari
+  - item_id: MNPHON_226
+    structural_context: []
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: р
+    trigger_type: []
+    contrast_pair_id: pal_bar_bari
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Hard member of pal_bar_bari with MNPHON_227 барь."
+
+  # MNPHON_227 барь | soft member of pal_bar_bari
+  - item_id: MNPHON_227
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: р
+    trigger_type: [explicit_soft_sign]
+    contrast_pair_id: pal_bar_bari
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Soft member of pal_bar_bari with MNPHON_226 бар."
+
+  # MNPHON_228 тав | hard member of pal_tav_tavi
+  - item_id: MNPHON_228
+    structural_context: []
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: в
+    trigger_type: []
+    contrast_pair_id: pal_tav_tavi
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Hard member of pal_tav_tavi with MNPHON_229 тавь."
+
+  # MNPHON_229 тавь | soft member of pal_tav_tavi
+  - item_id: MNPHON_229
+    structural_context: [word_final]
+    vowel_context_class: [back]
+    cluster_or_ng_context: []
+    target_consonant: в
+    trigger_type: [explicit_soft_sign]
+    contrast_pair_id: pal_tav_tavi
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+    notes: "Soft member of pal_tav_tavi with MNPHON_228 тав."
+
+contrast_pairs:
+  - pair_id: pal_bar_bari
+    hard_item_id: MNPHON_226
+    soft_item_id: MNPHON_227
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved
+  - pair_id: pal_tav_tavi
+    hard_item_id: MNPHON_228
+    soft_item_id: MNPHON_229
+    reviewer_pseudonym: developer_01
+    review_date: "2026-08-18"
+    review_status: approved

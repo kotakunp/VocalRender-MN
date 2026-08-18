@@ -35,7 +35,7 @@ are done.
 | [007](007-build-tokenizer-audit.md) | Build a read-only Mongolian tokenizer audit | P1 | M | 003, 004, 005 | DONE |
 | [008](008-add-vocalrender-score-adapter.md) | Add a score-preserving VocalRender adapter | P1 | M | 003, 006 | DONE |
 | [009](009-run-reproducible-milestone-experiments.md) | Run and document reproducible Milestone 0 experiments | P2 | M | 004–008 | DONE |
-| [010](010-build-native-reference-study-kit.md) | Build the deterministic context-stratified 32-item native-reference study kit | P1 | L | 009 | BLOCKED: human approvals/recordings |
+| [010](010-build-native-reference-study-kit.md) | Build the deterministic context-stratified 32-item native-reference study kit | P1 | L | 009 | DONE |
 | [011](011-provision-fail-closed-cuda-smoke.md) | Provision a fail-closed CUDA environment and close the upstream smoke | P1 | M | 009 | BLOCKED: no CUDA runtime/device |
 | [012](012-execute-native-reference-study.md) | Execute the 32-item same-score native-singing study | P1 | XL | 010, 011 | BLOCKED: singer/recordings/raters |
 | [013](013-establish-training-corpus-contract.md) | Establish the training-corpus eligibility and leakage-safe split contract | P1 | L | 009 | DONE |

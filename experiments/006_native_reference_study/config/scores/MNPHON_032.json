@@ -1,0 +1,37 @@
+{
+  "bpm": 96,
+  "item_name": "MNPHON_032",
+  "metadata": {
+    "alignment_manifest_sha256": "ea3e9500e9f7dae361fc25a3de63b78a35eafd2b48872de7623e23d028490514",
+    "alignment_status": "approved",
+    "source_text": "өлөн"
+  },
+  "units": [
+    {
+      "notes": [
+        {
+          "midi_pitch": 60,
+          "note_value": "<NOTE_2>"
+        }
+      ],
+      "source_span": [
+        0,
+        1
+      ],
+      "text": "ө"
+    },
+    {
+      "notes": [
+        {
+          "midi_pitch": 60,
+          "note_value": "<NOTE_2>"
+        }
+      ],
+      "source_span": [
+        1,
+        4
+      ],
+      "text": "лөн"
+    }
+  ]
+}
